@@ -1,0 +1,33 @@
+# /etc/conf.d/astrald: config file for /etc/init.d/astrald
+
+# Config file location
+#RAVEND_CONFIGFILE="/etc/astral/astral.conf"
+
+# What directory to write pidfile to?  (created and owned by $RAVEND_USER)
+#RAVEND_PIDDIR="/var/run/astrald"
+
+# What filename to give the pidfile
+#RAVEND_PIDFILE="${RAVEND_PIDDIR}/astrald.pid"
+
+# Where to write astrald data (be mindful that the blockchain is large)
+#RAVEND_DATADIR="/var/lib/astrald"
+
+# User and group to own astrald process
+#RAVEND_USER="astral"
+#RAVEND_GROUP="astral"
+
+# Path to astrald executable
+#RAVEND_BIN="/usr/bin/astrald"
+
+# Nice value to run astrald under
+#RAVEND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#RAVEND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for astrald to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+RAVEND_SIGTERM_TIMEOUT=60

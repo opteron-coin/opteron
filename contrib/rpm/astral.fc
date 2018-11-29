@@ -1,0 +1,8 @@
+/usr/bin/astral-cli		--	gen_context(system_u:object_r:astral_exec_t,s0)
+/usr/sbin/astrald		--	gen_context(system_u:object_r:astral_exec_t,s0)
+/usr/lib(64)?/astral/astrald		--	gen_context(system_u:object_r:astral_exec_t,s0)
+
+/etc/astral(/.*)?		gen_context(system_u:object_r:astral_conf_t,s0)
+/var/lib/astral(/.*)?		gen_context(system_u:object_r:astral_var_lib_t,s0)
+
+(/var)?/run/astrald(/.*)?   gen_context(system_u:object_r:astral_var_run_t,s0)

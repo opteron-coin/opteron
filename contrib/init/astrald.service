@@ -1,0 +1,22 @@
+[Unit]
+Description=Astral's distributed currency daemon
+After=network.target
+
+[Service]
+User=astral
+Group=astral
+
+Type=forking
+PIDFile=/var/lib/astrald/astrald.pid
+ExecStart=/usr/bin/astrald -daemon -pid=/var/lib/astrald/astrald.pid \
+-conf=/etc/astral/astral.conf -datadir=/var/lib/astrald -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
