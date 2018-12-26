@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -161,7 +161,7 @@ public:
     }
 };
 
-/** Interface to Astral wallet from Qt view code. */
+/** Interface to opteron wallet from Qt view code. */
 class WalletModel : public QObject
 {
     Q_OBJECT
@@ -265,10 +265,10 @@ public:
     void getOutputs(const std::vector<COutPoint>& vOutpoints, std::vector<COutput>& vOutputs);
     bool isSpent(const COutPoint& outpoint) const;
     void listCoins(std::map<QString, std::vector<COutput> >& mapCoins) const;
-    /** ASTRAL START */
+    /** opteron START */
     // Map of asset name to map of address to CTxOut
     void listAssets(std::map<QString, std::map<QString, std::vector<COutput> > >& mapCoins) const;
-    /** ASTRAL END */
+    /** opteron END */
     bool isLockedCoin(uint256 hash, unsigned int n) const;
     void lockCoin(COutPoint& output);
     void unlockCoin(COutPoint& output);

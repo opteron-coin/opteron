@@ -13,7 +13,7 @@ Construct a linear, no-fork, best version of the blockchain.
 
 ### [Qos](/contrib/qos) ###
 
-A Linux bash script that will set up traffic control (tc) to limit the outgoing bandwidth for connections to the Astral network. This means one can have an always-on astrald instance running, and another local astrald/astral-qt instance which connects to this node and receives blocks from it.
+A Linux bash script that will set up traffic control (tc) to limit the outgoing bandwidth for connections to the opteron network. This means one can have an always-on opterond instance running, and another local opterond/opteron-qt instance which connects to this node and receives blocks from it.
 
 ### [Seeds](/contrib/seeds) ###
 Utility to generate the pnSeed[] array that is compiled into the client.
@@ -22,29 +22,29 @@ Build Tools and Keys
 ---------------------
 
 ### [Debian](/contrib/debian) ###
-Contains files used to package astrald/astral-qt
-for Debian-based Linux systems. If you compile astrald/astral-qt yourself, there are some useful files here.
+Contains files used to package opterond/opteron-qt
+for Debian-based Linux systems. If you compile opterond/opteron-qt yourself, there are some useful files here.
 
 ### [Gitian-descriptors](/contrib/gitian-descriptors) ###
-Files used during the gitian build process. For more information about gitian, see the [the Astral Core documentation repository](https://github.com/astral-core/docs).
+Files used during the gitian build process. For more information about gitian, see the [the opteron Core documentation repository](https://github.com/opteron-core/docs).
 
 ### [Gitian-keys](/contrib/gitian-keys)
-PGP keys used for signing Astral Core [Gitian release](/doc/release-process.md) results.
+PGP keys used for signing opteron Core [Gitian release](/doc/release-process.md) results.
 
 ### [MacDeploy](/contrib/macdeploy) ###
-Scripts and notes for Mac builds. 
+Scripts and notes for Mac builds.
 
 ### [RPM](/contrib/rpm) ###
-RPM spec file for building astral-core on RPM based distributions.
+RPM spec file for building opteron-core on RPM based distributions.
 
 ### [Gitian-build](/contrib/gitian-build.sh) ###
 Script for running full Gitian builds.
 
-Test and Verify Tools 
+Test and Verify Tools
 ---------------------
 
 ### [TestGen](/contrib/testgen) ###
-Utilities to generate test vectors for the data-driven Astral tests.
+Utilities to generate test vectors for the data-driven opteron tests.
 
 ### [Verify Binaries](/contrib/verifybinaries) ###
-This script attempts to download and verify the signature file SHA256SUMS.asc from astral.org.
+This script attempts to download and verify the signature file SHA256SUMS.asc from opteron.org.

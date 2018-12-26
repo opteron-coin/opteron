@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.astral;
+package org.opteron;
 
 /**
- * This class holds the context reference used in native methods 
+ * This class holds the context reference used in native methods
  * to handle ECDSA operations.
  */
 public class Secp256k1Context {

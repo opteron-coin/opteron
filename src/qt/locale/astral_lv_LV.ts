@@ -64,7 +64,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Parakstīt &amp;ziņojumu...</translation>
@@ -142,8 +142,8 @@
         <translation>Bloku reindeksēšana no diska...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Nosūtīt bitkoinus uz Astral adresi</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Nosūtīt bitkoinus uz opteron adresi</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>&amp;Pārbaudīt ziņojumu...</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -194,12 +194,12 @@
         <translation>Šifrēt privātās atslēgas kuras pieder tavam maciņam</translation>
     </message>
     <message>
-        <source>Sign messages with your Astral addresses to prove you own them</source>
-        <translation>Parakstīt ziņojumus ar savām Astral adresēm lai pierādītu ka tās pieder tev</translation>
+        <source>Sign messages with your opteron addresses to prove you own them</source>
+        <translation>Parakstīt ziņojumus ar savām opteron adresēm lai pierādītu ka tās pieder tev</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Astral addresses</source>
-        <translation>Pārbaudīt ziņojumus lai pārliecinātos, ka tie tika parakstīti ar norādītajām Astral adresēm</translation>
+        <source>Verify messages to ensure they were signed with specified opteron addresses</source>
+        <translation>Pārbaudīt ziņojumus lai pārliecinātos, ka tie tika parakstīti ar norādītajām opteron adresēm</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -218,12 +218,12 @@
         <translation>Ciļņu rīkjosla</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and astral: URIs)</source>
-        <translation>Pieprasīt maksājumus (izveido QR kodu un astral: URIs)</translation>
+        <source>Request payments (generates QR codes and opteron: URIs)</source>
+        <translation>Pieprasīt maksājumus (izveido QR kodu un opteron: URIs)</translation>
     </message>
     <message>
-        <source>Open a astral: URI or payment request</source>
-        <translation>Atvērt astral URI vai maksājuma pieprasījumu</translation>
+        <source>Open a opteron: URI or payment request</source>
+        <translation>Atvērt opteron URI vai maksājuma pieprasījumu</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -499,15 +499,15 @@
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
-        <translation>Ieslēgt astral &amp;kontroles funkcijas</translation>
+        <translation>Ieslēgt opteron &amp;kontroles funkcijas</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
         <translation>&amp;Tērēt neapstiprinātu atlikumu</translation>
     </message>
     <message>
-        <source>Automatically open the Astral client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Uz rūtera automātiski atvērt Astral klienta portu. Tas strādā tikai tad, ja rūteris atbalsta UPnP un tas ir ieslēgts.</translation>
+        <source>Automatically open the opteron client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Uz rūtera automātiski atvērt opteron klienta portu. Tas strādā tikai tad, ja rūteris atbalsta UPnP un tas ir ieslēgts.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -559,7 +559,7 @@
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
-        <translation>Vai rādīt Astral kontroles funkcijas vai nē.</translation>
+        <translation>Vai rādīt opteron kontroles funkcijas vai nē.</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -593,8 +593,8 @@
         <translation>Forma</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Astral network after a connection is established, but this process has not completed yet.</source>
-        <translation>Attēlotā informācija var būt novecojusi. Jūsu maciņš pēc savienojuma izveides automātiski sinhronizējas ar Astral tīklu, taču šis process vēl nav beidzies.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the opteron network after a connection is established, but this process has not completed yet.</source>
+        <translation>Attēlotā informācija var būt novecojusi. Jūsu maciņš pēc savienojuma izveides automātiski sinhronizējas ar opteron tīklu, taču šis process vēl nav beidzies.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -852,7 +852,7 @@
     </message>
     <message>
         <source>Coin Control Features</source>
-        <translation>Astral Kontroles Funkcijas</translation>
+        <translation>opteron Kontroles Funkcijas</translation>
     </message>
     <message>
         <source>Inputs...</source>
@@ -1027,8 +1027,8 @@
         <translation>Kopēt parakstu uz sistēmas starpliktuvi</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Astral address</source>
-        <translation>Parakstīt ziņojumu lai pierādītu, ka esi šīs Astral adreses īpašnieks.</translation>
+        <source>Sign the message to prove you own this opteron address</source>
+        <translation>Parakstīt ziņojumu lai pierādītu, ka esi šīs opteron adreses īpašnieks.</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1098,7 +1098,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
         <source>Options:</source>
         <translation>Iespējas:</translation>
@@ -1124,8 +1124,8 @@
         <translation>Darbināt fonā kā servisu un pieņemt komandas</translation>
     </message>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

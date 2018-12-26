@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
-/** Dialog for requesting payment of astrals */
+/** Dialog for requesting payment of opterons */
 class ReceiveCoinsDialog : public QDialog
 {
     Q_OBJECT

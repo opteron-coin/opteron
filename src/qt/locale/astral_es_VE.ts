@@ -68,7 +68,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Firmar &amp;mensaje...</translation>
@@ -114,8 +114,8 @@
         <translation>Reindexando bloques en el disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Enviar monedas a una dirección Astral</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Enviar monedas a una dirección opteron</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -130,8 +130,8 @@
         <translation>Abre la consola de depuración y diágnostico</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -158,12 +158,12 @@
         <translation>Encriptar las llaves privadas que pertenecen a tu billetera</translation>
     </message>
     <message>
-        <source>Sign messages with your Astral addresses to prove you own them</source>
-        <translation>Firma mensajes con tus direcciones Astral para probar que eres dueño de ellas</translation>
+        <source>Sign messages with your opteron addresses to prove you own them</source>
+        <translation>Firma mensajes con tus direcciones opteron para probar que eres dueño de ellas</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Astral addresses</source>
-        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones Astral especificas</translation>
+        <source>Verify messages to ensure they were signed with specified opteron addresses</source>
+        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones opteron especificas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -582,7 +582,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
         <source>Options:</source>
         <translation>Opciones:</translation>
@@ -608,8 +608,8 @@
         <translation>Correr en segundo plano como daemon y aceptar comandos</translation>
     </message>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

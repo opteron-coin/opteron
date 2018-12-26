@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 #include "ui_assetsdialog.h"
 
 #include "addresstablemodel.h"
-#include "astralunits.h"
+#include "opteronunits.h"
 #include "clientmodel.h"
 #include "assetcontroldialog.h"
 #include "guiutil.h"
@@ -115,7 +115,7 @@ AssetsDialog::AssetsDialog(const PlatformStyle *_platformStyle, QWidget *parent)
     ui->checkBoxMinimumFee->setChecked(settings.value("fPayOnlyMinFee").toBool());
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
 
-    /** ASTRAL START */
+    /** opteron START */
     connect(ui->createAssetButton, SIGNAL(clicked()), this, SLOT(createAssetButtonClicked()));
     connect(ui->reissueAssetButton, SIGNAL(clicked()), this, SLOT(reissueAssetButtonClicked()));
 
@@ -129,7 +129,7 @@ AssetsDialog::AssetsDialog(const PlatformStyle *_platformStyle, QWidget *parent)
         ui->mineBlocksCount->setToolTip(tr("The number of blocks to mine"));
         connect(ui->mineButton, SIGNAL(clicked()), this, SLOT(mineButtonClicked()));
     }
-    /** ASTRAL END */
+    /** opteron END */
 }
 
 void AssetsDialog::setClientModel(ClientModel *_clientModel)
@@ -333,7 +333,7 @@ void AssetsDialog::on_sendButton_clicked()
     {
         // append fee string if a fee is required
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append(AstralUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
+        questionString.append(opteronUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
 
@@ -542,7 +542,7 @@ void AssetsDialog::setBalance(const CAmount& balance, const CAmount& unconfirmed
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(AstralUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
+        ui->labelBalance->setText(opteronUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
     }
 }
 
@@ -589,7 +589,7 @@ void AssetsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn &se
             msgParams.second = CClientUIInterface::MSG_ERROR;
             break;
         case WalletModel::AbsurdFee:
-            msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(AstralUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
+            msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(opteronUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
             break;
         case WalletModel::PaymentRequestExpired:
             msgParams.first = tr("Payment request expired.");
@@ -651,7 +651,7 @@ void AssetsDialog::updateFeeMinimizedLabel()
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText(AstralUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
+        ui->labelFeeMinimized->setText(opteronUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
     }
 }
 
@@ -659,7 +659,7 @@ void AssetsDialog::updateMinFeeLabel()
 {
     if (model && model->getOptionsModel())
         ui->checkBoxMinimumFee->setText(tr("Pay only the required fee of %1").arg(
-                AstralUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
+                opteronUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
         );
 }
 
@@ -686,7 +686,7 @@ void AssetsDialog::updateSmartFeeLabel()
     FeeCalculation feeCalc;
     CFeeRate feeRate = CFeeRate(GetMinimumFee(1000, coin_control, ::mempool, ::feeEstimator, &feeCalc));
 
-    ui->labelSmartFee->setText(AstralUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
+    ui->labelSmartFee->setText(opteronUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
 
     if (feeCalc.reason == FeeReason::FALLBACK) {
         ui->labelSmartFee2->show(); // (Smart fee not initialized yet. This usually takes a few blocks...)
@@ -807,7 +807,7 @@ void AssetsDialog::assetControlChangeEdited(const QString& text)
         }
         else if (!IsValidDestination(dest)) // Invalid address
         {
-            ui->labelAssetControlChangeLabel->setText(tr("Warning: Invalid Astral address"));
+            ui->labelAssetControlChangeLabel->setText(tr("Warning: Invalid opteron address"));
         }
         else // Valid address
         {
@@ -886,7 +886,7 @@ void AssetsDialog::assetControlUpdateLabels()
     }
 }
 
-/** ASTRAL START */
+/** opteron START */
 void AssetsDialog::createAssetButtonClicked()
 {
     WalletModel::UnlockContext ctx(model->requestUnlock());
@@ -965,4 +965,4 @@ void AssetsDialog::processNewTransaction()
         }
     }
 }
-/** ASTRAL END */
+/** opteron END */

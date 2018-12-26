@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -142,7 +142,7 @@ isminetype IsMine(const CKeyStore &keystore, const CScript& scriptPubKey, bool& 
                 return ISMINE_SPENDABLE;
             break;
         }
-            /** ASTRAL START */
+            /** opteron START */
         case TX_NEW_ASSET: {
             if (!AreAssetsDeployed())
                 return ISMINE_NO;
@@ -191,7 +191,7 @@ isminetype IsMine(const CKeyStore &keystore, const CScript& scriptPubKey, bool& 
                 return ISMINE_SPENDABLE;
             break;
         }
-            /** ASTRAL END*/
+            /** opteron END*/
     }
 
     if (keystore.HaveWatchOnly(scriptPubKey)) {

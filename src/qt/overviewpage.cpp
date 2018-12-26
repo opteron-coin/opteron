@@ -1,12 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
 
-#include "astralunits.h"
+#include "opteronunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -30,7 +30,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     explicit TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(parent), unit(AstralUnits::ASTRAL),
+        QAbstractItemDelegate(parent), unit(opteronUnits::opteron),
         platformStyle(_platformStyle)
     {
 
@@ -114,7 +114,7 @@ public:
 
 };
 #include "overviewpage.moc"
-#include "astralgui.h"
+#include "opterongui.h"
 
 OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent),
@@ -182,14 +182,14 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(AstralUnits::formatWithUnit(unit, balance, false, AstralUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(AstralUnits::formatWithUnit(unit, unconfirmedBalance, false, AstralUnits::separatorAlways));
-    ui->labelImmature->setText(AstralUnits::formatWithUnit(unit, immatureBalance, false, AstralUnits::separatorAlways));
-    ui->labelTotal->setText(AstralUnits::formatWithUnit(unit, balance + unconfirmedBalance + immatureBalance, false, AstralUnits::separatorAlways));
-    ui->labelWatchAvailable->setText(AstralUnits::formatWithUnit(unit, watchOnlyBalance, false, AstralUnits::separatorAlways));
-    ui->labelWatchPending->setText(AstralUnits::formatWithUnit(unit, watchUnconfBalance, false, AstralUnits::separatorAlways));
-    ui->labelWatchImmature->setText(AstralUnits::formatWithUnit(unit, watchImmatureBalance, false, AstralUnits::separatorAlways));
-    ui->labelWatchTotal->setText(AstralUnits::formatWithUnit(unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, AstralUnits::separatorAlways));
+    ui->labelBalance->setText(opteronUnits::formatWithUnit(unit, balance, false, opteronUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(opteronUnits::formatWithUnit(unit, unconfirmedBalance, false, opteronUnits::separatorAlways));
+    ui->labelImmature->setText(opteronUnits::formatWithUnit(unit, immatureBalance, false, opteronUnits::separatorAlways));
+    ui->labelTotal->setText(opteronUnits::formatWithUnit(unit, balance + unconfirmedBalance + immatureBalance, false, opteronUnits::separatorAlways));
+    ui->labelWatchAvailable->setText(opteronUnits::formatWithUnit(unit, watchOnlyBalance, false, opteronUnits::separatorAlways));
+    ui->labelWatchPending->setText(opteronUnits::formatWithUnit(unit, watchUnconfBalance, false, opteronUnits::separatorAlways));
+    ui->labelWatchImmature->setText(opteronUnits::formatWithUnit(unit, watchImmatureBalance, false, opteronUnits::separatorAlways));
+    ui->labelWatchTotal->setText(opteronUnits::formatWithUnit(unit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, opteronUnits::separatorAlways));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users
@@ -259,7 +259,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("ASTRAL")
+    // update the display unit, to not use the default ("opteron")
     updateDisplayUnit();
     ui->listAssets->resizeColumnsToContents();
 }
@@ -310,7 +310,7 @@ void OverviewPage::showAssets()
         ui->listAssets->hide();
         ui->labelAssetAdministrator->hide();
 
-        // This keeps the ASTRAL balance grid from expanding and looking terrible when asset balance is hidden
+        // This keeps the opteron balance grid from expanding and looking terrible when asset balance is hidden
         ui->assetVeriticalSpaceWidget->show();
     }
 

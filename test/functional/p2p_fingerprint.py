@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test various fingerprinting protections.
@@ -23,13 +23,13 @@ from test_framework.mininode import (
     msg_getheaders,
     wait_until,
 )
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import (
     assert_equal,
     p2p_port,
 )
 
-class P2PFingerprintTest(AstralTestFramework):
+class P2PFingerprintTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

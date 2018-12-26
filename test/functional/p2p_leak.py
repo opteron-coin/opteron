@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test message sending before handshake completion.
@@ -11,15 +11,15 @@ received a VERACK.
 This test connects to a node and sends it a few messages, trying to intice it
 into sending us something it shouldn't.
 
-Also test that nodes that send unsupported service bits to astrald are disconnected
+Also test that nodes that send unsupported service bits to opterond are disconnected
 and don't receive a VERACK. Unsupported service bits are currently 1 << 5 and
 1 << 7 (until August 1st 2018).
 
-UPDATE: Astral RIP-2 uses bit 1 << 5.  Currently there are no unsupported service bits.
+UPDATE: opteron RIP-2 uses bit 1 << 5.  Currently there are no unsupported service bits.
 """
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 
 banscore = 10
@@ -65,7 +65,7 @@ class CLazyNode(NodeConnCB):
 # anyway, and eventually get disconnected.
 class CNodeNoVersionBan(CLazyNode):
     # send a bunch of veracks without sending a message. This should get us disconnected.
-    # NOTE: implementation-specific check here. Remove if astrald ban behavior changes
+    # NOTE: implementation-specific check here. Remove if opterond ban behavior changes
     def on_open(self, conn):
         super().on_open(conn)
         for i in range(banscore):
@@ -95,7 +95,7 @@ class CNodeNoVerackIdle(CLazyNode):
         conn.send_message(msg_ping())
         conn.send_message(msg_getaddr())
 
-class P2PLeakTest(AstralTestFramework):
+class P2PLeakTest(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [['-banscore='+str(banscore)]]

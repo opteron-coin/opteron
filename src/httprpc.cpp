@@ -1,5 +1,5 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -85,7 +85,7 @@ static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const Uni
 //This function checks username and password against -rpcauth
 //entries from config file.
 static bool multiUserAuthorized(std::string strUserPass)
-{    
+{
     if (strUserPass.find(":") == std::string::npos) {
         return false;
     }

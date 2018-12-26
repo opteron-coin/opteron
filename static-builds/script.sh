@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Set DISTNAME, BRANCH and MAKEOPTS to the desired settings
-DISTNAME=astral-2.0.3
+DISTNAME=opteron-2.0.3
 MAKEOPTS="-j4"
 BRANCH=master
 clear
@@ -27,10 +27,10 @@ apt install -y curl g++-aarch64-linux-gnu g++-7-aarch64-linux-gnu gcc-7-aarch64-
 cd ~/
 
 # Removes any existing builds and starts clean WARNING
-rm -rf ~/astralcoin ~/sign ~/release
+rm -rf ~/opteroncoin ~/sign ~/release
 
-git clone https://github.com/astralproject/astralcoin
-cd ~/astralcoin
+git clone https://github.com/opteronproject/opteroncoin
+cd ~/opteroncoin
 git checkout $BRANCH
 
 
@@ -39,25 +39,25 @@ echo @@@"Building linux 64 binaries"
 echo @@@
 
 mkdir -p ~/release
-cd ~/astralcoin/depends
+cd ~/opteroncoin/depends
 make HOST=x86_64-linux-gnu $MAKEOPTS
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
-make -C src check-symbols 
+make -C src check-symbols
 mkdir ~/linux64
 make install DESTDIR=~/linux64/$DISTNAME
 cd ~/linux64
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-x86_64-linux-gnu.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf ~/linux64
 make clean
 export PATH=$PATH_orig
@@ -67,17 +67,17 @@ echo @@@
 echo @@@"Building general sourcecode"
 echo @@@
 
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/
 make dist
-SOURCEDIST=`echo astral-*.tar.gz`
-mkdir -p ~/astralcoin/temp
-cd ~/astralcoin/temp
+SOURCEDIST=`echo opteron-*.tar.gz`
+mkdir -p ~/opteroncoin/temp
+cd ~/opteroncoin/temp
 tar xf ../$SOURCEDIST
-find astral-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
-cd ~/astralcoin
+find opteron-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+cd ~/opteroncoin
 mv $SOURCEDIST ~/release
 rm -rf temp
 make clean
@@ -112,26 +112,26 @@ done
 
 export PATH=$PWD/wrapped:$PATH
 export HOST_ID_SALT="$PWD/wrapped/extra_includes/i386-linux-gnu"
-cd ~/astralcoin/depends
+cd ~/opteroncoin/depends
 make HOST=i686-pc-linux-gnu $MAKEOPTS
 unset HOST_ID_SALT
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/i686-pc-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/i686-pc-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
-make -C src check-symbols 
+make -C src check-symbols
 mkdir -p ~/linux32
 make install DESTDIR=~/linux32/$DISTNAME
 cd ~/linux32
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-i686-pc-linux-gnu.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf ~/linux32
 rm -rf ~/wrapped
 make clean
@@ -142,13 +142,13 @@ echo @@@
 echo @@@ "Building linux ARM binaries"
 echo @@@
 
-cd ~/astralcoin/depends
+cd ~/opteroncoin/depends
 make HOST=arm-linux-gnueabihf $MAKEOPTS
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/arm-linux-gnueabihf/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/arm-linux-gnueabihf/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
 mkdir -p ~/linuxARM
 make install DESTDIR=~/linuxARM/$DISTNAME
@@ -156,10 +156,10 @@ cd ~/linuxARM
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-arm-linux-gnueabihf.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf ~/linuxARM
 make clean
 export PATH=$PATH_orig
@@ -169,13 +169,13 @@ echo @@@
 echo @@@ "Building linux aarch64 binaries"
 echo @@@
 
-cd ~/astralcoin/depends
+cd ~/opteroncoin/depends
 make HOST=aarch64-linux-gnu $MAKEOPTS
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/aarch64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
 mkdir -p ~/linuxaarch64
 make install DESTDIR=~/linuxaarch64/$DISTNAME
@@ -183,10 +183,10 @@ cd ~/linuxaarch64
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../astralcoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../opteroncoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-aarch64-linux-gnu.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf ~/linuxaarch64
 make clean
 export PATH=$PATH_orig
@@ -196,21 +196,21 @@ echo @@@
 echo @@@ "Building windows 64 binaries"
 echo @@@
 
-update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix 
+update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
 mkdir -p ~/release/unsigned/
 mkdir -p ~/sign/win64
 PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
-cd ~/astralcoin/depends
+cd ~/opteroncoin/depends
 make HOST=x86_64-w64-mingw32 $MAKEOPTS
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/x86_64-w64-mingw32/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
 make deploy
 rename 's/-setup\.exe$/-setup-unsigned.exe/' *-setup.exe
-cp -f astral-*setup*.exe ~/release/unsigned/
+cp -f opteron-*setup*.exe ~/release/unsigned/
 mkdir -p ~/win64
 make install DESTDIR=~/win64/$DISTNAME
 cd ~/win64
@@ -223,14 +223,14 @@ find ./$DISTNAME -not -name "*.dbg"  -type f | sort | zip -X@ ./$DISTNAME-x86_64
 mv ./$DISTNAME-x86_64-*.zip ~/release/$DISTNAME-win64.zip
 cd ~/
 rm -rf win64
-cp -rf astralcoin/contrib/windeploy ~/sign/win64
+cp -rf opteroncoin/contrib/windeploy ~/sign/win64
 cd ~/sign/win64/windeploy
 mkdir -p unsigned
-mv ~/astralcoin/astral-*setup-unsigned.exe unsigned/
+mv ~/opteroncoin/opteron-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win64-unsigned.tar.gz
 cd ~/sign
 rm -rf win64
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf release
 make clean
 export PATH=$PATH_orig
@@ -240,20 +240,20 @@ echo @@@
 echo @@@ "Building windows 32 binaries"
 echo @@@
 
-update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix 
+update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
 mkdir -p ~/sign/win32
-PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') 
-cd ~/astralcoin/depends
+PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g')
+cd ~/opteroncoin/depends
 make HOST=i686-w64-mingw32 $MAKEOPTS
-cd ~/astralcoin
+cd ~/opteroncoin
 export PATH=$PWD/depends/i686-w64-mingw32/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
-make $MAKEOPTS 
+make $MAKEOPTS
 make -C src check-security
 make deploy
 rename 's/-setup\.exe$/-setup-unsigned.exe/' *-setup.exe
-cp -f astral-*setup*.exe ~/release/unsigned/
+cp -f opteron-*setup*.exe ~/release/unsigned/
 mkdir -p ~/win32
 make install DESTDIR=~/win32/$DISTNAME
 cd ~/win32
@@ -266,14 +266,14 @@ find ./$DISTNAME -not -name "*.dbg"  -type f | sort | zip -X@ ./$DISTNAME-i686-w
 mv ./$DISTNAME-i686-w64-*.zip ~/release/$DISTNAME-win32.zip
 cd ~/
 rm -rf win32
-cp -rf astralcoin/contrib/windeploy ~/sign/win32
+cp -rf opteroncoin/contrib/windeploy ~/sign/win32
 cd ~/sign/win32/windeploy
 mkdir -p unsigned
-mv ~/astralcoin/astral-*setup-unsigned.exe unsigned/
+mv ~/opteroncoin/opteron-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win32-unsigned.tar.gz
 cd ~/sign
 rm -rf win32
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf release
 make clean
 export PATH=$PATH_orig
@@ -283,16 +283,16 @@ echo @@@
 echo @@@ "Building OSX binaries"
 echo @@@
 
-mkdir -p ~/astralcoin/depends/SDKs
-cp ~/MacOSX10.11.sdk.tar.gz ~/astralcoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
-cd ~/astralcoin/depends/SDKs && tar -xf MacOSX10.11.sdk.tar.gz 
-rm -rf MacOSX10.11.sdk.tar.gz 
-cd ~/astralcoin/depends
+mkdir -p ~/opteroncoin/depends/SDKs
+cp ~/MacOSX10.11.sdk.tar.gz ~/opteroncoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
+cd ~/opteroncoin/depends/SDKs && tar -xf MacOSX10.11.sdk.tar.gz
+rm -rf MacOSX10.11.sdk.tar.gz
+cd ~/opteroncoin/depends
 make $MAKEOPTS HOST="x86_64-apple-darwin14"
-cd ~/astralcoin
+cd ~/opteroncoin
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage
-make $MAKEOPTS 
+make $MAKEOPTS
 mkdir -p ~/OSX
 export PATH=$PWD/depends/x86_64-apple-darwin14/native/bin:$PATH
 make install-strip DESTDIR=~/OSX/$DISTNAME
@@ -308,16 +308,16 @@ cp $PWD/depends/x86_64-apple-darwin14/native/bin/x86_64-apple-darwin14-pagestuff
 mv dist unsigned-app-$DISTNAME
 cd unsigned-app-$DISTNAME
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-osx-unsigned.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 make deploy
-$PWD/depends/x86_64-apple-darwin14/native/bin/dmg dmg "Astral-Core.dmg" ~/release/unsigned/$DISTNAME-osx-unsigned.dmg
+$PWD/depends/x86_64-apple-darwin14/native/bin/dmg dmg "opteron-Core.dmg" ~/release/unsigned/$DISTNAME-osx-unsigned.dmg
 rm -rf unsigned-app-$DISTNAME dist osx_volname dpi36.background.tiff dpi72.background.tiff
 cd ~/OSX
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
 find $DISTNAME | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-osx64.tar.gz
-cd ~/astralcoin
+cd ~/opteroncoin
 rm -rf ~/OSX
 make clean
 export PATH=$PATH_orig

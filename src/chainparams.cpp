@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -55,7 +55,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "Astral X20R";
+    const char* pszTimestamp = "opteron X20R";
     const CScript genesisOutputScript = CScript() << ParseHex("04ed583f338b0eeb0df6bab2d0eefd1f9503f1cebfdf5a1e50e7526e693da1ff882fabba0ca1b6b08651781e0985aaf72835b8b68203ed3bc9e00a7fb4ff38df0b") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -185,14 +185,14 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Update as we know more about the contents of the Astral chain
+            // Update as we know more about the contents of the opteron chain
             1543437000, // * UNIX timestamp of last known number of transactions
             1,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.1         // * estimated number of transactions per second after that timestamp
         };
 
-        /** ASTRAL Start **/
+        /** opteron Start **/
         // Burn Amounts
         nIssueAssetBurnAmount = 0 * COIN;
         nReissueAssetBurnAmount = 0 * COIN;
@@ -214,7 +214,7 @@ public:
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
-        /** ASTRAL End **/
+        /** opteron End **/
     }
 };
 
@@ -271,7 +271,7 @@ public:
         vSeeds.clear();
 
         vSeeds.emplace_back("vps614526.ovh.net", false);
-        
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
@@ -291,7 +291,7 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Update as we know more about the contents of the Astral chain
+            // Update as we know more about the contents of the opteron chain
             1543337100, // * UNIX timestamp of last known number of transactions
             1,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
@@ -319,7 +319,7 @@ public:
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
-        /** ASTRAL End **/
+        /** opteron End **/
 
     }
 };
@@ -395,7 +395,7 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
 
-        /** ASTRAL Start **/
+        /** opteron Start **/
         // Burn Amounts
         nIssueAssetBurnAmount = 0 * COIN;
         nReissueAssetBurnAmount = 0 * COIN;
@@ -417,7 +417,7 @@ public:
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
-        /** ASTRAL End **/
+        /** opteron End **/
     }
 };
 

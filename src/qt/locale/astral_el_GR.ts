@@ -140,7 +140,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Υπογραφή &amp;Μηνύματος...</translation>
@@ -222,8 +222,8 @@
         <translation>Φόρτωση ευρετηρίου μπλοκ στον σκληρο δισκο...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Στείλε νομίσματα σε μια διεύθυνση astral</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Στείλε νομίσματα σε μια διεύθυνση opteron</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -246,8 +246,8 @@
         <translation>&amp;Επιβεβαίωση μηνύματος</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -274,12 +274,12 @@
         <translation>Κρυπτογραφήστε τα ιδιωτικά κλειδιά που ανήκουν στο πορτοφόλι σας </translation>
     </message>
     <message>
-        <source>Sign messages with your Astral addresses to prove you own them</source>
+        <source>Sign messages with your opteron addresses to prove you own them</source>
         <translation>Υπογράψτε ένα μήνυμα για να βεβαιώσετε πως είστε ο κάτοχος αυτής της διεύθυνσης</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Astral addresses</source>
-        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως ανήκει μια συγκεκριμένη διεύθυνση Astral</translation>
+        <source>Verify messages to ensure they were signed with specified opteron addresses</source>
+        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως ανήκει μια συγκεκριμένη διεύθυνση opteron</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -298,8 +298,8 @@
         <translation>Εργαλειοθήκη καρτελών</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and astral: URIs)</source>
-        <translation>Αίτηση πληρωμών (δημιουργεί QR codes και διευθύνσεις astral: )</translation>
+        <source>Request payments (generates QR codes and opteron: URIs)</source>
+        <translation>Αίτηση πληρωμών (δημιουργεί QR codes και διευθύνσεις opteron: )</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -310,8 +310,8 @@
         <translation>Προβολή της λίστας των χρησιμοποιημένων διευθύνσεων και ετικετών λήψεως</translation>
     </message>
     <message>
-        <source>Open a astral: URI or payment request</source>
-        <translation>Άνοιγμα astral: URI αίτησης πληρωμής</translation>
+        <source>Open a opteron: URI or payment request</source>
+        <translation>Άνοιγμα opteron: URI αίτησης πληρωμής</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -720,16 +720,16 @@
         <translation>&amp;Ξόδεμα μη επικυρωμένων ρέστων</translation>
     </message>
     <message>
-        <source>Automatically open the Astral client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Αυτόματο άνοιγμα των θυρών Astral στον δρομολογητή. Λειτουργεί μόνο αν ο δρομολογητής σας υποστηρίζει τη λειτουργία UPnP.</translation>
+        <source>Automatically open the opteron client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Αυτόματο άνοιγμα των θυρών opteron στον δρομολογητή. Λειτουργεί μόνο αν ο δρομολογητής σας υποστηρίζει τη λειτουργία UPnP.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Απόδοση θυρών με χρήστη &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Astral network through a SOCKS5 proxy.</source>
-        <translation>Σύνδεση στο Astral δίκτυο μέσω διαμεσολαβητή SOCKS5 (π.χ. για σύνδεση μέσω Tor)</translation>
+        <source>Connect to the opteron network through a SOCKS5 proxy.</source>
+        <translation>Σύνδεση στο opteron δίκτυο μέσω διαμεσολαβητή SOCKS5 (π.χ. για σύνδεση μέσω Tor)</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -824,8 +824,8 @@
         <translation>Φόρμα</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Astral network after a connection is established, but this process has not completed yet.</source>
-        <translation>Οι πληροφορίες που εμφανίζονται μπορεί να είναι ξεπερασμένες. Το πορτοφόλι σας συγχρονίζεται αυτόματα με το δίκτυο Astral μετά από μια σύνδεση, αλλά αυτή η διαδικασία δεν έχει ακόμη ολοκληρωθεί. </translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the opteron network after a connection is established, but this process has not completed yet.</source>
+        <translation>Οι πληροφορίες που εμφανίζονται μπορεί να είναι ξεπερασμένες. Το πορτοφόλι σας συγχρονίζεται αυτόματα με το δίκτυο opteron μετά από μια σύνδεση, αλλά αυτή η διαδικασία δεν έχει ακόμη ολοκληρωθεί. </translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -905,8 +905,8 @@
         <translation>Ποσό</translation>
     </message>
     <message>
-        <source>Enter a Astral address (e.g. %1)</source>
-        <translation>Εισάγετε μια διεύθυνση Astral (π.χ. %1)</translation>
+        <source>Enter a opteron address (e.g. %1)</source>
+        <translation>Εισάγετε μια διεύθυνση opteron (π.χ. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1373,8 +1373,8 @@
         <translation>Αυτή είναι μια απλή πληρωμή.</translation>
     </message>
     <message>
-        <source>The Astral address to send the payment to</source>
-        <translation>Η διεύθυνση Astral που θα σταλεί η πληρωμή</translation>
+        <source>The opteron address to send the payment to</source>
+        <translation>Η διεύθυνση opteron που θα σταλεί η πληρωμή</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1430,8 +1430,8 @@
         <translation>&amp;Υπογραφή Μηνύματος</translation>
     </message>
     <message>
-        <source>The Astral address to sign the message with</source>
-        <translation>Διεύθυνση Astral που θα σταλεί το μήνυμα</translation>
+        <source>The opteron address to sign the message with</source>
+        <translation>Διεύθυνση opteron που θα σταλεί το μήνυμα</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1462,8 +1462,8 @@
         <translation>Αντέγραφη της επιλεγμενης διεύθυνσης στο πρόχειρο του συστηματος</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Astral address</source>
-        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως σας ανήκει μια συγκεκριμένη διεύθυνση Astral</translation>
+        <source>Sign the message to prove you own this opteron address</source>
+        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως σας ανήκει μια συγκεκριμένη διεύθυνση opteron</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1482,12 +1482,12 @@
         <translation>&amp;Επιβεβαίωση μηνύματος</translation>
     </message>
     <message>
-        <source>The Astral address the message was signed with</source>
-        <translation>Διεύθυνση Astral η οποία το μήνυμα έχει υπογραφεί</translation>
+        <source>The opteron address the message was signed with</source>
+        <translation>Διεύθυνση opteron η οποία το μήνυμα έχει υπογραφεί</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Astral address</source>
-        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως υπογραφθηκε απο μια συγκεκριμένη διεύθυνση Astral</translation>
+        <source>Verify the message to ensure it was signed with the specified opteron address</source>
+        <translation>Υπογράψτε ένα μήνυμα για ν' αποδείξετε πως υπογραφθηκε απο μια συγκεκριμένη διεύθυνση opteron</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1673,7 +1673,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
         <source>Options:</source>
         <translation>Επιλογές:</translation>
@@ -1699,8 +1699,8 @@
         <translation>Εκτέλεση στο παρασκήνιο κι αποδοχή εντολών</translation>
     </message>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

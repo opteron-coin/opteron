@@ -1,13 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Astral Core
-Comment=Connect to the Astral P2P Network
-Comment[de]=Verbinde mit dem Astral peer-to-peer Netzwerk
-Comment[fr]=Astral, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Astral, eşten eşe kriptografik sanal para birimi
-Exec=astral-qt %u
+Name=opteron Core
+Comment=Connect to the opteron P2P Network
+Comment[de]=Verbinde mit dem opteron peer-to-peer Netzwerk
+Comment[fr]=opteron, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=opteron, eşten eşe kriptografik sanal para birimi
+Exec=opteron-qt %u
 Terminal=false
 Type=Application
-Icon=astral128
-MimeType=x-scheme-handler/astral;
+Icon=opteron128
+MimeType=x-scheme-handler/opteron;
 Categories=Office;Finance;

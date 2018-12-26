@@ -1,2 +1,2 @@
-contrib/astrald.bash-completion	astrald
-contrib/astral-cli.bash-completion	astral-cli
+contrib/opterond.bash-completion	opterond
+contrib/opteron-cli.bash-completion	opteron-cli

@@ -1,5 +1,5 @@
-Building Astral
+Building opteron
 ================
 
 See doc/build-*.md for instructions on building the various
-elements of the Astral Core reference implementation of Astral.
+elements of the opteron Core reference implementation of opteron.

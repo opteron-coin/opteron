@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1564,7 +1564,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                 listReceived.push_back(output);
         }
 
-        /** ASTRAL START */
+        /** opteron START */
         if (AreAssetsDeployed()) {
             if (txout.scriptPubKey.IsAssetScript()) {
                 CAssetOutputEntry assetoutput;
@@ -1579,7 +1579,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                     assetsReceived.emplace_back(assetoutput);
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
     }
 
 }
@@ -2183,7 +2183,7 @@ void CWallet::AvailableCoinsWithAssets(std::vector<COutput> &vCoins, std::map<st
     AvailableCoinsAll(vCoins, mapAssetCoins, true, AreAssetsDeployed(), fOnlySafe, coinControl, nMinimumAmount, nMaximumAmount, nMinimumSumAmount, nMaximumCount, nMinDepth, nMaxDepth);
 }
 
-void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetASTRAL, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const {
+void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetopteron, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const {
     vCoins.clear();
 
     {
@@ -2191,8 +2191,8 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
 
         CAmount nTotal = 0;
 
-        /** ASTRAL START */
-        bool fASTRALLimitHit = false;
+        /** opteron START */
+        bool fopteronLimitHit = false;
         // A set of the hashes that have already been used
         std::set<uint256> usedMempoolHashes;
 
@@ -2368,11 +2368,11 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
                     }
                 }
 
-                if (fGetASTRAL) { // Looking for ASTRAL Tx OutPoints Only
-                    if (fASTRALLimitHit) // We hit our limit
+                if (fGetopteron) { // Looking for opteron Tx OutPoints Only
+                    if (fopteronLimitHit) // We hit our limit
                         continue;
 
-                    // We only want ASTRAL OutPoints. Don't include Asset OutPoints
+                    // We only want opteron OutPoints. Don't include Asset OutPoints
                     if (isAssetScript)
                         continue;
 
@@ -2383,23 +2383,23 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
                         nTotal += pcoin->tx->vout[i].nValue;
 
                         if (nTotal >= nMinimumSumAmount) {
-                            fASTRALLimitHit = true;
+                            fopteronLimitHit = true;
                         }
                     }
 
                     // Checks the maximum number of UTXO's.
                     if (nMaximumCount > 0 && vCoins.size() >= nMaximumCount) {
-                        fASTRALLimitHit = true;
+                        fopteronLimitHit = true;
                     }
                     continue;
                 }
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
     }
 }
 
-/** ASTRAL START */
+/** opteron START */
 
 std::map<CTxDestination, std::vector<COutput>> CWallet::ListAssets() const
 {
@@ -2409,8 +2409,8 @@ std::map<CTxDestination, std::vector<COutput>> CWallet::ListAssets() const
     // CWalletTx objects, callers to this function really should acquire the
     // cs_wallet lock before calling it. However, the current caller doesn't
     // acquire this lock yet. There was an attempt to add the missing lock in
-    // https://github.com/AstralProject/Astralcoin/pull/10340, but that change has been
-    // postponed until after https://github.com/AstralProject/Astralcoin/pull/10244 to
+    // https://github.com/opteronProject/opteroncoin/pull/10340, but that change has been
+    // postponed until after https://github.com/opteronProject/opteroncoin/pull/10244 to
     // avoid adding some extra complexity to the Qt code.
 
     std::map<CTxDestination, std::vector<COutput>> result;
@@ -2451,7 +2451,7 @@ std::map<CTxDestination, std::vector<COutput>> CWallet::ListAssets() const
     return result;
 }
 
-/** ASTRAL END */
+/** opteron END */
 
 std::map<CTxDestination, std::vector<COutput>> CWallet::ListCoins() const
 {
@@ -2461,8 +2461,8 @@ std::map<CTxDestination, std::vector<COutput>> CWallet::ListCoins() const
     // CWalletTx objects, callers to this function really should acquire the
     // cs_wallet lock before calling it. However, the current caller doesn't
     // acquire this lock yet. There was an attempt to add the missing lock in
-    // https://github.com/AstralProject/Astralcoin/pull/10340, but that change has been
-    // postponed until after https://github.com/AstralProject/Astralcoin/pull/10244 to
+    // https://github.com/opteronProject/opteroncoin/pull/10340, but that change has been
+    // postponed until after https://github.com/opteronProject/opteroncoin/pull/10244 to
     // avoid adding some extra complexity to the Qt code.
 
     std::map<CTxDestination, std::vector<COutput>> result;
@@ -2783,7 +2783,7 @@ bool CWallet::SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAm
     return res;
 }
 
-/** ASTRAL START */
+/** opteron START */
 bool CWallet::CreateNewChangeAddress(CReserveKey& reservekey, CKeyID& keyID, std::string& strFailReason)
 {
     // Called with coin control doesn't have a change_address
@@ -3013,7 +3013,7 @@ bool CWallet::SelectAssets(const std::map<std::string, std::vector<COutput> >& m
     return true;
 }
 
-/** ASTRAL END */
+/** opteron END */
 
 bool CWallet::SignTransaction(CMutableTransaction &tx)
 {
@@ -3149,7 +3149,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                                    const AssetType& assetType, bool sign)
 {
 
-    /** ASTRAL START */
+    /** opteron START */
     if (!AreAssetsDeployed() && (fTransferAsset || fNewAsset || fReissueAsset))
         return false;
 
@@ -3161,7 +3161,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
 
     if (fReissueAsset && (reissueAsset.IsNull() || !IsValidDestination(destination)))
         return error("%s : Tried reissuing an asset and the reissue data was null or the destination was invalid", __func__);
-    /** ASTRAL END */
+    /** opteron END */
 
     CAmount nValue = 0;
     std::map<std::string, CAmount> mapAssetValue;
@@ -3169,7 +3169,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
     unsigned int nSubtractFeeFromAmount = 0;
     for (const auto& recipient : vecSend)
     {
-        /** ASTRAL START */
+        /** opteron START */
         if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE) {
             CAssetTransfer assetTransfer;
             std::string address;
@@ -3185,7 +3185,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 mapAssetValue[assetTransfer.strName] += assetTransfer.nAmount;
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
 
         if (nValue < 0 || recipient.nAmount < 0)
         {
@@ -3247,17 +3247,17 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
         std::set<CInputCoin> setAssets;
         LOCK2(cs_main, cs_wallet);
         {
-            /** ASTRAL START */
+            /** opteron START */
             std::vector<COutput> vAvailableCoins;
             std::map<std::string, std::vector<COutput> > mapAssetCoins;
             if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE)
                 AvailableCoinsWithAssets(vAvailableCoins, mapAssetCoins, true, &coin_control);
             else
                 AvailableCoins(vAvailableCoins, true, &coin_control);
-            /** ASTRAL END */
+            /** opteron END */
             // Create change script that will be used if we need change
             // TODO: pass in scriptChange instead of reservekey so
-            // change transaction isn't always pay-to-astral-address
+            // change transaction isn't always pay-to-opteron-address
             CScript scriptChange;
 
             // coin control: send change to custom address
@@ -3313,7 +3313,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                     }
 
-                    if (IsDust(txout, ::dustRelayFee) && !IsScriptTransferAsset(recipient.scriptPubKey)) /** ASTRAL START */ /** ASTRAL END */
+                    if (IsDust(txout, ::dustRelayFee) && !IsScriptTransferAsset(recipient.scriptPubKey)) /** opteron START */ /** opteron END */
                     {
                         if (recipient.fSubtractFeeFromAmount && nFeeRet > 0)
                         {
@@ -3340,7 +3340,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         return false;
                     }
 
-                    /** ASTRAL START */
+                    /** opteron START */
                     if (AreAssetsDeployed()) {
                         setAssets.clear();
                         mapAssetsIn.clear();
@@ -3349,12 +3349,12 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                             return false;
                         }
                     }
-                    /** ASTRAL END */
+                    /** opteron END */
                 }
 
                 const CAmount nChange = nValueIn - nValueToSelect;
 
-                /** ASTRAL START */
+                /** opteron START */
                 if (AreAssetsDeployed()) {
                     // Add the change for the assets
                     std::map<std::string, CAmount> mapAssetChange;
@@ -3376,7 +3376,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                     }
                 }
-                /** ASTRAL END */
+                /** opteron END */
 
                 if (nChange > 0)
                 {
@@ -3410,7 +3410,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     nChangePosInOut = -1;
                 }
 
-                /** ASTRAL START */
+                /** opteron START */
                 if (AreAssetsDeployed()) {
                     if (fNewAsset) {
                         for (auto asset : assets) {
@@ -3439,7 +3439,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         txNew.vout.push_back(reissueTxOut);
                     }
                 }
-                /** ASTRAL END */
+                /** opteron END */
 
                 // Fill vin
                 //
@@ -3457,13 +3457,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     txNew.vin.push_back(CTxIn(coin.outpoint,CScript(),
                                               nSequence));
 
-                /** ASTRAL START */
+                /** opteron START */
                 if (AreAssetsDeployed()) {
                     for (const auto &asset : setAssets)
                         txNew.vin.push_back(CTxIn(asset.outpoint, CScript(),
                                                   nSequence));
                 }
-                /** ASTRAL END */
+                /** opteron END */
 
                 // Add the new asset inputs into the tempSet so the dummysigntx will add the correct amount of sigsß
                 std::set<CInputCoin> tempSet = setCoins;
@@ -3578,7 +3578,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
 
                 nIn++;
             }
-            /** ASTRAL START */
+            /** opteron START */
             if (AreAssetsDeployed()) {
                 for (const auto &asset : setAssets) {
                     const CScript &scriptPubKey = asset.txout.scriptPubKey;
@@ -3596,7 +3596,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     nIn++;
                 }
             }
-            /** ASTRAL END */
+            /** opteron END */
         }
 
         // Embed the constructed transaction data in wtxNew.
@@ -4387,8 +4387,8 @@ void CWallet::GetKeyBirthTimes(std::map<CTxDestination, int64_t> &mapKeyBirth) c
  *   the block time.
  *
  * For more information see CWalletTx::nTimeSmart,
- * https://astraltalk.org/?topic=54527, or
- * https://github.com/AstralProject/Astralcoin/pull/1393.
+ * https://opterontalk.org/?topic=54527, or
+ * https://github.com/opteronProject/opteroncoin/pull/1393.
  */
 unsigned int CWallet::ComputeTimeSmart(const CWalletTx& wtx) const
 {

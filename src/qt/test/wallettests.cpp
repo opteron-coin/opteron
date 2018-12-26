@@ -1,6 +1,6 @@
 #include "wallettests.h"
 
-#include "qt/astralamountfield.h"
+#include "qt/opteronamountfield.h"
 #include "qt/callback.h"
 #include "qt/optionsmodel.h"
 #include "qt/platformstyle.h"
@@ -10,7 +10,7 @@
 #include "qt/transactiontablemodel.h"
 #include "qt/transactionview.h"
 #include "qt/walletmodel.h"
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 #include "validation.h"
 #include "wallet/wallet.h"
 #include "qt/overviewpage.h"
@@ -69,7 +69,7 @@ uint256 SendCoins(CWallet& wallet, SendCoinsDialog& sendCoinsDialog, const CTxDe
     QVBoxLayout* entries = sendCoinsDialog.findChild<QVBoxLayout*>("entries");
     SendCoinsEntry* entry = qobject_cast<SendCoinsEntry*>(entries->itemAt(0)->widget());
     entry->findChild<QValidatedLineEdit*>("payTo")->setText(QString::fromStdString(EncodeDestination(address)));
-    entry->findChild<AstralAmountField*>("payAmount")->setValue(amount);
+    entry->findChild<opteronAmountField*>("payAmount")->setValue(amount);
     sendCoinsDialog.findChild<QFrame*>("frameFee")
         ->findChild<QFrame*>("frameFeeSelection")
         ->findChild<QCheckBox*>("optInRBF")
@@ -144,9 +144,9 @@ void BumpFee(TransactionView& view, const uint256& txid, bool expectDisabled, st
 //
 // This also requires overriding the default minimal Qt platform:
 //
-//     src/qt/test/test_astral-qt -platform xcb      # Linux
-//     src/qt/test/test_astral-qt -platform windows  # Windows
-//     src/qt/test/test_astral-qt -platform cocoa    # macOS
+//     src/qt/test/test_opteron-qt -platform xcb      # Linux
+//     src/qt/test/test_opteron-qt -platform windows  # Windows
+//     src/qt/test/test_opteron-qt -platform cocoa    # macOS
 void TestGUI()
 {
     // Set up wallet and chain with 105 blocks (5 mature blocks for spending).
@@ -198,7 +198,7 @@ void TestGUI()
     QString balanceText = balanceLabel->text();
     int unit = walletModel.getOptionsModel()->getDisplayUnit();
     CAmount balance = walletModel.getBalance();
-    QString balanceComparison = AstralUnits::formatWithUnit(unit, balance, false, AstralUnits::separatorAlways);
+    QString balanceComparison = opteronUnits::formatWithUnit(unit, balance, false, opteronUnits::separatorAlways);
     QCOMPARE(balanceText, balanceComparison);
 
     // Check Request Payment button
@@ -211,7 +211,7 @@ void TestGUI()
     labelInput->setText("TEST_LABEL_1");
 
     // Amount input
-    AstralAmountField* amountInput = receiveCoinsDialog.findChild<AstralAmountField*>("reqAmount");
+    opteronAmountField* amountInput = receiveCoinsDialog.findChild<opteronAmountField*>("reqAmount");
     amountInput->setValue(1);
 
     // Message input
@@ -227,7 +227,7 @@ void TestGUI()
             QString paymentText = rlist->toPlainText();
             QStringList paymentTextList = paymentText.split('\n');
             QCOMPARE(paymentTextList.at(0), QString("Payment information"));
-            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: astral:")) != -1);
+            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: opteron:")) != -1);
             QVERIFY(paymentTextList.at(2).indexOf(QString("Address:")) != -1);
             QCOMPARE(paymentTextList.at(3), QString("Amount: 0.00000001 ") + QString::fromStdString(CURRENCY_UNIT));
             QCOMPARE(paymentTextList.at(4), QString("Label: TEST_LABEL_1"));

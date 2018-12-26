@@ -1,16 +1,16 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
-#include "astralunits.h"
+#include "opteronunits.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
 
@@ -74,10 +74,10 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     /* Display elements init */
     QDir translations(":translations");
 
-    ui->astralAtStartup->setToolTip(ui->astralAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
-    ui->astralAtStartup->setText(ui->astralAtStartup->text().arg(tr(PACKAGE_NAME)));
+    ui->opteronAtStartup->setToolTip(ui->opteronAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
+    ui->opteronAtStartup->setText(ui->opteronAtStartup->text().arg(tr(PACKAGE_NAME)));
 
-    ui->openAstralConfButton->setToolTip(ui->openAstralConfButton->toolTip().arg(tr(PACKAGE_NAME)));
+    ui->openopteronConfButton->setToolTip(ui->openopteronConfButton->toolTip().arg(tr(PACKAGE_NAME)));
 
     ui->lang->setToolTip(ui->lang->toolTip().arg(tr(PACKAGE_NAME)));
     ui->lang->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
@@ -111,7 +111,7 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     ui->thirdPartyTxUrls->setPlaceholderText("https://example.com/tx/%s");
 #endif
 
-    ui->unit->setModel(new AstralUnits(this));
+    ui->unit->setModel(new opteronUnits(this));
 
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);
@@ -173,7 +173,7 @@ void OptionsDialog::setModel(OptionsModel *_model)
 void OptionsDialog::setMapper()
 {
     /* Main */
-    mapper->addMapping(ui->astralAtStartup, OptionsModel::StartAtStartup);
+    mapper->addMapping(ui->opteronAtStartup, OptionsModel::StartAtStartup);
     mapper->addMapping(ui->threadsScriptVerif, OptionsModel::ThreadsScriptVerif);
     mapper->addMapping(ui->databaseCache, OptionsModel::DatabaseCache);
 
@@ -230,7 +230,7 @@ void OptionsDialog::on_resetButton_clicked()
     }
 }
 
-void OptionsDialog::on_openAstralConfButton_clicked()
+void OptionsDialog::on_openopteronConfButton_clicked()
 {
     /* explain the purpose of the config file */
     QMessageBox::information(this, tr("Configuration options"),
@@ -238,7 +238,7 @@ void OptionsDialog::on_openAstralConfButton_clicked()
            "Additionally, any command-line options will override this configuration file."));
 
     /* show an error if there was some problem opening the file */
-    if (!GUIUtil::openAstralConf())
+    if (!GUIUtil::openopteronConf())
         QMessageBox::critical(this, tr("Error"), tr("The configuration file could not be opened."));
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.astral;
+package org.opteron;
 
 public class NativeSecp256k1Util{
 

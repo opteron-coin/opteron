@@ -384,7 +384,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -464,7 +464,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -515,7 +515,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -544,7 +544,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -916,7 +916,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="AstralAmountField" name="customFee"/>
+                  <widget class="opteronAmountField" name="customFee"/>
                  </item>
                  <item>
                   <spacer name="horizontalSpacer_6">
@@ -938,7 +938,7 @@
                  <item>
                   <widget class="QCheckBox" name="checkBoxMinimumFee">
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for astral transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for opteron transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -951,7 +951,7 @@
                     <bool>true</bool>
                    </property>
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for astral transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for opteron transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string>(read the tooltip)</string>
@@ -1213,7 +1213,7 @@
         <string>S&amp;end</string>
        </property>
        <property name="icon">
-        <iconset resource="../astral.qrc">
+        <iconset resource="../opteron.qrc">
          <normaloff>:/icons/send</normaloff>:/icons/send</iconset>
        </property>
        <property name="autoDefault">
@@ -1239,7 +1239,7 @@
         <string>Clear &amp;All</string>
        </property>
        <property name="icon">
-        <iconset resource="../astral.qrc">
+        <iconset resource="../opteron.qrc">
          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
        </property>
        <property name="autoDefault">
@@ -1256,7 +1256,7 @@
         <string>Add &amp;Recipient</string>
        </property>
        <property name="icon">
-        <iconset resource="../astral.qrc">
+        <iconset resource="../opteron.qrc">
          <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
        </property>
        <property name="autoDefault">
@@ -1307,7 +1307,7 @@
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="text">
-          <string notr="true">123.456 ASTRAL</string>
+          <string notr="true">123.456 opteron</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -1322,9 +1322,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>AstralAmountField</class>
+   <class>opteronAmountField</class>
    <extends>QLineEdit</extends>
-   <header>astralamountfield.h</header>
+   <header>opteronamountfield.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -1334,7 +1334,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../astral.qrc"/>
+  <include location="../opteron.qrc"/>
  </resources>
  <connections/>
  <buttongroups>

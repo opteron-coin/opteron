@@ -1,12 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef RAVEN_QT_TRANSACTIONTABLEMODEL_H
 #define RAVEN_QT_TRANSACTIONTABLEMODEL_H
 
-#include "astralunits.h"
+#include "opteronunits.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -74,7 +74,7 @@ public:
         StatusRole,
         /** Unprocessed icon */
         RawDecorationRole,
-        /** ASTRAL or name of an asset */
+        /** opteron or name of an asset */
         AssetNameRole,
     };
 
@@ -102,7 +102,7 @@ private:
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
     QString formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const;
-    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, AstralUnits::SeparatorStyle separators=AstralUnits::separatorStandard) const;
+    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, opteronUnits::SeparatorStyle separators=opteronUnits::separatorStandard) const;
     QString formatTooltip(const TransactionRecord *rec) const;
     QVariant txStatusDecoration(const TransactionRecord *wtx) const;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;

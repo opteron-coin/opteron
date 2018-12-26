@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -57,7 +57,7 @@
 #include "assets/assetdb.h"
 
 #if defined(NDEBUG)
-# error "Astral cannot be compiled without assertions."
+# error "opteron cannot be compiled without assertions."
 #endif
 
 #define MICRO 0.000001
@@ -107,7 +107,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "Astral Signed Message:\n";
+const std::string strMessageMagic = "opteron Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -467,7 +467,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
     const CTransaction& tx = *ptx;
     const uint256 hash = tx.GetHash();
 
-    /** ASTRAL START */
+    /** opteron START */
     std::vector<std::pair<std::string, uint256>> vReissueAssets;
     AssertLockHeld(cs_main);
     if (pfMissingInputs)
@@ -600,7 +600,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
             return error("%s: Consensus::CheckTxInputs: %s, %s", __func__, tx.GetHash().ToString(), FormatStateMessage(state));
         }
 
-        /** ASTRAL START */
+        /** opteron START */
         if (!AreAssetsDeployed()) {
             for (auto out : tx.vout) {
                 if (out.scriptPubKey.IsAssetScript())
@@ -613,7 +613,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
                 return error("%s: Consensus::CheckTxAssets: %s, %s", __func__, tx.GetHash().ToString(),
                              FormatStateMessage(state));
         }
-        /** ASTRAL END */
+        /** opteron END */
 
         // Check for non-standard pay-to-script-hash in inputs
         if (fRequireStandard && !AreInputsStandard(tx, view))
@@ -881,7 +881,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         // Remove conflicting transactions from the mempool
         for (const CTxMemPool::txiter it : allConflicting)
         {
-            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s ASTRAL additional fees, %d delta bytes\n",
+            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s opteron additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
@@ -1332,12 +1332,12 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo &txund
         txundo.vprevout.reserve(tx.vin.size());
         for (const CTxIn &txin : tx.vin) {
             txundo.vprevout.emplace_back();
-            bool is_spent = inputs.SpendCoin(txin.prevout, &txundo.vprevout.back(), assetCache); /** ASTRAL START */ /* Pass assetCache into function */ /** ASTRAL END */
+            bool is_spent = inputs.SpendCoin(txin.prevout, &txundo.vprevout.back(), assetCache); /** opteron START */ /* Pass assetCache into function */ /** opteron END */
             assert(is_spent);
         }
     }
     // add outputs
-    AddCoins(inputs, tx, nHeight, blockHash, false, assetCache, undoAssetData); /** ASTRAL START */ /* Pass assetCache into function */ /** ASTRAL END */
+    AddCoins(inputs, tx, nHeight, blockHash, false, assetCache, undoAssetData); /** opteron START */ /* Pass assetCache into function */ /** opteron END */
 }
 
 void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
@@ -1564,7 +1564,7 @@ int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out, CAss
 {
     bool fClean = true;
 
-    /** ASTRAL START */
+    /** opteron START */
     // This is needed because undo, is going to be cleared and moved when AddCoin is called. We need this for undo assets
     Coin tempCoin;
     bool fIsAsset = false;
@@ -1572,7 +1572,7 @@ int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out, CAss
         fIsAsset = true;
         tempCoin = undo;
     }
-    /** ASTRAL END */
+    /** opteron END */
 
     if (view.HaveCoin(out)) fClean = false; // overwriting transaction output
 
@@ -1594,14 +1594,14 @@ int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out, CAss
     // it is an overwrite.
     view.AddCoin(out, std::move(undo), !fClean);
 
-    /** ASTRAL START */
+    /** opteron START */
     if (AreAssetsDeployed()) {
         if (assetCache && fIsAsset) {
             if (!assetCache->UndoAssetCoin(tempCoin, out))
                 fClean = false;
         }
     }
-    /** ASTRAL END */
+    /** opteron END */
 
     return fClean ? DISCONNECT_OK : DISCONNECT_UNCLEAN;
 }
@@ -1633,7 +1633,7 @@ static DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* 
         error("DisconnectBlock(): block asset undo data inconsistent");
         return DISCONNECT_FAILED;
     }
-    
+
     std::vector<std::pair<CAddressIndexKey, CAmount> > addressIndex;
     std::vector<std::pair<CAddressUnspentKey, CAddressUnspentValue> > addressUnspentIndex;
     std::vector<std::pair<CSpentIndexKey, CSpentIndexValue> > spentIndex;
@@ -1687,23 +1687,23 @@ static DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* 
             if (!tx.vout[o].scriptPubKey.IsUnspendable()) {
                 COutPoint out(hash, o);
                 Coin coin;
-                bool is_spent = view.SpendCoin(out, &coin, &tempCache); /** ASTRAL START */ /* Pass assetsCache into the SpendCoin function */ /** ASTRAL END */
+                bool is_spent = view.SpendCoin(out, &coin, &tempCache); /** opteron START */ /* Pass assetsCache into the SpendCoin function */ /** opteron END */
                 if (!is_spent || tx.vout[o] != coin.out || pindex->nHeight != coin.nHeight || is_coinbase != coin.fCoinBase) {
                     fClean = false; // transaction output mismatch
                 }
 
-                /** ASTRAL START */
+                /** opteron START */
                 if (AreAssetsDeployed()) {
                     if (assetsCache) {
                         if (IsScriptTransferAsset(tx.vout[o].scriptPubKey))
                             vAssetTxIndex.emplace_back(o);
                     }
                 }
-                /** ASTRAL START */
+                /** opteron START */
             }
         }
 
-        /** ASTRAL START */
+        /** opteron START */
         if (AreAssetsDeployed()) {
             if (assetsCache) {
                 if (tx.IsNewAsset()) {
@@ -1793,7 +1793,7 @@ static DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* 
                 }
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
 
         // restore inputs
         if (i > 0) { // not coinbases
@@ -1805,7 +1805,7 @@ static DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* 
             for (unsigned int j = tx.vin.size(); j-- > 0;) {
                 const COutPoint &out = tx.vin[j].prevout;
                 Coin &undo = txundo.vprevout[j];
-                int res = ApplyTxInUndo(std::move(undo), view, out, assetsCache); /** ASTRAL START */ /* Pass assetsCache into ApplyTxInUndo function */ /** ASTRAL END */
+                int res = ApplyTxInUndo(std::move(undo), view, out, assetsCache); /** opteron START */ /* Pass assetsCache into ApplyTxInUndo function */ /** opteron END */
                 if (res == DISCONNECT_FAILED) return DISCONNECT_FAILED;
                 fClean = fClean && res != DISCONNECT_UNCLEAN;
 
@@ -1896,7 +1896,7 @@ static bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, 
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("astral-scriptch");
+    RenameThread("opteron-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -2143,7 +2143,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
                                  REJECT_INVALID, "bad-txns-accumulated-fee-outofrange");
             }
 
-            /** ASTRAL START */
+            /** opteron START */
             if (!AreAssetsDeployed()) {
                 for (auto out : tx.vout)
                     if (out.scriptPubKey.IsAssetScript())
@@ -2157,7 +2157,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
                                  FormatStateMessage(state));
                 }
             }
-            /** ASTRAL END */
+            /** opteron END */
 
             // Check that transaction is BIP68 final
             // BIP68 lock checks (as opposed to nLockTime checks) must
@@ -2233,7 +2233,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
             control.Add(vChecks);
         }
 
-        /** ASTRAL START */
+        /** opteron START */
         if (assetsCache) {
             if (tx.IsNewAsset())
             {
@@ -2265,7 +2265,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
                 std::string strError;
                 if (!tx.VerifyReissueAsset(strError))
                     return state.DoS(100, false, REJECT_INVALID, strError);
-                
+
                 CReissueAsset reissue;
                 std::string strAddress;
                 if (!ReissueAssetFromTransaction(tx, reissue, strAddress))
@@ -2299,7 +2299,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
                 }
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
         if (fAddressIndex) {
             for (unsigned int k = 0; k < tx.vout.size(); k++) {
                 const CTxOut &out = tx.vout[k];
@@ -2337,19 +2337,19 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
         if (i > 0) {
             blockundo.vtxundo.push_back(CTxUndo());
         }
-        /** ASTRAL START */
+        /** opteron START */
         // Create the basic empty string pair for the undoblock
         std::pair<std::string, CBlockAssetUndo> undoPair = std::make_pair("", CBlockAssetUndo());
         std::pair<std::string, CBlockAssetUndo>* undoAssetData = &undoPair;
-        /** ASTRAL END */
+        /** opteron END */
 
         UpdateCoins(tx, view, i == 0 ? undoDummy : blockundo.vtxundo.back(), pindex->nHeight, block.GetHash(), assetsCache, undoAssetData);
 
-        /** ASTRAL START */
+        /** opteron START */
         if (!undoAssetData->first.empty()) {
             vUndoAssetData.emplace_back(*undoAssetData);
         }
-        /** ASTRAL END */
+        /** opteron END */
 
         vPos.push_back(std::make_pair(tx.GetHash(), pos));
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
@@ -2538,28 +2538,28 @@ bool static FlushStateToDisk(const CChainParams& chainparams, CValidationState &
         // Flush best chain related state. This can only be done if the blocks / block index write was also done.
         if (fDoFullFlush) {
 
-            /** ASTRAL START */
+            /** opteron START */
 
             size_t assetsSize = 0;
             if (AreAssetsDeployed()) {
                 if (passets)
                     assetsSize = passets->GetCacheSize() * 2;
             }
-            /** ASTRAL END */
+            /** opteron END */
 
             // Typical Coin structures on disk are around 48 bytes in size.
             // Pushing a new one to the database can cause it to be written
             // twice (once in the log, and once in the tables). This is already
             // an overestimation, as most will delete an existing entry or
             // overwrite one. Still, use a conservative safety factor of 2.
-            if (!CheckDiskSpace((48 * 2 * 2 * pcoinsTip->GetCacheSize()) + assetsSize)) /** ASTRAL START */ /** ASTRAL END */
+            if (!CheckDiskSpace((48 * 2 * 2 * pcoinsTip->GetCacheSize()) + assetsSize)) /** opteron START */ /** opteron END */
                 return state.Error("out of disk space");
 
             // Flush the chainstate (which may refer to block index entries).
             if (!pcoinsTip->Flush())
                 return AbortNode(state, "Failed to write to coin database");
 
-            /** ASTRAL START */
+            /** opteron START */
             // Flush the assetstate
             if (AreAssetsDeployed()) {
                 // Flush the assetstate
@@ -2571,7 +2571,7 @@ bool static FlushStateToDisk(const CChainParams& chainparams, CValidationState &
             // Write the reissue mempool data to database
             if (passetsdb)
                 passetsdb->WriteReissuedMempoolState();
-            /** ASTRAL END */
+            /** opteron END */
 
             nLastFlush = nNow;
         }
@@ -2822,19 +2822,19 @@ bool static ConnectTip(CValidationState& state, const CChainParams& chainparams,
     int64_t nTime3;
     LogPrint(BCLog::BENCH, "  - Load block from disk: %.2fms [%.2fs]\n", (nTime2 - nTime1) * MILLI, nTimeReadFromDisk * MICRO);
 
-    /** ASTRAL START */
+    /** opteron START */
     // Initialize sets used from removing asset entries from the mempool
     std::set<CAssetCacheNewAsset> prevNewAssets;
     std::set<CAssetCacheNewAsset> afterNewAsset;
-    /** ASTRAL END */
+    /** opteron END */
 
     {
         CCoinsViewCache view(pcoinsTip);
 
-        /** ASTRAL START */
+        /** opteron START */
         CAssetsCache assetCache(*passets);
         prevNewAssets = assetCache.setNewAssetsToAdd; // List of newly cached assets before block is connected
-        /** ASTRAL END */
+        /** opteron END */
 
         bool rv = ConnectBlock(blockConnecting, state, pindexNew, view, chainparams, &assetCache);
         GetMainSignals().BlockChecked(blockConnecting, state);
@@ -2844,7 +2844,7 @@ bool static ConnectTip(CValidationState& state, const CChainParams& chainparams,
             return error("ConnectTip(): ConnectBlock %s failed", pindexNew->GetBlockHash().ToString());
         }
 
-        /** ASTRAL START */
+        /** opteron START */
         // Get the newly created assets, from the connectblock assetCache
         afterNewAsset = assetCache.setNewAssetsToAdd;
         for (auto it : prevNewAssets) {
@@ -2859,17 +2859,17 @@ bool static ConnectTip(CValidationState& state, const CChainParams& chainparams,
                 mapReissuedTx.erase(txHash);
             }
         }
-        /** ASTRAL END */
+        /** opteron END */
 
         nTime3 = GetTimeMicros(); nTimeConnectTotal += nTime3 - nTime2;
         LogPrint(BCLog::BENCH, "  - Connect total: %.2fms [%.2fs (%.2fms/blk)]\n", (nTime3 - nTime2) * MILLI, nTimeConnectTotal * MICRO, nTimeConnectTotal * MILLI / nBlocksTotal);
         bool flushed = view.Flush();
         assert(flushed);
 
-        /** ASTRAL START */
+        /** opteron START */
         bool assetFlushed = assetCache.Flush(true);
         assert(assetFlushed);
-        /** ASTRAL END */
+        /** opteron END */
     }
     int64_t nTime4 = GetTimeMicros(); nTimeFlush += nTime4 - nTime3;
     LogPrint(BCLog::BENCH, "  - Flush: %.2fms [%.2fs (%.2fms/blk)]\n", (nTime4 - nTime3) * MILLI, nTimeFlush * MICRO, nTimeFlush * MILLI / nBlocksTotal);
@@ -3917,9 +3917,9 @@ bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams,
     indexDummy.pprev = pindexPrev;
     indexDummy.nHeight = pindexPrev->nHeight + 1;
 
-    /** ASTRAL START */
+    /** opteron START */
     CAssetsCache assetCache(*passets);
-    /** ASTRAL END */
+    /** opteron END */
 
     // NOTE: CheckBlockHeader is called by CheckBlock
     if (!ContextualCheckBlockHeader(block, state, chainparams, pindexPrev, GetAdjustedTime()))
@@ -3928,7 +3928,7 @@ bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams,
         return error("%s: Consensus::CheckBlock: %s", __func__, FormatStateMessage(state));
     if (!ContextualCheckBlock(block, state, chainparams.GetConsensus(), pindexPrev, &assetCache))
         return error("%s: Consensus::ContextualCheckBlock: %s", __func__, FormatStateMessage(state));
-    if (!ConnectBlock(block, state, &indexDummy, viewNew, chainparams, &assetCache, true)) /** ASTRAL START */ /*Add asset to function */ /** ASTRAL END*/
+    if (!ConnectBlock(block, state, &indexDummy, viewNew, chainparams, &assetCache, true)) /** opteron START */ /*Add asset to function */ /** opteron END*/
         return error("%s: Consensus::ConnectBlock: %s", __func__, FormatStateMessage(state));
     assert(state.IsValid());
 
@@ -5158,7 +5158,7 @@ double GuessVerificationProgress(const ChainTxData& data, CBlockIndex *pindex) {
     return pindex->nChainTx / fTxTotal;
 }
 
-/** ASTRAL START */
+/** opteron START */
 bool AreAssetsDeployed() {
 
     if (fAssetsIsActive)
@@ -5174,7 +5174,7 @@ bool AreAssetsDeployed() {
 bool IsDGWActive(unsigned int nBlockNumber) {
     return nBlockNumber >= Params().DGWActivationBlock();
 }
-/** ASTRAL END */
+/** opteron END */
 
 class CMainCleanup
 {

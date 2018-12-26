@@ -1,5 +1,5 @@
 # Copyright (c) 2013-2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,23 +24,23 @@ RAVEN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS)
 RAVEN_INCLUDES += -I$(srcdir)/secp256k1/include
 RAVEN_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBRAVEN_SERVER=libastral_server.a
-LIBRAVEN_COMMON=libastral_common.a
-LIBRAVEN_CONSENSUS=libastral_consensus.a
-LIBRAVEN_CLI=libastral_cli.a
-LIBRAVEN_UTIL=libastral_util.a
-LIBRAVEN_CRYPTO=crypto/libastral_crypto.a
-LIBRAVENQT=qt/libastralqt.a
+LIBRAVEN_SERVER=libopteron_server.a
+LIBRAVEN_COMMON=libopteron_common.a
+LIBRAVEN_CONSENSUS=libopteron_consensus.a
+LIBRAVEN_CLI=libopteron_cli.a
+LIBRAVEN_UTIL=libopteron_util.a
+LIBRAVEN_CRYPTO=crypto/libopteron_crypto.a
+LIBRAVENQT=qt/libopteronqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBRAVEN_ZMQ=libastral_zmq.a
+LIBRAVEN_ZMQ=libopteron_zmq.a
 endif
 if BUILD_RAVEN_LIBS
-LIBRAVENCONSENSUS=libastralconsensus.la
+LIBRAVENCONSENSUS=libopteronconsensus.la
 endif
 if ENABLE_WALLET
-LIBRAVEN_WALLET=libastral_wallet.a
+LIBRAVEN_WALLET=libopteron_wallet.a
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -66,19 +66,19 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_RAVEND
-  bin_PROGRAMS += astrald
+  bin_PROGRAMS += opterond
 endif
 
 if BUILD_RAVEN_CLI
-  bin_PROGRAMS += astral-cli
+  bin_PROGRAMS += opteron-cli
 endif
 
 if BUILD_RAVEN_TX
-  bin_PROGRAMS += astral-tx
+  bin_PROGRAMS += opteron-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# astral core #
+# opteron core #
 RAVEN_CORE_H = \
   addrdb.h \
   addressindex.h \
@@ -189,12 +189,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libastral_util_a-clientversion.$(OBJEXT): obj/build.h
+libopteron_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between astrald and astral-qt
-libastral_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libastral_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_server_a_SOURCES = \
+# server: shared between opterond and opteron-qt
+libopteron_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libopteron_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   bloom.cpp \
@@ -241,20 +241,20 @@ libastral_server_a_SOURCES = \
   $(RAVEN_CORE_H)
 
 if ENABLE_ZMQ
-libastral_zmq_a_CPPFLAGS = $(RAVEN_INCLUDES) $(ZMQ_CFLAGS)
-libastral_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_zmq_a_SOURCES = \
+libopteron_zmq_a_CPPFLAGS = $(RAVEN_INCLUDES) $(ZMQ_CFLAGS)
+libopteron_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between astrald and astral-qt, but only linked
+# wallet: shared between opterond and opteron-qt, but only linked
 # when wallet enabled
-libastral_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libastral_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_wallet_a_SOURCES = \
+libopteron_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+libopteron_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_wallet_a_SOURCES = \
   wallet/crypter.cpp \
   wallet/db.cpp \
   wallet/feebumper.cpp \
@@ -267,9 +267,9 @@ libastral_wallet_a_SOURCES = \
   $(RAVEN_CORE_H)
 
 # crypto primitives library
-crypto_libastral_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libastral_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libastral_crypto_a_SOURCES = \
+crypto_libopteron_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libopteron_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libopteron_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -334,13 +334,13 @@ crypto_libastral_crypto_a_SOURCES = \
   crypto/sha512.h
 
 if USE_ASM
-crypto_libastral_crypto_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libopteron_crypto_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
 # consensus: shared between all executables that validate any consensus rules.
-libastral_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libastral_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_consensus_a_SOURCES = \
+libopteron_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+libopteron_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -357,7 +357,7 @@ libastral_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/astralconsensus.cpp \
+  script/opteronconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -374,10 +374,10 @@ libastral_consensus_a_SOURCES = \
   utilstrencodings.h \
   version.h
 
-# common: shared between astrald, and astral-qt and non-server tools
-libastral_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libastral_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_common_a_SOURCES = \
+# common: shared between opterond, and opteron-qt and non-server tools
+libopteron_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+libopteron_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_common_a_SOURCES = \
   base58.cpp \
   chainparams.cpp \
   coins.cpp \
@@ -399,9 +399,9 @@ libastral_common_a_SOURCES = \
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libastral_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libastral_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_util_a_SOURCES = \
+libopteron_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+libopteron_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -421,31 +421,31 @@ libastral_util_a_SOURCES = \
   $(RAVEN_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libastral_util_a_SOURCES += compat/glibc_compat.cpp
+libopteron_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between astral-cli and astral-qt
-libastral_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libastral_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libastral_cli_a_SOURCES = \
+# cli: shared between opteron-cli and opteron-qt
+libopteron_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+libopteron_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteron_cli_a_SOURCES = \
   rpc/client.cpp \
   $(RAVEN_CORE_H)
 
-nodist_libastral_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libopteron_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# astrald binary #
-astrald_SOURCES = astrald.cpp
-astrald_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-astrald_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-astrald_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# opterond binary #
+opterond_SOURCES = opterond.cpp
+opterond_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+opterond_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+opterond_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-astrald_SOURCES += astrald-res.rc
+opterond_SOURCES += opterond-res.rc
 endif
 
-astrald_LDADD = \
+opterond_LDADD = \
   $(LIBRAVEN_SERVER) \
   $(LIBRAVEN_COMMON) \
   $(LIBUNIVALUE) \
@@ -459,38 +459,38 @@ astrald_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-astrald_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+opterond_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# astral-cli binary #
-astral_cli_SOURCES = astral-cli.cpp
-astral_cli_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(EVENT_CFLAGS)
-astral_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-astral_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# opteron-cli binary #
+opteron_cli_SOURCES = opteron-cli.cpp
+opteron_cli_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(EVENT_CFLAGS)
+opteron_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+opteron_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-astral_cli_SOURCES += astral-cli-res.rc
+opteron_cli_SOURCES += opteron-cli-res.rc
 endif
 
-astral_cli_LDADD = \
+opteron_cli_LDADD = \
   $(LIBRAVEN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBRAVEN_UTIL) \
   $(LIBRAVEN_CRYPTO)
 
-astral_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+opteron_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# astral-tx binary #
-astral_tx_SOURCES = astral-tx.cpp
-astral_tx_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-astral_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-astral_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# opteron-tx binary #
+opteron_tx_SOURCES = opteron-tx.cpp
+opteron_tx_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+opteron_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+opteron_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-astral_tx_SOURCES += astral-tx-res.rc
+opteron_tx_SOURCES += opteron-tx-res.rc
 endif
 
-astral_tx_LDADD = \
+opteron_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBRAVEN_COMMON) \
   $(LIBRAVEN_UTIL) \
@@ -498,22 +498,22 @@ astral_tx_LDADD = \
   $(LIBRAVEN_CRYPTO) \
   $(LIBSECP256K1)
 
-astral_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+opteron_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# astralconsensus library #
+# opteronconsensus library #
 if BUILD_RAVEN_LIBS
-include_HEADERS = script/astralconsensus.h
-libastralconsensus_la_SOURCES = $(crypto_libastral_crypto_a_SOURCES) $(libastral_consensus_a_SOURCES)
+include_HEADERS = script/opteronconsensus.h
+libopteronconsensus_la_SOURCES = $(crypto_libopteron_crypto_a_SOURCES) $(libopteron_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libastralconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libopteronconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libastralconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libastralconsensus_la_LIBADD = $(LIBSECP256K1)
-libastralconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_RAVEN_INTERNAL
-libastralconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libopteronconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libopteronconsensus_la_LIBADD = $(LIBSECP256K1)
+libopteronconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_RAVEN_INTERNAL
+libopteronconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #
@@ -543,12 +543,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST = $(CTAES_DIST)
 
 
-config/astral-config.h: config/stamp-h1
+config/opteron-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/astral-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/opteron-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/astral-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/astral-config.h.in
+$(top_srcdir)/$(subdir)/config/opteron-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/opteron-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

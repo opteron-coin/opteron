@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test astrald with different proxy configuration.
+"""Test opterond with different proxy configuration.
 
 Test plan:
-- Start astrald's with different proxy configurations
+- Start opterond's with different proxy configurations
 - Use addnode to initiate connections
 - Verify that proxies are connected to, and the right connection command is given
-- Proxy configurations to test on astrald side:
+- Proxy configurations to test on opterond side:
     - `-proxy` (proxy everything)
     - `-onion` (proxy just onions)
     - `-proxyrandomize` Circuit randomization
@@ -19,8 +19,8 @@ Test plan:
     - proxy on IPv6
 
 - Create various proxies (as threads)
-- Create astralds that connect to them
-- Manipulate the astralds using addnode (onetry) an observe effects
+- Create opteronds that connect to them
+- Manipulate the opteronds using addnode (onetry) an observe effects
 
 addnode connect to IPv4
 addnode connect to IPv6
@@ -32,7 +32,7 @@ import socket
 import os
 
 from test_framework.socks5 import Socks5Configuration, Socks5Command, Socks5Server, AddressType
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import (
     PORT_MIN,
     PORT_RANGE,
@@ -42,7 +42,7 @@ from test_framework.netutil import test_ipv6_local
 
 RANGE_BEGIN = PORT_MIN + 2 * PORT_RANGE  # Start after p2p and rpc ports
 
-class ProxyTest(AstralTestFramework):
+class ProxyTest(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
 
@@ -80,9 +80,9 @@ class ProxyTest(AstralTestFramework):
         # Note: proxies are not used to connect to local nodes
         # this is because the proxy to use is based on CService.GetNetwork(), which return NET_UNROUTABLE for localhost
         args = [
-            ['-listen', '-proxy=%s:%i' % (self.conf1.addr),'-proxyrandomize=1'], 
-            ['-listen', '-proxy=%s:%i' % (self.conf1.addr),'-onion=%s:%i' % (self.conf2.addr),'-proxyrandomize=0'], 
-            ['-listen', '-proxy=%s:%i' % (self.conf2.addr),'-proxyrandomize=1'], 
+            ['-listen', '-proxy=%s:%i' % (self.conf1.addr),'-proxyrandomize=1'],
+            ['-listen', '-proxy=%s:%i' % (self.conf1.addr),'-onion=%s:%i' % (self.conf2.addr),'-proxyrandomize=0'],
+            ['-listen', '-proxy=%s:%i' % (self.conf2.addr),'-proxyrandomize=1'],
             []
             ]
         if self.have_ipv6:
@@ -96,7 +96,7 @@ class ProxyTest(AstralTestFramework):
         node.addnode("15.61.23.23:1234", "onetry")
         cmd = proxies[0].queue.get()
         assert(isinstance(cmd, Socks5Command))
-        # Note: astrald's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
+        # Note: opterond's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
         assert_equal(cmd.atyp, AddressType.DOMAINNAME)
         assert_equal(cmd.addr, b"15.61.23.23")
         assert_equal(cmd.port, 1234)
@@ -110,7 +110,7 @@ class ProxyTest(AstralTestFramework):
             node.addnode("[1233:3432:2434:2343:3234:2345:6546:4534]:5443", "onetry")
             cmd = proxies[1].queue.get()
             assert(isinstance(cmd, Socks5Command))
-            # Note: astrald's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
+            # Note: opterond's SOCKS5 implementation only sends atyp DOMAINNAME, even if connecting directly to IPv4/IPv6
             assert_equal(cmd.atyp, AddressType.DOMAINNAME)
             assert_equal(cmd.addr, b"1233:3432:2434:2343:3234:2345:6546:4534")
             assert_equal(cmd.port, 5443)
@@ -184,7 +184,7 @@ class ProxyTest(AstralTestFramework):
         assert_equal(n1['onion']['proxy'], '%s:%i' % (self.conf2.addr))
         assert_equal(n1['onion']['proxy_randomize_credentials'], False)
         assert_equal(n1['onion']['reachable'], True)
-        
+
         n2 = networks_dict(self.nodes[2].getnetworkinfo())
         for net in ['ipv4','ipv6','onion']:
             assert_equal(n2[net]['proxy'], '%s:%i' % (self.conf2.addr))

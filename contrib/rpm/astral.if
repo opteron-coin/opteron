@@ -1,10 +1,10 @@
 
-## <summary>policy for astral</summary>
+## <summary>policy for opteron</summary>
 
 
 ########################################
 ## <summary>
-##	Transition to astral.
+##	Transition to opteron.
 ## </summary>
 ## <param name="domain">
 ## <summary>
@@ -12,19 +12,19 @@
 ## </summary>
 ## </param>
 #
-interface(`astral_domtrans',`
+interface(`opteron_domtrans',`
 	gen_require(`
-		type astral_t, astral_exec_t;
+		type opteron_t, opteron_exec_t;
 	')
 
 	corecmd_search_bin($1)
-	domtrans_pattern($1, astral_exec_t, astral_t)
+	domtrans_pattern($1, opteron_exec_t, opteron_t)
 ')
 
 
 ########################################
 ## <summary>
-##	Execute astral server in the astral domain.
+##	Execute opteron server in the opteron domain.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -32,18 +32,18 @@ interface(`astral_domtrans',`
 ##	</summary>
 ## </param>
 #
-interface(`astral_initrc_domtrans',`
+interface(`opteron_initrc_domtrans',`
 	gen_require(`
-		type astral_initrc_exec_t;
+		type opteron_initrc_exec_t;
 	')
 
-	init_labeled_script_domtrans($1, astral_initrc_exec_t)
+	init_labeled_script_domtrans($1, opteron_initrc_exec_t)
 ')
 
 
 ########################################
 ## <summary>
-##	Search astral lib directories.
+##	Search opteron lib directories.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -51,18 +51,18 @@ interface(`astral_initrc_domtrans',`
 ##	</summary>
 ## </param>
 #
-interface(`astral_search_lib',`
+interface(`opteron_search_lib',`
 	gen_require(`
-		type astral_var_lib_t;
+		type opteron_var_lib_t;
 	')
 
-	allow $1 astral_var_lib_t:dir search_dir_perms;
+	allow $1 opteron_var_lib_t:dir search_dir_perms;
 	files_search_var_lib($1)
 ')
 
 ########################################
 ## <summary>
-##	Read astral lib files.
+##	Read opteron lib files.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -70,18 +70,18 @@ interface(`astral_search_lib',`
 ##	</summary>
 ## </param>
 #
-interface(`astral_read_lib_files',`
+interface(`opteron_read_lib_files',`
 	gen_require(`
-		type astral_var_lib_t;
+		type opteron_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	read_files_pattern($1, astral_var_lib_t, astral_var_lib_t)
+	read_files_pattern($1, opteron_var_lib_t, opteron_var_lib_t)
 ')
 
 ########################################
 ## <summary>
-##	Manage astral lib files.
+##	Manage opteron lib files.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -89,18 +89,18 @@ interface(`astral_read_lib_files',`
 ##	</summary>
 ## </param>
 #
-interface(`astral_manage_lib_files',`
+interface(`opteron_manage_lib_files',`
 	gen_require(`
-		type astral_var_lib_t;
+		type opteron_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	manage_files_pattern($1, astral_var_lib_t, astral_var_lib_t)
+	manage_files_pattern($1, opteron_var_lib_t, opteron_var_lib_t)
 ')
 
 ########################################
 ## <summary>
-##	Manage astral lib directories.
+##	Manage opteron lib directories.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -108,20 +108,20 @@ interface(`astral_manage_lib_files',`
 ##	</summary>
 ## </param>
 #
-interface(`astral_manage_lib_dirs',`
+interface(`opteron_manage_lib_dirs',`
 	gen_require(`
-		type astral_var_lib_t;
+		type opteron_var_lib_t;
 	')
 
 	files_search_var_lib($1)
-	manage_dirs_pattern($1, astral_var_lib_t, astral_var_lib_t)
+	manage_dirs_pattern($1, opteron_var_lib_t, opteron_var_lib_t)
 ')
 
 
 ########################################
 ## <summary>
 ##	All of the rules required to administrate
-##	a astral environment
+##	a opteron environment
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -135,23 +135,23 @@ interface(`astral_manage_lib_dirs',`
 ## </param>
 ## <rolecap/>
 #
-interface(`astral_admin',`
+interface(`opteron_admin',`
 	gen_require(`
-		type astral_t;
-		type astral_initrc_exec_t;
-		type astral_var_lib_t;
+		type opteron_t;
+		type opteron_initrc_exec_t;
+		type opteron_var_lib_t;
 	')
 
-	allow $1 astral_t:process { ptrace signal_perms };
-	ps_process_pattern($1, astral_t)
+	allow $1 opteron_t:process { ptrace signal_perms };
+	ps_process_pattern($1, opteron_t)
 
-	astral_initrc_domtrans($1)
+	opteron_initrc_domtrans($1)
 	domain_system_change_exemption($1)
-	role_transition $2 astral_initrc_exec_t system_r;
+	role_transition $2 opteron_initrc_exec_t system_r;
 	allow $2 system_r;
 
 	files_search_var_lib($1)
-	admin_pattern($1, astral_var_lib_t)
+	admin_pattern($1, opteron_var_lib_t)
 
 ')
 

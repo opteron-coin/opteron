@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test resurrection of mined transactions when the blockchain is re-organized."""
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 
 # Create one-input, one-output, no-fee transaction:
-class MempoolCoinbaseTest(AstralTestFramework):
+class MempoolCoinbaseTest(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [["-checkmempool"]]

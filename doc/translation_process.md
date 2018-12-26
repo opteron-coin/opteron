@@ -1,28 +1,28 @@
 Translations
 ============
 
-The Astral-Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, Astral-Core makes use of the Transifex online translation management tool.
+The opteron-Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, opteron-Core makes use of the Transifex online translation management tool.
 
 ### Helping to translate (using Transifex)
 Transifex is setup to monitor the GitHub repo for updates, and when code containing new translations is found, Transifex will process any changes. It may take several hours after a pull-request has been merged, to appear in the Transifex web interface.
 
-Multiple language support is critical in assisting Astral’s global adoption, and growth. One of Astral’s greatest strengths is cross-border money transfers, any help making that easier is greatly appreciated.
+Multiple language support is critical in assisting opteron’s global adoption, and growth. One of opteron’s greatest strengths is cross-border money transfers, any help making that easier is greatly appreciated.
 
-See the [Transifex Astral project](https://www.transifex.com/projects/p/astral/) to assist in translations. You should also join the translation mailing list for announcements - see details below.
+See the [Transifex opteron project](https://www.transifex.com/projects/p/opteron/) to assist in translations. You should also join the translation mailing list for announcements - see details below.
 
 ### Writing code with translations
 We use automated scripts to help extract translations in both Qt, and non-Qt source files. It is rarely necessary to manually edit the files in `src/qt/locale/`. The translation source files must adhere to the following format:
-`astral_xx_YY.ts or astral_xx.ts`
+`opteron_xx_YY.ts or opteron_xx.ts`
 
-`src/qt/locale/astral_en.ts` is treated in a special way. It is used as the source for all other translations. Whenever a string in the source code is changed, this file must be updated to reflect those changes. A custom script is used to extract strings from the non-Qt parts. This script makes use of `gettext`, so make sure that utility is installed (ie, `apt-get install gettext` on Ubuntu/Debian). Once this has been updated, `lupdate` (included in the Qt SDK) is used to update `astral_en.ts`.
+`src/qt/locale/opteron_en.ts` is treated in a special way. It is used as the source for all other translations. Whenever a string in the source code is changed, this file must be updated to reflect those changes. A custom script is used to extract strings from the non-Qt parts. This script makes use of `gettext`, so make sure that utility is installed (ie, `apt-get install gettext` on Ubuntu/Debian). Once this has been updated, `lupdate` (included in the Qt SDK) is used to update `opteron_en.ts`.
 
-To automatically regenerate the `astral_en.ts` file, run the following commands:
+To automatically regenerate the `opteron_en.ts` file, run the following commands:
 ```sh
 cd src/
 make translate
 ```
 
-`contrib/astral-qt.pro` takes care of generating `.qm` (binary compiled) files from `.ts` (source files) files. It’s mostly automated, and you shouldn’t need to worry about it.
+`contrib/opteron-qt.pro` takes care of generating `.qm` (binary compiled) files from `.ts` (source files) files. It’s mostly automated, and you shouldn’t need to worry about it.
 
 **Example Qt translation**
 ```cpp
@@ -36,14 +36,14 @@ When an updated source file is merged into the GitHub repo, Transifex will autom
 
 To create the pull-request, use the following commands:
 ```
-git add src/qt/astralstrings.cpp src/qt/locale/astral_en.ts
+git add src/qt/opteronstrings.cpp src/qt/locale/opteron_en.ts
 git commit
 ```
 
 ### Creating a Transifex account
 Visit the [Transifex Signup](https://www.transifex.com/signup/) page to create an account. Take note of your username and password, as they will be required to configure the command-line tool.
 
-You can find the Astral translation project at [https://www.transifex.com/projects/p/astral/](https://www.transifex.com/projects/p/astral/).
+You can find the opteron translation project at [https://www.transifex.com/projects/p/opteron/](https://www.transifex.com/projects/p/opteron/).
 
 ### Installing the Transifex client command-line tool
 The client it used to fetch updated translations. If you are having problems, or need more details, see [http://docs.transifex.com/developer/client/setup](http://docs.transifex.com/developer/client/setup)
@@ -68,16 +68,16 @@ username = USERNAME
 
 Please see [http://docs.transifex.com/developer/client/setup#windows](http://docs.transifex.com/developer/client/setup#windows) for details on installation.
 
-The Transifex Astral project config file is included as part of the repo. It can be found at `.tx/config`, however you shouldn’t need change anything.
+The Transifex opteron project config file is included as part of the repo. It can be found at `.tx/config`, however you shouldn’t need change anything.
 
 ### Synchronising translations
 To assist in updating translations, we have created a script to help.
 
 1. `python contrib/devtools/update-translations.py`
-2. Update `src/qt/astral_locale.qrc` manually or via
-   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(astral_\(.*\)\).ts/<file alias="\2">locale\/\1.qm<\/file>/'`
+2. Update `src/qt/opteron_locale.qrc` manually or via
+   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(opteron_\(.*\)\).ts/<file alias="\2">locale\/\1.qm<\/file>/'`
 3. Update `src/Makefile.qt.include` manually or via
-   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(astral_\(.*\)\).ts/  qt\/locale\/\1.ts \\/'`
+   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(opteron_\(.*\)\).ts/  qt\/locale\/\1.ts \\/'`
 4. `git add` new translations from `src/qt/locale/`
 
 **Do not directly download translations** one by one from the Transifex website, as we do a few post-processing steps before committing the translations.
@@ -85,7 +85,7 @@ To assist in updating translations, we have created a script to help.
 ### Handling Plurals (in source files)
 When new plurals are added to the source file, it's important to do the following steps:
 
-1. Open `astral_en.ts` in Qt Linguist (included in the Qt SDK)
+1. Open `opteron_en.ts` in Qt Linguist (included in the Qt SDK)
 2. Search for `%n`, which will take you to the parts in the translation that use plurals
 3. Look for empty `English Translation (Singular)` and `English Translation (Plural)` fields
 4. Add the appropriate strings for the singular and plural form of the base string
@@ -94,11 +94,11 @@ When new plurals are added to the source file, it's important to do the followin
 7. Save the source file
 
 ### Translating a new language
-To create a new language template, you will need to edit the languages manifest file `src/qt/astral_locale.qrc` and add a new entry. Below is an example of the English language entry.
+To create a new language template, you will need to edit the languages manifest file `src/qt/opteron_locale.qrc` and add a new entry. Below is an example of the English language entry.
 
 ```xml
 <qresource prefix="/translations">
-    <file alias="en">locale/astral_en.qm</file>
+    <file alias="en">locale/opteron_en.qm</file>
     ...
 </qresource>
 ```
@@ -106,6 +106,6 @@ To create a new language template, you will need to edit the languages manifest 
 **Note:** that the language translation file **must end in `.qm`** (the compiled extension), and not `.ts`.
 
 ### Questions and general assistance
-The Astral-Core translation maintainers include *tcatm, seone, Diapolo, wumpus and luke-jr*. You can find them, and others, in the Freenode IRC chatroom - `irc.freenode.net #astral-core-dev`.
+The opteron-Core translation maintainers include *tcatm, seone, Diapolo, wumpus and luke-jr*. You can find them, and others, in the Freenode IRC chatroom - `irc.freenode.net #opteron-core-dev`.
 
-If you are a translator, you should also subscribe to the mailing list, https://groups.google.com/forum/#!forum/astral-translators. Announcements will be posted during application pre-releases to notify translators to check for updates.
+If you are a translator, you should also subscribe to the mailing list, https://groups.google.com/forum/#!forum/opteron-translators. Announcements will be posted during application pre-releases to notify translators to check for updates.

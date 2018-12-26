@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test node responses to invalid blocks.
@@ -22,7 +22,7 @@ import time
 # Use the ComparisonTestFramework with 1 node: only use --testbinary.
 class InvalidBlockRequestTest(ComparisonTestFramework):
 
-    ''' Can either run this test as 1 node with expected answers, or two and compare them. 
+    ''' Can either run this test as 1 node with expected answers, or two and compare them.
         Change the "outcome" variable from each TestInstance object to only do the comparison. '''
     def set_test_params(self):
         self.num_nodes = 1
@@ -71,7 +71,7 @@ class InvalidBlockRequestTest(ComparisonTestFramework):
         Now we use merkle-root malleability to generate an invalid block with
         same blockheader.
         Manufacture a block with 3 transactions (coinbase, spend of prior
-        coinbase, spend of that spend).  Duplicate the 3rd transaction to 
+        coinbase, spend of that spend).  Duplicate the 3rd transaction to
         leave merkle root and blockheader unchanged but invalidate the block.
         '''
         block2 = create_block(self.tip, create_coinbase(height), self.block_time)

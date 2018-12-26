@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test behavior of -maxuploadtarget.
@@ -15,7 +15,7 @@ from collections import defaultdict
 import time
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 
 class TestNode(NodeConnCB):
@@ -30,8 +30,8 @@ class TestNode(NodeConnCB):
         message.block.calc_sha256()
         self.block_receive_map[message.block.sha256] += 1
 
-class MaxUploadTest(AstralTestFramework):
- 
+class MaxUploadTest(opteronTestFramework):
+
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -103,7 +103,7 @@ class MaxUploadTest(AstralTestFramework):
             assert_equal(test_nodes[0].block_receive_map[big_old_block], i+1)
 
         assert_equal(len(self.nodes[0].getpeerinfo()), 3)
-        # At most a couple more tries should succeed (depending on how long 
+        # At most a couple more tries should succeed (depending on how long
         # the test has been running so far).
         for i in range(3):
             test_nodes[0].send_message(getdata_request)

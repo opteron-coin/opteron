@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,24 +47,24 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** Astral unit definitions. Encapsulates parsing and formatting
+/** opteron unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class AstralUnits: public QAbstractListModel
+class opteronUnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit AstralUnits(QObject *parent);
+    explicit opteronUnits(QObject *parent);
 
-    /** Astral units.
-      @note Source: https://en.astral.it/wiki/Units . Please add only sensible ones
+    /** opteron units.
+      @note Source: https://en.opteron.it/wiki/Units . Please add only sensible ones
      */
     enum Unit
     {
-        ASTRAL,
-        mASTRAL,
-        uASTRAL
+        opteron,
+        mopteron,
+        uopteron
     };
 
     enum SeparatorStyle
@@ -129,8 +129,8 @@ public:
     static CAmount maxMoney();
 
 private:
-    QList<AstralUnits::Unit> unitlist;
+    QList<opteronUnits::Unit> unitlist;
 };
-typedef AstralUnits::Unit AstralUnit;
+typedef opteronUnits::Unit opteronUnit;
 
 #endif // RAVEN_QT_RAVENUNITS_H

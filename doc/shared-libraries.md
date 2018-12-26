@@ -1,21 +1,21 @@
 Shared Libraries
 ================
 
-## astralconsensus
+## opteronconsensus
 
-The purpose of this library is to make the verification functionality that is critical to Astral's consensus available to other applications, e.g. to language bindings.
+The purpose of this library is to make the verification functionality that is critical to opteron's consensus available to other applications, e.g. to language bindings.
 
 ### API
 
-The interface is defined in the C header `astralconsensus.h` located in  `src/script/astralconsensus.h`.
+The interface is defined in the C header `opteronconsensus.h` located in  `src/script/opteronconsensus.h`.
 
 #### Version
 
-`astralconsensus_version` returns an `unsigned int` with the API version *(currently at an experimental `0`)*.
+`opteronconsensus_version` returns an `unsigned int` with the API version *(currently at an experimental `0`)*.
 
 #### Script Validation
 
-`astralconsensus_verify_script` returns an `int` with the status of the verification. It will be `1` if the input script correctly spends the previous output `scriptPubKey`.
+`opteronconsensus_verify_script` returns an `int` with the status of the verification. It will be `1` if the input script correctly spends the previous output `scriptPubKey`.
 
 ##### Parameters
 - `const unsigned char *scriptPubKey` - The previous output script that encumbers spending.
@@ -24,26 +24,26 @@ The interface is defined in the C header `astralconsensus.h` located in  `src/sc
 - `unsigned int txToLen` - The number of bytes for the `txTo`.
 - `unsigned int nIn` - The index of the input in `txTo` that spends the `scriptPubKey`.
 - `unsigned int flags` - The script validation flags *(see below)*.
-- `astralconsensus_error* err` - Will have the error/success code for the operation *(see below)*.
+- `opteronconsensus_error* err` - Will have the error/success code for the operation *(see below)*.
 
 ##### Script Flags
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_NONE`
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_P2SH` - Evaluate P2SH ([BIP16](https://github.com/astral/bips/blob/master/bip-0016.mediawiki)) subscripts
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_DERSIG` - Enforce strict DER ([BIP66](https://github.com/astral/bips/blob/master/bip-0066.mediawiki)) compliance
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY` - Enforce NULLDUMMY ([BIP147](https://github.com/astral/bips/blob/master/bip-0147.mediawiki))
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY` - Enable CHECKLOCKTIMEVERIFY ([BIP65](https://github.com/astral/bips/blob/master/bip-0065.mediawiki))
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY` - Enable CHECKSEQUENCEVERIFY ([BIP112](https://github.com/astral/bips/blob/master/bip-0112.mediawiki))
-- `astralconsensus_SCRIPT_FLAGS_VERIFY_WITNESS` - Enable WITNESS ([BIP141](https://github.com/astral/bips/blob/master/bip-0141.mediawiki))
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_NONE`
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_P2SH` - Evaluate P2SH ([BIP16](https://github.com/opteron/bips/blob/master/bip-0016.mediawiki)) subscripts
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_DERSIG` - Enforce strict DER ([BIP66](https://github.com/opteron/bips/blob/master/bip-0066.mediawiki)) compliance
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY` - Enforce NULLDUMMY ([BIP147](https://github.com/opteron/bips/blob/master/bip-0147.mediawiki))
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY` - Enable CHECKLOCKTIMEVERIFY ([BIP65](https://github.com/opteron/bips/blob/master/bip-0065.mediawiki))
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY` - Enable CHECKSEQUENCEVERIFY ([BIP112](https://github.com/opteron/bips/blob/master/bip-0112.mediawiki))
+- `opteronconsensus_SCRIPT_FLAGS_VERIFY_WITNESS` - Enable WITNESS ([BIP141](https://github.com/opteron/bips/blob/master/bip-0141.mediawiki))
 
 ##### Errors
-- `astralconsensus_ERR_OK` - No errors with input parameters *(see the return value of `astralconsensus_verify_script` for the verification status)*
-- `astralconsensus_ERR_TX_INDEX` - An invalid index for `txTo`
-- `astralconsensus_ERR_TX_SIZE_MISMATCH` - `txToLen` did not match with the size of `txTo`
-- `astralconsensus_ERR_DESERIALIZE` - An error deserializing `txTo`
-- `astralconsensus_ERR_AMOUNT_REQUIRED` - Input amount is required if WITNESS is used
+- `opteronconsensus_ERR_OK` - No errors with input parameters *(see the return value of `opteronconsensus_verify_script` for the verification status)*
+- `opteronconsensus_ERR_TX_INDEX` - An invalid index for `txTo`
+- `opteronconsensus_ERR_TX_SIZE_MISMATCH` - `txToLen` did not match with the size of `txTo`
+- `opteronconsensus_ERR_DESERIALIZE` - An error deserializing `txTo`
+- `opteronconsensus_ERR_AMOUNT_REQUIRED` - Input amount is required if WITNESS is used
 
 ### Example Implementations
-- [NAstral](https://github.com/NicolasDorier/NAstral/blob/master/NAstral/Script.cs#L814) (.NET Bindings)
-- [node-libastralconsensus](https://github.com/bitpay/node-libastralconsensus) (Node.js Bindings)
-- [java-libastralconsensus](https://github.com/dexX7/java-libastralconsensus) (Java Bindings)
-- [astralconsensus-php](https://github.com/Bit-Wasp/astralconsensus-php) (PHP Bindings)
+- [Nopteron](https://github.com/NicolasDorier/Nopteron/blob/master/Nopteron/Script.cs#L814) (.NET Bindings)
+- [node-libopteronconsensus](https://github.com/bitpay/node-libopteronconsensus) (Node.js Bindings)
+- [java-libopteronconsensus](https://github.com/dexX7/java-libopteronconsensus) (Java Bindings)
+- [opteronconsensus-php](https://github.com/Bit-Wasp/opteronconsensus-php) (PHP Bindings)

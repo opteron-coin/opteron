@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 #include "txmempool.h"
 #include "util.h"
 
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 
 #include <boost/test/unit_test.hpp>
 #include <list>
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(MempoolRemoveTest)
     poolSize = testPool.size();
     testPool.removeRecursive(txParent);
     BOOST_CHECK_EQUAL(testPool.size(), poolSize - 1);
-    
+
     // Parent, children, grandchildren:
     testPool.addUnchecked(txParent.GetHash(), entry.FromTx(txParent));
     for (int i = 0; i < 3; i++)

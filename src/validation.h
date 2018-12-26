@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 #define RAVEN_VALIDATION_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
 #include "amount.h"
@@ -236,7 +236,7 @@ static const unsigned int DEFAULT_CHECKLEVEL = 3;
 // Setting the target to > than 550MB will make it likely we can respect the target.
 static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 550 * 1024 * 1024;
 
-/** 
+/**
  * Process an incoming block. This only returns after the best known valid
  * block is made active. Note that it does not, however, guarantee that the
  * specific block passed to it has been checked for validity!
@@ -247,7 +247,7 @@ static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 550 * 1024 * 1024;
  *
  * Note that we guarantee that either the proof-of-work is valid on pblock, or
  * (and possibly also) BlockChecked will have been called.
- * 
+ *
  * Call without cs_main held.
  *
  * @param[in]   pblock  The block we want to process.
@@ -376,7 +376,7 @@ bool CheckSequenceLocks(const CTransaction &tx, int flags, LockPoints* lp = null
 
 /**
  * Closure representing one script verification
- * Note that this stores references to the spending transaction 
+ * Note that this stores references to the spending transaction
  */
 class CScriptCheck
 {
@@ -480,14 +480,14 @@ extern CCoinsViewCache *pcoinsTip;
 /** Global variable that points to the active block tree (protected by cs_main) */
 extern CBlockTreeDB *pblocktree;
 
-/** ASTRAL START */
+/** opteron START */
 /** Global variable that point to the active assets database (protexted by cs_main) */
 extern CAssetsDB *passetsdb;
 /** Global variable that point to the active assets (protexted by cs_main) */
 extern CAssetsCache *passets;
 /** Global variable that point to the assets LRU Cache (protexted by cs_main) */
 extern CLRUCache<std::string, CDatabasedAssetData> *passetsCache;
-/** ASTRAL END */
+/** opteron END */
 
 /**
  * Return the spend height, which is one more than the inputs.GetBestBlock().
@@ -520,10 +520,10 @@ bool DumpMempool();
 /** Load the mempool from disk. */
 bool LoadMempool();
 
-/** ASTRAL START */
+/** opteron START */
 bool AreAssetsDeployed();
 
 bool IsDGWActive(unsigned int nBlockNumber);
-/** ASTRAL END */
+/** opteron END */
 
 #endif // RAVEN_VALIDATION_H

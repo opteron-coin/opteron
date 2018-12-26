@@ -124,7 +124,7 @@
     </message>
 </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Usklađivanje sa mrežom...</translation>
@@ -158,16 +158,16 @@
         <translation>Otvori &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Pošalji novčiće na Astral adresu</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Pošalji novčiće na opteron adresu</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Proveri poruku...</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -404,10 +404,10 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Information</source>

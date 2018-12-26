@@ -1,7 +1,7 @@
 RPM Spec File Notes
 -------------------
 
-The RPM spec file provided here is for Astral-Core 0.12.0 and builds on CentOS
+The RPM spec file provided here is for opteron-Core 0.12.0 and builds on CentOS
 7 with either the CentOS provided OpenSSL library or with LibreSSL as packaged
 at [LibreLAMP.com](https://librelamp.com/). It should hopefully not be too
 difficult to port the RPM spec file to most RPM based Linux distributions.
@@ -15,15 +15,15 @@ It is considered good form for all sources to reference a URL where the source
 can be downloaded.
 
 Sources 0-9 should be reserved for source code tarballs. `Source0` should
-reference the release tarball available from https://astral.org/bin/ and
+reference the release tarball available from https://opteron.org/bin/ and
 `Source1` should reference the BerkeleyDB source.
 
 Sources 10-99 are for source files that are maintained in the
-[Astral git repository](https://github.com/AstralProject/Astralcoin) but are not part of
+[opteron git repository](https://github.com/opteronProject/opteroncoin) but are not part of
 the release tarball. Most of these will reside in the `contrib` sub-directory.
 
 Sources 10-19 should be reserved for miscellaneous configuration files.
-Currently only `Source10` is used, for the example `astral.conf` file.
+Currently only `Source10` is used, for the example `opteron.conf` file.
 
 Sources 20-29 should be reserved for man pages. Currently only `Source20`
 through `Source23` are used.
@@ -34,21 +34,21 @@ release, the full URL specified in the RPM spec file will not work. You can get
 them from the git repository where you retrieved this file.
 
 Sources 100+ are for files that are not source tarballs and are not maintained
-in the astral git repository. At present only an SVG version of the Astral
+in the opteron git repository. At present only an SVG version of the opteron
 icon is used.
 
 ## Patches
 
 In general, patches should be avoided. When a packager feels a patch is
-necessary, the packager should bring the problem to the attention of the astral
+necessary, the packager should bring the problem to the attention of the opteron
 developers so that an official fix to the issue can make it into the next
 release.
 
-### Patch0 astral-0.12.0-libressl.patch
+### Patch0 opteron-0.12.0-libressl.patch
 
 This patch is only needed if building against LibreSSL. LibreSSL is not the
 standard TLS library on most Linux distributions. The patch will likely not be
-needed when 0.12.1 is released, a proper fix is already in the Astral git
+needed when 0.12.1 is released, a proper fix is already in the opteron git
 master branch.
 
 ## BuildRequires
@@ -62,7 +62,7 @@ most likely to be the case with the Qt packages.
 
 The `build-unix.md` file recommends building against BerkeleyDB 4.8.30. Even if
 that is the version your Linux distribution ships with, it probably is a good
-idea to build Astral Core against a static version of that library compiled
+idea to build opteron Core against a static version of that library compiled
 according to the instructions in the `build-unix.md` file so that any changes
 the distribution may make in the future will not result in a problem for users.
 
@@ -91,7 +91,7 @@ assigned to them in the `touch` command that specifies the timestamp.
 
 ## SVG, PNG, and XPM Icons
 
-The `astral.svg` file is from the source listed as `Source100`. It is used as
+The `opteron.svg` file is from the source listed as `Source100`. It is used as
 the source for the PNG and XPM files. The generated PNG and XPM files are given
 the same timestamp as the source SVG file as a means of indicating they are
 derived from it.
@@ -99,7 +99,7 @@ derived from it.
 ## Systemd
 
 This spec file assumes the target distribution uses systemd. That really only
-matters for the `astral-server` package. At this point, most RPM based
+matters for the `opteron-server` package. At this point, most RPM based
 distributions that still receive vendor updates do in fact use systemd.
 
 The files to control the service are created in the RPM spec file itself using
@@ -112,7 +112,7 @@ command that specifies the timestamp.
 
 ## SELinux
 
-The `astral-server` package should have SELinux support. How to properly do
+The `opteron-server` package should have SELinux support. How to properly do
 that *may* vary by distribution and version of distribution.
 
 The SELinux stuff in this RPM spec file *should* be correct for CentOS, RHEL,
@@ -137,7 +137,7 @@ want the OpenSSL development files.
 LibreSSL (and some newer builds of OpenSSL) do not have support for SSLv3. This
 can cause issues with the Boost package if the Boost package has not been
 patched accordingly. On those distributions, you will either need to build
-Astral-Core against OpenSSL or use a patched version of Boost in the build
+opteron-Core against OpenSSL or use a patched version of Boost in the build
 system.
 
 As SSLv3 is no longer safe, distributions that have not patched Boost to work
@@ -156,8 +156,8 @@ developed on (CentOS 7).
 ## Legacy Credit
 
 This RPM spec file is largely based upon the work of Michael Hampton at
-[Ringing Liberty](https://www.ringingliberty.com/astral/). He has been
-packaging Astral for Fedora at least since 2012.
+[Ringing Liberty](https://www.ringingliberty.com/opteron/). He has been
+packaging opteron for Fedora at least since 2012.
 
 Most of the differences between his packaging and this package are stylistic in
 nature. The major differences:
@@ -174,9 +174,9 @@ academic.
 specifying a build without the Qt GUI, or specifying which version of the Qt
 libraries to use.
 
-4. I renamed the `astral` package that contains the Qt GUI to `astral-core` as
+4. I renamed the `opteron` package that contains the Qt GUI to `opteron-core` as
 that appears to be how the general population refers to it, in contrast to
-`astral-xt` or `astral-classic`. I wanted to make sure the general population
+`opteron-xt` or `opteron-classic`. I wanted to make sure the general population
 knows what they are getting when installing the GUI package.
 
 As far as minor differences, I generally prefer to assign the file permissions

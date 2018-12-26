@@ -1,12 +1,12 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "guiutil.h"
 
-#include "astraladdressvalidator.h"
-#include "astralunits.h"
+#include "opteronaddressvalidator.h"
+#include "opteronunits.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
 
@@ -129,11 +129,11 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Astral address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a opteron address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
 #endif
-    widget->setValidator(new AstralAddressEntryValidator(parent));
-    widget->setCheckValidator(new AstralAddressCheckValidator(parent));
+    widget->setValidator(new opteronAddressEntryValidator(parent));
+    widget->setCheckValidator(new opteronAddressCheckValidator(parent));
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -145,10 +145,10 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseAstralURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parseopteronURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no astral: URI
-    if(!uri.isValid() || uri.scheme() != QString("astral"))
+    // return if URI is not valid or is no opteron: URI
+    if(!uri.isValid() || uri.scheme() != QString("opteron"))
         return false;
 
     SendCoinsRecipient rv;
@@ -188,7 +188,7 @@ bool parseAstralURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!AstralUnits::parse(AstralUnits::ASTRAL, i->second, &rv.amount))
+                if(!opteronUnits::parse(opteronUnits::opteron, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -206,28 +206,28 @@ bool parseAstralURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseAstralURI(QString uri, SendCoinsRecipient *out)
+bool parseopteronURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert astral:// to astral:
+    // Convert opteron:// to opteron:
     //
-    //    Cannot handle this later, because astral:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because opteron:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("astral://", Qt::CaseInsensitive))
+    if(uri.startsWith("opteron://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "astral:");
+        uri.replace(0, 10, "opteron:");
     }
     QUrl uriInstance(uri);
-    return parseAstralURI(uriInstance, out);
+    return parseopteronURI(uriInstance, out);
 }
 
-QString formatAstralURI(const SendCoinsRecipient &info)
+QString formatopteronURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("astral:%1").arg(info.address);
+    QString ret = QString("opteron:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(AstralUnits::format(AstralUnits::ASTRAL, info.amount, false, AstralUnits::separatorNever));
+        ret += QString("?amount=%1").arg(opteronUnits::format(opteronUnits::opteron, info.amount, false, opteronUnits::separatorNever));
         paramCount++;
     }
 
@@ -417,19 +417,19 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-bool openAstralConf()
+bool openopteronConf()
 {
     boost::filesystem::path pathConfig = GetConfigFile(RAVEN_CONF_FILENAME);
 
     /* Create the file */
     boost::filesystem::ofstream configFile(pathConfig, std::ios_base::app);
-    
+
     if (!configFile.good())
         return false;
-    
+
     configFile.close();
-    
-    /* Open astral.conf with the associated application */
+
+    /* Open opteron.conf with the associated application */
     return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
@@ -617,15 +617,15 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Astral.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "opteron.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Astral (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Astral (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "opteron (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("opteron (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for Astral*.lnk
+    // check for opteron*.lnk
     return fs::exists(StartupShortcutPath());
 }
 
@@ -715,8 +715,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "astral.desktop";
-    return GetAutostartDir() / strprintf("astral-%s.lnk", chain);
+        return GetAutostartDir() / "opteron.desktop";
+    return GetAutostartDir() / strprintf("opteron-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -756,13 +756,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = ChainNameFromCommandLine();
-        // Write a astral.desktop file to the autostart directory:
+        // Write a opteron.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Astral\n";
+            optionFile << "Name=opteron\n";
         else
-            optionFile << strprintf("Name=Astral (%s)\n", chain);
+            optionFile << strprintf("Name=opteron (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -787,8 +787,8 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
     if (listSnapshot == nullptr) {
         return nullptr;
     }
-    
-    // loop through the list of startup items and try to find the astral app
+
+    // loop through the list of startup items and try to find the opteron app
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
         UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
@@ -815,45 +815,45 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
             CFRelease(currentItemURL);
         }
     }
-    
+
     CFRelease(listSnapshot);
     return nullptr;
 }
 
 bool GetStartOnSystemStartup()
 {
-    CFURLRef astralAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (astralAppUrl == nullptr) {
+    CFURLRef opteronAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (opteronAppUrl == nullptr) {
         return false;
     }
-    
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, astralAppUrl);
 
-    CFRelease(astralAppUrl);
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, opteronAppUrl);
+
+    CFRelease(opteronAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
-    CFURLRef astralAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (astralAppUrl == nullptr) {
+    CFURLRef opteronAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    if (opteronAppUrl == nullptr) {
         return false;
     }
-    
+
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, astralAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, opteronAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add astral app to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, astralAppUrl, nullptr, nullptr);
+        // add opteron app to startup item list
+        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, opteronAppUrl, nullptr, nullptr);
     }
     else if(!fAutoStart && foundItem) {
         // remove item
         LSSharedFileListItemRemove(loginItems, foundItem);
     }
-    
-    CFRelease(astralAppUrl);
+
+    CFRelease(opteronAppUrl);
     return true;
 }
 #pragma GCC diagnostic pop
@@ -1001,7 +1001,7 @@ void ClickableLabel::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_EMIT clicked(event->pos());
 }
-    
+
 void ClickableProgressBar::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_EMIT clicked(event->pos());

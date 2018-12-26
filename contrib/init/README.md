@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: astrald.service
-Upstart: astrald.conf
-OpenRC:  astrald.openrc
-         astrald.openrcconf
-CentOS:  astrald.init
-OS X:    org.astral.astrald.plist
+SystemD: opterond.service
+Upstart: opterond.conf
+OpenRC:  opterond.openrc
+         opterond.openrcconf
+CentOS:  opterond.init
+OS X:    org.opteron.opterond.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

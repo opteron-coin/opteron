@@ -1,15 +1,15 @@
-Astralcoin Core
+opteroncoin Core
 ==============
 
 Setup
 ---------------------
-Astralcoin Core is the original Astralcoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Astralcoin transactions; depending on the speed of your computer and network connection, the synchronization process is typically complete in under an hour.
+opteroncoin Core is the original opteroncoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of opteroncoin transactions; depending on the speed of your computer and network connection, the synchronization process is typically complete in under an hour.
 
-To download compiled binaries of the Astralcoin Core and wallet, visit the [GitHub release page](https://github.com/AstralProject/Astralcoin/releases).
+To download compiled binaries of the opteroncoin Core and wallet, visit the [GitHub release page](https://github.com/opteronProject/opteroncoin/releases).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Astralcoin on your native platform.
+The following are some helpful notes on how to run opteroncoin on your native platform.
 
 ### Linux
 
@@ -17,15 +17,15 @@ The following are some helpful notes on how to run Astralcoin on your native pla
 
 2) Install distribution-specific dependencies listed below.
 
-3) Run the GUI wallet or only the Astralcoin core deamon
+3) Run the GUI wallet or only the opteroncoin core deamon
 
    a. GUI wallet:
-   
-   `./astral-qt`
+
+   `./opteron-qt`
 
    b. Core deamon:
-   
-   `./astrald -deamon`
+
+   `./opterond -deamon`
 
 #### Ubuntu 16.04, 17.04/17.10 and 18.04
 
@@ -36,7 +36,7 @@ sudo apt update
 sudo apt install libevent-dev libboost-all-dev libminiupnpc10 libzmq5 software-properties-common
 ```
 
-The wallet requires version 4.8 of the Berkeley DB. The easiest way to get it is from the bitcoin repository: 
+The wallet requires version 4.8 of the Berkeley DB. The easiest way to get it is from the bitcoin repository:
 
 ```
 sudo add-apt-repository ppa:bitcoin/bitcoin
@@ -73,15 +73,15 @@ The GUI wallet requires the QR Code encoding library and Google's data interchan
 
 ### OS X
 
-1) Download Astral-Qt.dmg.
+1) Download opteron-Qt.dmg.
 
-2) Double click the DMG to mount it. 
+2) Double click the DMG to mount it.
 
-3) Drag Astral Core icon to the Applications Folder
+3) Drag opteron Core icon to the Applications Folder
 
 ![alt tag](https://i.imgur.com/GLhBFUV.png)
 
-4) Open the Applications folder and Launch Astral Core. The client will begin synchronizing with the network.
+4) Open the Applications folder and Launch opteron Core. The client will begin synchronizing with the network.
 
 ![alt tag](https://i.imgur.com/v3962qo.png)
 
@@ -89,69 +89,69 @@ Note: You may get the follow error on first launch:
 ```
 Dyld Error Message:
   Library not loaded: @loader_path/libboost_system-mt.dylib
-  Referenced from: /Applications/Astral-Qt.app/Contents/Frameworks/libboost_thread-mt.dylib
+  Referenced from: /Applications/opteron-Qt.app/Contents/Frameworks/libboost_thread-mt.dylib
   Reason: image not found
 ```
-To resolve, you will need to copy libboost_system.dylib to libboost_system-mt.dylib in the /Applications/Astral-Qt.app/Contents/Frameworks folder
+To resolve, you will need to copy libboost_system.dylib to libboost_system-mt.dylib in the /Applications/opteron-Qt.app/Contents/Frameworks folder
 
 ### Windows
 
 1) Download windows-x86_64.zip and unpack executables to desired folder.
 
-2) Double click the astral-qt.exe to launch it.
+2) Double click the opteron-qt.exe to launch it.
 
 ### Need Help?
 
-- See the documentation at the [Astralcoin Wiki](https://astral.wiki/wiki/Astralcoin_Wiki)
+- See the documentation at the [opteroncoin Wiki](https://opteron.wiki/wiki/opteroncoin_Wiki)
 for help and more information.
-- Ask for help on [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/AstralcoinDev) or [Reddit](https://www.reddit.com/r/Astralcoin/).
-- Ask for help on the [AstralcoinTalk](https://www.astralcointalk.org/) forums, in the [Development and Technical discussion board](https://www.astralcointalk.org/?forum=661517).
+- Ask for help on [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/opteroncoinDev) or [Reddit](https://www.reddit.com/r/opteroncoin/).
+- Ask for help on the [opteroncoinTalk](https://www.opteroncointalk.org/) forums, in the [Development and Technical discussion board](https://www.opteroncointalk.org/?forum=661517).
 
 Building from source
 ---------------------
-The following are developer notes on how to build the Astralcoin core software on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build the opteroncoin core software on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
-- [Dependencies](https://github.com/AstralProject/Astralcoin/tree/master/doc/dependencies.md)
-- [OS X Build Notes](https://github.com/AstralProject/Astralcoin/tree/master/doc/build-osx.md)
-- [Unix Build Notes](https://github.com/AstralProject/Astralcoin/tree/master/doc/build-unix.md)
-- [Windows Build Notes](https://github.com/AstralProject/Astralcoin/tree/master/doc/build-windows.md)
-- [OpenBSD Build Notes](https://github.com/AstralProject/Astralcoin/tree/master/doc/build-openbsd.md)
-- [Gitian Building Guide](https://github.com/AstralProject/Astralcoin/tree/master/doc/gitian-building.md)
+- [Dependencies](https://github.com/opteronProject/opteroncoin/tree/master/doc/dependencies.md)
+- [OS X Build Notes](https://github.com/opteronProject/opteroncoin/tree/master/doc/build-osx.md)
+- [Unix Build Notes](https://github.com/opteronProject/opteroncoin/tree/master/doc/build-unix.md)
+- [Windows Build Notes](https://github.com/opteronProject/opteroncoin/tree/master/doc/build-windows.md)
+- [OpenBSD Build Notes](https://github.com/opteronProject/opteroncoin/tree/master/doc/build-openbsd.md)
+- [Gitian Building Guide](https://github.com/opteronProject/opteroncoin/tree/master/doc/gitian-building.md)
 
 Development
 ---------------------
-Astralcoin repo's [root README](https://github.com/AstralProject/Astralcoin/blob/master/README.md) contains relevant information on the development process and automated testing.
+opteroncoin repo's [root README](https://github.com/opteronProject/opteroncoin/blob/master/README.md) contains relevant information on the development process and automated testing.
 
-- [Developer Notes](https://github.com/AstralProject/Astralcoin/blob/master/doc/developer-notes.md)
-- [Release Notes](https://github.com/AstralProject/Astralcoin/blob/master/doc/release-notes.md)
-- [Release Process](https://github.com/AstralProject/Astralcoin/blob/master/doc/release-process.md)
-- [Source Code Documentation (External Link)](https://dev.visucore.com/astral/doxygen/) -- 2018-05-11 -- Broken link
-- [Translation Process](https://github.com/AstralProject/Astralcoin/blob/master/doc/translation_process.md)
-- [Translation Strings Policy](https://github.com/AstralProject/Astralcoin/blob/master/doc/translation_strings_policy.md)
-- [Travis CI](https://github.com/AstralProject/Astralcoin/blob/master/doc/travis-ci.md)
-- [Unauthenticated REST Interface](https://github.com/AstralProject/Astralcoin/blob/master/doc/REST-interface.md)
-- [Shared Libraries](https://github.com/AstralProject/Astralcoin/blob/master/doc/shared-libraries.md)
-- [BIPS](https://github.com/AstralProject/Astralcoin/blob/master/doc/bips.md)
-- [Dnsseed Policy](https://github.com/AstralProject/Astralcoin/blob/master/doc/dnsseed-policy.md)
-- [Benchmarking](https://github.com/AstralProject/Astralcoin/blob/master/doc/benchmarking.md)
+- [Developer Notes](https://github.com/opteronProject/opteroncoin/blob/master/doc/developer-notes.md)
+- [Release Notes](https://github.com/opteronProject/opteroncoin/blob/master/doc/release-notes.md)
+- [Release Process](https://github.com/opteronProject/opteroncoin/blob/master/doc/release-process.md)
+- [Source Code Documentation (External Link)](https://dev.visucore.com/opteron/doxygen/) -- 2018-05-11 -- Broken link
+- [Translation Process](https://github.com/opteronProject/opteroncoin/blob/master/doc/translation_process.md)
+- [Translation Strings Policy](https://github.com/opteronProject/opteroncoin/blob/master/doc/translation_strings_policy.md)
+- [Travis CI](https://github.com/opteronProject/opteroncoin/blob/master/doc/travis-ci.md)
+- [Unauthenticated REST Interface](https://github.com/opteronProject/opteroncoin/blob/master/doc/REST-interface.md)
+- [Shared Libraries](https://github.com/opteronProject/opteroncoin/blob/master/doc/shared-libraries.md)
+- [BIPS](https://github.com/opteronProject/opteroncoin/blob/master/doc/bips.md)
+- [Dnsseed Policy](https://github.com/opteronProject/opteroncoin/blob/master/doc/dnsseed-policy.md)
+- [Benchmarking](https://github.com/opteronProject/opteroncoin/blob/master/doc/benchmarking.md)
 
 ### Resources
-- Discuss on the [AstralcoinTalk](https://www.astralcointalk.org/) forums, in the [Development & Technical Discussion board](https://www.astralcointalk.org/?forum=661517).
-- Discuss on chat [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/AstralcoinDev) or [Reddit](https://www.reddit.com/r/Astralcoin/).
-- Find out more on the [Astralcoin Wiki](https://astral.wiki/wiki/Astralcoin_Wiki)
-- Visit the project home [Astralcoin.org](https://astralcoin.org)
+- Discuss on the [opteroncoinTalk](https://www.opteroncointalk.org/) forums, in the [Development & Technical Discussion board](https://www.opteroncointalk.org/?forum=661517).
+- Discuss on chat [Discord](https://discord.gg/DUkcBst), [Telegram](https://t.me/opteroncoinDev) or [Reddit](https://www.reddit.com/r/opteroncoin/).
+- Find out more on the [opteroncoin Wiki](https://opteron.wiki/wiki/opteroncoin_Wiki)
+- Visit the project home [opteroncoin.org](https://opteroncoin.org)
 
 ### Miscellaneous
-- [Assets Attribution](https://github.com/AstralProject/Astralcoin/blob/master/doc/assets-attribution.md)
-- [Files](https://github.com/AstralProject/Astralcoin/blob/master/doc/files.md)
-- [Fuzz-testing](https://github.com/AstralProject/Astralcoin/blob/master/doc/fuzzing.md)
-- [Reduce Traffic](https://github.com/AstralProject/Astralcoin/blob/master/doc/reduce-traffic.md)
-- [Tor Support](https://github.com/AstralProject/Astralcoin/blob/master/doc/tor.md)
-- [Init Scripts (systemd/upstart/openrc)](https://github.com/AstralProject/Astralcoin/blob/master/doc/init.md)
-- [ZMQ](https://github.com/AstralProject/Astralcoin/blob/master/doc/zmq.md)
+- [Assets Attribution](https://github.com/opteronProject/opteroncoin/blob/master/doc/assets-attribution.md)
+- [Files](https://github.com/opteronProject/opteroncoin/blob/master/doc/files.md)
+- [Fuzz-testing](https://github.com/opteronProject/opteroncoin/blob/master/doc/fuzzing.md)
+- [Reduce Traffic](https://github.com/opteronProject/opteroncoin/blob/master/doc/reduce-traffic.md)
+- [Tor Support](https://github.com/opteronProject/opteroncoin/blob/master/doc/tor.md)
+- [Init Scripts (systemd/upstart/openrc)](https://github.com/opteronProject/opteroncoin/blob/master/doc/init.md)
+- [ZMQ](https://github.com/opteronProject/opteroncoin/blob/master/doc/zmq.md)
 
 License
 ---------------------
-Distributed under the [MIT software license](https://github.com/AstralProject/Astralcoin/blob/master/COPYING).
+Distributed under the [MIT software license](https://github.com/opteronProject/opteroncoin/blob/master/COPYING).
 This product includes software developed by the OpenSSL Project for use in the [OpenSSL Toolkit](https://www.openssl.org/). This product includes
 cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cryptsoft.com)), and UPnP software written by Thomas Bernard.

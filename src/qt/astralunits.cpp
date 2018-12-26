@@ -1,87 +1,87 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "astralunits.h"
+#include "opteronunits.h"
 
 #include "primitives/transaction.h"
 
 #include <QStringList>
 
-AstralUnits::AstralUnits(QObject *parent):
+opteronUnits::opteronUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<AstralUnits::Unit> AstralUnits::availableUnits()
+QList<opteronUnits::Unit> opteronUnits::availableUnits()
 {
-    QList<AstralUnits::Unit> unitlist;
-    unitlist.append(ASTRAL);
-    unitlist.append(mASTRAL);
-    unitlist.append(uASTRAL);
+    QList<opteronUnits::Unit> unitlist;
+    unitlist.append(opteron);
+    unitlist.append(mopteron);
+    unitlist.append(uopteron);
     return unitlist;
 }
 
-bool AstralUnits::valid(int unit)
+bool opteronUnits::valid(int unit)
 {
     switch(unit)
     {
-    case ASTRAL:
-    case mASTRAL:
-    case uASTRAL:
+    case opteron:
+    case mopteron:
+    case uopteron:
         return true;
     default:
         return false;
     }
 }
 
-QString AstralUnits::name(int unit)
+QString opteronUnits::name(int unit)
 {
     switch(unit)
     {
-    case ASTRAL: return QString("ASTRAL");
-    case mASTRAL: return QString("mASTRAL");
-    case uASTRAL: return QString::fromUtf8("μASTRAL");
+    case opteron: return QString("opteron");
+    case mopteron: return QString("mopteron");
+    case uopteron: return QString::fromUtf8("μopteron");
     default: return QString("???");
     }
 }
 
-QString AstralUnits::description(int unit)
+QString opteronUnits::description(int unit)
 {
     switch(unit)
     {
-    case ASTRAL: return QString("Astrals");
-    case mASTRAL: return QString("Milli-Astrals (1 / 1" THIN_SP_UTF8 "000)");
-    case uASTRAL: return QString("Micro-Astrals (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case opteron: return QString("opterons");
+    case mopteron: return QString("Milli-opterons (1 / 1" THIN_SP_UTF8 "000)");
+    case uopteron: return QString("Micro-opterons (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
 
-qint64 AstralUnits::factor(int unit)
+qint64 opteronUnits::factor(int unit)
 {
     switch(unit)
     {
-    case ASTRAL:  return 100000000;
-    case mASTRAL: return 100000;
-    case uASTRAL: return 100;
+    case opteron:  return 100000000;
+    case mopteron: return 100000;
+    case uopteron: return 100;
     default:   return 100000000;
     }
 }
 
-int AstralUnits::decimals(int unit)
+int opteronUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case ASTRAL: return 8;
-    case mASTRAL: return 5;
-    case uASTRAL: return 2;
+    case opteron: return 8;
+    case mopteron: return 5;
+    case uopteron: return 2;
     default: return 0;
     }
 }
 
-QString AstralUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, const int nAssetUnit)
+QString opteronUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, const int nAssetUnit)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -124,17 +124,17 @@ QString AstralUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorS
 // Please take care to use formatHtmlWithUnit instead, when
 // appropriate.
 
-QString AstralUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString opteronUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     return format(unit, amount, plussign, separators) + QString(" ") + name(unit);
 }
 
-QString AstralUnits::formatWithCustomName(QString customName, const CAmount& amount, int unit, bool plussign, SeparatorStyle separators)
+QString opteronUnits::formatWithCustomName(QString customName, const CAmount& amount, int unit, bool plussign, SeparatorStyle separators)
 {
-    return format(ASTRAL, amount, plussign, separators, unit) + QString(" ") + customName;
+    return format(opteron, amount, plussign, separators, unit) + QString(" ") + customName;
 }
 
-QString AstralUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString opteronUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(formatWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
@@ -142,7 +142,7 @@ QString AstralUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool pl
 }
 
 
-bool AstralUnits::parse(int unit, const QString &value, CAmount *val_out)
+bool opteronUnits::parse(int unit, const QString &value, CAmount *val_out)
 {
     if(!valid(unit) || value.isEmpty())
         return false; // Refuse to parse invalid unit or empty string
@@ -181,23 +181,23 @@ bool AstralUnits::parse(int unit, const QString &value, CAmount *val_out)
     return ok;
 }
 
-QString AstralUnits::getAmountColumnTitle(int unit)
+QString opteronUnits::getAmountColumnTitle(int unit)
 {
     QString amountTitle = QObject::tr("Amount");
-    if (AstralUnits::valid(unit))
+    if (opteronUnits::valid(unit))
     {
-        amountTitle += " ("+AstralUnits::name(unit) + ")";
+        amountTitle += " ("+opteronUnits::name(unit) + ")";
     }
     return amountTitle;
 }
 
-int AstralUnits::rowCount(const QModelIndex &parent) const
+int opteronUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant AstralUnits::data(const QModelIndex &index, int role) const
+QVariant opteronUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())
@@ -217,7 +217,7 @@ QVariant AstralUnits::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-CAmount AstralUnits::maxMoney()
+CAmount opteronUnits::maxMoney()
 {
     return MAX_MONEY;
 }

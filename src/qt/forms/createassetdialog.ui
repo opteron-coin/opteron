@@ -318,7 +318,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -398,7 +398,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -449,7 +449,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -478,7 +478,7 @@
                   <enum>Qt::ActionsContextMenu</enum>
                  </property>
                  <property name="text">
-                  <string notr="true">0.00 ASTRAL</string>
+                  <string notr="true">0.00 opteron</string>
                  </property>
                  <property name="textInteractionFlags">
                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -671,7 +671,7 @@
              <string/>
             </property>
             <property name="placeholderText">
-             <string>The ASTRAL address that will hold this asset (You must own this address). Leave blank to create a new address.</string>
+             <string>The opteron address that will hold this asset (You must own this address). Leave blank to create a new address.</string>
             </property>
            </widget>
           </item>
@@ -1034,7 +1034,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="AstralAmountField" name="customFee"/>
+                  <widget class="opteronAmountField" name="customFee"/>
                  </item>
                  <item>
                   <spacer name="horizontalSpacer_6">
@@ -1056,7 +1056,7 @@
                  <item>
                   <widget class="QCheckBox" name="checkBoxMinimumFee">
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for astral transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for opteron transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -1069,7 +1069,7 @@
                     <bool>true</bool>
                    </property>
                    <property name="toolTip">
-                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for astral transactions than the network can process.</string>
+                    <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for opteron transactions than the network can process.</string>
                    </property>
                    <property name="text">
                     <string>(read the tooltip)</string>
@@ -1362,7 +1362,7 @@
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>123.456 ASTRAL</string>
+        <string>123.456 opteron</string>
        </property>
       </widget>
      </item>
@@ -1380,9 +1380,9 @@
    <header>qvalidatedlineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>AstralAmountField</class>
+   <class>opteronAmountField</class>
    <extends>QLineEdit</extends>
-   <header>astralamountfield.h</header>
+   <header>opteronamountfield.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

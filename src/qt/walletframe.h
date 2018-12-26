@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +9,7 @@
 #include <QFrame>
 #include <QMap>
 
-class AstralGUI;
+class opteronGUI;
 class ClientModel;
 class PlatformStyle;
 class SendCoinsRecipient;
@@ -22,9 +22,9 @@ QT_END_NAMESPACE
 
 /**
  * A container for embedding all wallet-related
- * controls into AstralGUI. The purpose of this class is to allow future
+ * controls into opteronGUI. The purpose of this class is to allow future
  * refinements of the wallet controls with minimal need for further
- * modifications to AstralGUI, thus greatly simplifying merges while
+ * modifications to opteronGUI, thus greatly simplifying merges while
  * reducing the risk of breaking top-level stuff.
  */
 class WalletFrame : public QFrame
@@ -32,7 +32,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(const PlatformStyle *platformStyle, AstralGUI *_gui = 0);
+    explicit WalletFrame(const PlatformStyle *platformStyle, opteronGUI *_gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
@@ -54,7 +54,7 @@ Q_SIGNALS:
 
 private:
     QStackedWidget *walletStack;
-    AstralGUI *gui;
+    opteronGUI *gui;
     ClientModel *clientModel;
     QMap<QString, WalletView*> mapWalletViews;
 
@@ -95,11 +95,11 @@ public Q_SLOTS:
     /** Pass on signal over requested out-of-sync-warning information */
     void outOfSyncWarningClicked();
 
-    /** ASTRAL START */
+    /** opteron START */
 
     /** Switch to assets page */
     void gotoAssetsPage();
-    /** ASTRAL END */
+    /** opteron END */
 };
 
 #endif // RAVEN_QT_WALLETFRAME_H

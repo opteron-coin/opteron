@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 
 #include <memory>
 
@@ -151,11 +151,11 @@ struct {
         {4, 0x38ef9569}, {5, 0x1e7a1130}, {2, 0x55352321}, {2, 0x6261af8b},
         {4, 0x490d3f21}, {4, 0x1d99468d}, {6, 0x1f6ad569}, {3, 0x5d8df13d},
         {5, 0x6560b11f}, {3, 0x56675bc0}, {5, 0x5c45c62a}, {2, 0x239b329c},
-        {1, 0x38cf1221}, {4, 0x38ce517e}, {2, 0x234eeec},  {2, 0x233d6f74}, 
+        {1, 0x38cf1221}, {4, 0x38ce517e}, {2, 0x234eeec},  {2, 0x233d6f74},
         {4, 0x45f03db2}, {6, 0x4901d57b}, {3, 0x32cd4a47}, {6, 0x5e628617},
         {1, 0x3e882544}, {1, 0x2fb7c17e}, {3, 0x3af1461c}, {5, 0x31dc024b},
         {3, 0x23b1d0fb}, {6, 0x637fa04a}, {2, 0x36d43eb2}, {6, 0x46ee75b0},
-        {5, 0x5c448fe1}, {6, 0x5d6c8c8e}, {3, 0x5645015c}, {1, 0x3ad2d9ae}, 
+        {5, 0x5c448fe1}, {6, 0x5d6c8c8e}, {3, 0x5645015c}, {1, 0x3ad2d9ae},
         {1, 0x125add93}, {3, 0x64686cc2}, {3, 0x21f43601}, {3, 0x28bcc0b0},
         {1, 0x3bd174b3}, {1, 0x3de01db1}, {4, 0x2385f3ca}, {4, 0x55371d14},
 };
@@ -251,7 +251,7 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     tx.vin[0].prevout.hash = txFirst[2]->GetHash();
     tx.vout.resize(2);
     tx.vout[0].nValue = 5000000000LL - 100000000;
-    tx.vout[1].nValue = 100000000; // 1ASTRAL output
+    tx.vout[1].nValue = 100000000; // 1opteron output
     uint256 hashFreeTx2 = tx.GetHash();
     mempool.addUnchecked(hashFreeTx2, entry.Fee(0).SpendsCoinbase(true).FromTx(tx));
 

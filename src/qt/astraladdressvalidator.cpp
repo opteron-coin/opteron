@@ -1,9 +1,9 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "astraladdressvalidator.h"
+#include "opteronaddressvalidator.h"
 
 #include "base58.h"
 
@@ -16,12 +16,12 @@
   - All lower-case letters except for 'l'
 */
 
-AstralAddressEntryValidator::AstralAddressEntryValidator(QObject *parent) :
+opteronAddressEntryValidator::opteronAddressEntryValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State AstralAddressEntryValidator::validate(QString &input, int &pos) const
+QValidator::State opteronAddressEntryValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
 
@@ -81,15 +81,15 @@ QValidator::State AstralAddressEntryValidator::validate(QString &input, int &pos
     return state;
 }
 
-AstralAddressCheckValidator::AstralAddressCheckValidator(QObject *parent) :
+opteronAddressCheckValidator::opteronAddressCheckValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State AstralAddressCheckValidator::validate(QString &input, int &pos) const
+QValidator::State opteronAddressCheckValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
-    // Validate the passed Astral address
+    // Validate the passed opteron address
     if (IsValidDestinationString(input.toStdString())) {
         return QValidator::Acceptable;
     }

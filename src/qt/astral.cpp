@@ -1,13 +1,13 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
-#include "astralgui.h"
+#include "opterongui.h"
 
 #include "chainparams.h"
 #include "clientmodel.h"
@@ -93,7 +93,7 @@ static void InitMessage(const std::string &message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("astral-core", psz).toStdString();
+    return QCoreApplication::translate("opteron-core", psz).toStdString();
 }
 
 static QString GetLangTerritory()
@@ -140,11 +140,11 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslator);
 
-    // Load e.g. astral_de.qm (shortcut "de" needs to be defined in astral.qrc)
+    // Load e.g. opteron_de.qm (shortcut "de" needs to be defined in opteron.qrc)
     if (translatorBase.load(lang, ":/translations/"))
         QApplication::installTranslator(&translatorBase);
 
-    // Load e.g. astral_de_DE.qm (shortcut "de_DE" needs to be defined in astral.qrc)
+    // Load e.g. opteron_de_DE.qm (shortcut "de_DE" needs to be defined in opteron.qrc)
     if (translator.load(lang_territory, ":/translations/"))
         QApplication::installTranslator(&translator);
 }
@@ -171,14 +171,14 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 #endif
 
-/** Class encapsulating Astral Core startup and shutdown.
+/** Class encapsulating opteron Core startup and shutdown.
  * Allows running startup and shutdown in a different thread from the UI thread.
  */
-class AstralCore: public QObject
+class opteronCore: public QObject
 {
     Q_OBJECT
 public:
-    explicit AstralCore();
+    explicit opteronCore();
     /** Basic initialization, before starting initialization/shutdown thread.
      * Return true on success.
      */
@@ -201,13 +201,13 @@ private:
     void handleRunawayException(const std::exception *e);
 };
 
-/** Main Astral application object */
-class AstralApplication: public QApplication
+/** Main opteron application object */
+class opteronApplication: public QApplication
 {
     Q_OBJECT
 public:
-    explicit AstralApplication(int &argc, char **argv);
-    ~AstralApplication();
+    explicit opteronApplication(int &argc, char **argv);
+    ~opteronApplication();
 
 #ifdef ENABLE_WALLET
     /// Create payment server
@@ -230,7 +230,7 @@ public:
     /// Get process return value
     int getReturnValue() const { return returnValue; }
 
-    /// Get window identifier of QMainWindow (AstralGUI)
+    /// Get window identifier of QMainWindow (opteronGUI)
     WId getMainWinId() const;
 
 public Q_SLOTS:
@@ -249,7 +249,7 @@ private:
     QThread *coreThread;
     OptionsModel *optionsModel;
     ClientModel *clientModel;
-    AstralGUI *window;
+    opteronGUI *window;
     QTimer *pollShutdownTimer;
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer;
@@ -262,20 +262,20 @@ private:
     void startThread();
 };
 
-#include "astral.moc"
+#include "opteron.moc"
 
-AstralCore::AstralCore():
+opteronCore::opteronCore():
     QObject()
 {
 }
 
-void AstralCore::handleRunawayException(const std::exception *e)
+void opteronCore::handleRunawayException(const std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
     Q_EMIT runawayException(QString::fromStdString(GetWarnings("gui")));
 }
 
-bool AstralCore::baseInitialize()
+bool opteronCore::baseInitialize()
 {
     if (!AppInitBasicSetup())
     {
@@ -296,7 +296,7 @@ bool AstralCore::baseInitialize()
     return true;
 }
 
-void AstralCore::initialize()
+void opteronCore::initialize()
 {
     try
     {
@@ -310,7 +310,7 @@ void AstralCore::initialize()
     }
 }
 
-void AstralCore::shutdown()
+void opteronCore::shutdown()
 {
     try
     {
@@ -327,7 +327,7 @@ void AstralCore::shutdown()
     }
 }
 
-AstralApplication::AstralApplication(int &argc, char **argv):
+opteronApplication::opteronApplication(int &argc, char **argv):
     QApplication(argc, argv),
     coreThread(0),
     optionsModel(0),
@@ -343,17 +343,17 @@ AstralApplication::AstralApplication(int &argc, char **argv):
     setQuitOnLastWindowClosed(false);
 
     // UI per-platform customization
-    // This must be done inside the AstralApplication constructor, or after it, because
+    // This must be done inside the opteronApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
     std::string platformName;
-    platformName = gArgs.GetArg("-uiplatform", AstralGUI::DEFAULT_UIPLATFORM);
+    platformName = gArgs.GetArg("-uiplatform", opteronGUI::DEFAULT_UIPLATFORM);
     platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-AstralApplication::~AstralApplication()
+opteronApplication::~opteronApplication()
 {
     if(coreThread)
     {
@@ -376,27 +376,27 @@ AstralApplication::~AstralApplication()
 }
 
 #ifdef ENABLE_WALLET
-void AstralApplication::createPaymentServer()
+void opteronApplication::createPaymentServer()
 {
     paymentServer = new PaymentServer(this);
 }
 #endif
 
-void AstralApplication::createOptionsModel(bool resetSettings)
+void opteronApplication::createOptionsModel(bool resetSettings)
 {
     optionsModel = new OptionsModel(nullptr, resetSettings);
 }
 
-void AstralApplication::createWindow(const NetworkStyle *networkStyle)
+void opteronApplication::createWindow(const NetworkStyle *networkStyle)
 {
-    window = new AstralGUI(platformStyle, networkStyle, 0);
+    window = new opteronGUI(platformStyle, networkStyle, 0);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, SIGNAL(timeout()), window, SLOT(detectShutdown()));
     pollShutdownTimer->start(200);
 }
 
-void AstralApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void opteronApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     SplashScreen *splash = new SplashScreen(0, networkStyle);
     // We don't hold a direct pointer to the splash screen after creation, but the splash
@@ -406,12 +406,12 @@ void AstralApplication::createSplashScreen(const NetworkStyle *networkStyle)
     connect(this, SIGNAL(requestedShutdown()), splash, SLOT(close()));
 }
 
-void AstralApplication::startThread()
+void opteronApplication::startThread()
 {
     if(coreThread)
         return;
     coreThread = new QThread(this);
-    AstralCore *executor = new AstralCore();
+    opteronCore *executor = new opteronCore();
     executor->moveToThread(coreThread);
 
     /*  communication to and from thread */
@@ -427,20 +427,20 @@ void AstralApplication::startThread()
     coreThread->start();
 }
 
-void AstralApplication::parameterSetup()
+void opteronApplication::parameterSetup()
 {
     InitLogging();
     InitParameterInteraction();
 }
 
-void AstralApplication::requestInitialize()
+void opteronApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void AstralApplication::requestShutdown()
+void opteronApplication::requestShutdown()
 {
     // Show a simple window indicating shutdown status
     // Do this first as some of the steps may take some time below,
@@ -467,7 +467,7 @@ void AstralApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void AstralApplication::initializeResult(bool success)
+void opteronApplication::initializeResult(bool success)
 {
     qDebug() << __func__ << ": Initialization result: " << success;
     // Set exit result.
@@ -490,8 +490,8 @@ void AstralApplication::initializeResult(bool success)
         {
             walletModel = new WalletModel(platformStyle, vpwallets[0], optionsModel);
 
-            window->addWallet(AstralGUI::DEFAULT_WALLET, walletModel);
-            window->setCurrentWallet(AstralGUI::DEFAULT_WALLET);
+            window->addWallet(opteronGUI::DEFAULT_WALLET, walletModel);
+            window->setCurrentWallet(opteronGUI::DEFAULT_WALLET);
 
             connect(walletModel, SIGNAL(coinsSent(CWallet*,SendCoinsRecipient,QByteArray)),
                              paymentServer, SLOT(fetchPaymentACK(CWallet*,const SendCoinsRecipient&,QByteArray)));
@@ -511,7 +511,7 @@ void AstralApplication::initializeResult(bool success)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // astral: URIs or payment requests:
+        // opteron: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
                          window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -525,18 +525,18 @@ void AstralApplication::initializeResult(bool success)
     }
 }
 
-void AstralApplication::shutdownResult()
+void opteronApplication::shutdownResult()
 {
     quit(); // Exit main loop after shutdown finished
 }
 
-void AstralApplication::handleRunawayException(const QString &message)
+void opteronApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(0, "Runaway exception", AstralGUI::tr("A fatal error occurred. Astral can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical(0, "Runaway exception", opteronGUI::tr("A fatal error occurred. opteron can no longer continue safely and will quit.") + QString("\n\n") + message);
     ::exit(EXIT_FAILURE);
 }
 
-WId AstralApplication::getMainWinId() const
+WId opteronApplication::getMainWinId() const
 {
     if (!window)
         return 0;
@@ -562,10 +562,10 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(astral);
-    Q_INIT_RESOURCE(astral_locale);
+    Q_INIT_RESOURCE(opteron);
+    Q_INIT_RESOURCE(opteron_locale);
 
-    AstralApplication app(argc, argv);
+    opteronApplication app(argc, argv);
 #if QT_VERSION > 0x050100
     // Generate high-dpi pixmaps
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -619,7 +619,7 @@ int main(int argc, char *argv[])
     if (!Intro::pickDataDirectory())
         return EXIT_SUCCESS;
 
-    /// 6. Determine availability of data directory and parse astral.conf
+    /// 6. Determine availability of data directory and parse opteron.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!fs::is_directory(GetDataDir(false)))
     {
@@ -671,7 +671,7 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // astral: links repeatedly have their payment requests routed to this process:
+    // opteron: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 
@@ -707,7 +707,7 @@ int main(int argc, char *argv[])
         // Perform base initialization before spinning up initialization/shutdown thread
         // This is acceptable because this function only contains steps that are quick to execute,
         // so the GUI thread won't be held up.
-        if (AstralCore::baseInitialize()) {
+        if (opteronCore::baseInitialize()) {
             app.requestInitialize();
 #if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
             WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("%1 didn't yet exit safely...").arg(QObject::tr(PACKAGE_NAME)), (HWND)app.getMainWinId());

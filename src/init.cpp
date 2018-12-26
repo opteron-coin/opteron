@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
 #include "init.h"
@@ -135,7 +135,7 @@ bool ShutdownRequested()
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between astrald, and astral-qt and non-server tools.
+ * between opterond, and opteron-qt and non-server tools.
 */
 class CCoinsViewErrorCatcher final : public CCoinsViewBacked
 {
@@ -184,7 +184,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("astral-shutoff");
+    RenameThread("opteron-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -194,7 +194,7 @@ void Shutdown()
 #ifdef ENABLE_WALLET
     FlushWallets();
 #endif
-    GenerateAstrals(false, 0, Params());
+    Generateopterons(false, 0, Params());
 
     MapPort(false);
 
@@ -531,8 +531,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/AstralProject/Astralcoin>";
-    const std::string URL_WEBSITE = "<https://astralcoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/opteronProject/opteroncoin>";
+    const std::string URL_WEBSITE = "<https://opteroncoin.org>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -636,7 +636,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("astral-loadblk");
+    RenameThread("opteron-loadblk");
 
     {
     CImportingNow imp;
@@ -706,7 +706,7 @@ void ThreadImport(std::vector<fs::path> vImportFiles)
 }
 
 /** Sanity checks
- *  Ensure that Astral is running in a usable environment with all
+ *  Ensure that opteron is running in a usable environment with all
  *  necessary library support.
  */
 bool InitSanityCheck(void)
@@ -830,7 +830,7 @@ void InitLogging()
     fLogIPs = gArgs.GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Astral version %s\n", FormatFullVersion());
+    LogPrintf("opteron version %s\n", FormatFullVersion());
 }
 
 namespace { // Variables internal to initialization process only
@@ -1171,7 +1171,7 @@ static bool LockDataDirectory(bool probeOnly)
 {
     std::string strDataDir = GetDataDir().string();
 
-    // Make sure only a single Astral process is using the data directory.
+    // Make sure only a single opteron process is using the data directory.
     fs::path pathLockFile = GetDataDir() / ".lock";
     FILE* file = fsbridge::fopen(pathLockFile, "a"); // empty lock file; created if it doesn't exist.
     if (file) fclose(file);
@@ -1283,7 +1283,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     bool fGenerate = gArgs.GetBoolArg("-regtest", false) ? false : DEFAULT_GENERATE;
     // Generate coins in the background
-    GenerateAstrals(fGenerate, gArgs.GetArg("-genproclimit", DEFAULT_GENERATE_THREADS), chainparams);
+    Generateopterons(fGenerate, gArgs.GetArg("-genproclimit", DEFAULT_GENERATE_THREADS), chainparams);
 
     // ********************************************************* Step 6: network initialization
     // Note that we absolutely cannot open any actual connections

@@ -1,16 +1,16 @@
-# bash programmable completion for astral-tx(1)
+# bash programmable completion for opteron-tx(1)
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-_astral_tx() {
+_opteron_tx() {
     local cur prev words=() cword
-    local astral_tx
+    local opteron_tx
 
-    # save and use original argument to invoke astral-tx for -help
+    # save and use original argument to invoke opteron-tx for -help
     # it might not be in $PATH
-    astral_tx="$1"
+    opteron_tx="$1"
 
     COMPREPLY=()
     _get_comp_words_by_ref -n =: cur prev words cword
@@ -28,15 +28,15 @@ _astral_tx() {
 
     if [[ "$cword" == 1 || ( "$prev" != "-create" && "$prev" == -* ) ]]; then
         # only options (or an uncompletable hex-string) allowed
-        # parse astral-tx -help for options
+        # parse opteron-tx -help for options
         local helpopts
-        helpopts=$($astral_tx -help | sed -e '/^  -/ p' -e d )
+        helpopts=$($opteron_tx -help | sed -e '/^  -/ p' -e d )
         COMPREPLY=( $( compgen -W "$helpopts" -- "$cur" ) )
     else
         # only commands are allowed
         # parse -help for commands
         local helpcmds
-        helpcmds=$($astral_tx -help | sed -e '1,/Commands:/d' -e 's/=.*/=/' -e '/^  [a-z]/ p' -e d )
+        helpcmds=$($opteron_tx -help | sed -e '1,/Commands:/d' -e 's/=.*/=/' -e '/^  [a-z]/ p' -e d )
         COMPREPLY=( $( compgen -W "$helpcmds" -- "$cur" ) )
     fi
 
@@ -47,7 +47,7 @@ _astral_tx() {
 
     return 0
 } &&
-complete -F _astral_tx astral-tx
+complete -F _opteron_tx opteron-tx
 
 # Local variables:
 # mode: shell-script

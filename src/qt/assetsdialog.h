@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending astrals */
+/** Dialog for sending opterons */
 class AssetsDialog : public QDialog
 {
     Q_OBJECT
@@ -98,12 +98,12 @@ private Q_SLOTS:
 
     void customFeeFeatureChanged(bool);
 
-    /** ASTRAL START */
+    /** opteron START */
     void createAssetButtonClicked();
     void reissueAssetButtonClicked();
     void mineButtonClicked();
     void assetControlUpdateSendCoinsDialog();
-    /** ASTRAL END */
+    /** opteron END */
 
     Q_SIGNALS:
             // Fired when a message should be reported to the user

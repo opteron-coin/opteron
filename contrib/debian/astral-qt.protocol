@@ -1,6 +1,6 @@
 [Protocol]
-exec=astral-qt '%u'
-protocol=astral
+exec=opteron-qt '%u'
+protocol=opteron
 input=none
 output=none
 helper=true

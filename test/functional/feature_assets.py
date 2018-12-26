@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Testing asset use cases
 
 """
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 
 
 import string
 
-class AssetTest(AstralTestFramework):
+class AssetTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
 
     def activate_assets(self):
-        self.log.info("Generating ASTRAL for node[0] and activating assets...")
+        self.log.info("Generating opteron for node[0] and activating assets...")
         n0, n1, n2 = self.nodes[0], self.nodes[1], self.nodes[2]
 
         n0.generate(1)
@@ -163,10 +163,10 @@ class AssetTest(AstralTestFramework):
         assert_equal(assetdata["has_ipfs"], 1)
         assert_equal(assetdata["ipfs_hash"], ipfs_hash)
 
-        astral_assets = n0.listassets(asset="RAVEN*", verbose=False, count=2, start=-2)
-        assert_equal(len(astral_assets), 2)
-        assert_equal(astral_assets[0], "RAVEN2")
-        assert_equal(astral_assets[1], "RAVEN3")
+        opteron_assets = n0.listassets(asset="RAVEN*", verbose=False, count=2, start=-2)
+        assert_equal(len(opteron_assets), 2)
+        assert_equal(opteron_assets[0], "RAVEN2")
+        assert_equal(opteron_assets[1], "RAVEN3")
         self.sync_all()
 
     def issue_param_checks(self):

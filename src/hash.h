@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Copyright (c) 2018 The Mono Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -77,7 +77,7 @@ GLOBAL sph_echo512_context      z_echo;
 #define ZJH (memcpy(&ctx_jh, &z_jh, sizeof(z_jh)))
 #define ZKECCAK (memcpy(&ctx_keccak, &z_keccak, sizeof(z_keccak)))
 #define ZSKEIN (memcpy(&ctx_skein, &z_skein, sizeof(z_skein)))
-/** A hasher class for Astral's 256-bit hash (double SHA-256). */
+/** A hasher class for opteron's 256-bit hash (double SHA-256). */
 class CHash256 {
 private:
     CSHA256 sha;
@@ -101,7 +101,7 @@ public:
     }
 };
 
-/** A hasher class for Astral's 160-bit hash (SHA-256 + RIPEMD-160). */
+/** A hasher class for opteron's 160-bit hash (SHA-256 + RIPEMD-160). */
 class CHash160 {
 private:
     CSHA256 sha;
@@ -368,32 +368,32 @@ inline uint256 HashX20R(const T1 pbegin, const T1 pend, const uint256 PrevBlockH
 //	static std::chrono::duration<double>[20];
     int hashSelection;
 
-    sph_blake512_context     ctx_blake;     
-    sph_bmw512_context       ctx_bmw;       
-    sph_groestl512_context   ctx_groestl;   
-    sph_jh512_context        ctx_jh;        
-    sph_keccak512_context    ctx_keccak;    
-    sph_skein512_context     ctx_skein;     
-    sph_luffa512_context     ctx_luffa;     
-    sph_cubehash512_context  ctx_cubehash;  
-    sph_shavite512_context   ctx_shavite;   
-    sph_simd512_context      ctx_simd;      
-    sph_echo512_context      ctx_echo;      
-    sph_hamsi512_context     ctx_hamsi;     
-    sph_fugue512_context     ctx_fugue;     
-    sph_shabal512_context    ctx_shabal;    
-    sph_whirlpool_context    ctx_whirlpool; 
+    sph_blake512_context     ctx_blake;
+    sph_bmw512_context       ctx_bmw;
+    sph_groestl512_context   ctx_groestl;
+    sph_jh512_context        ctx_jh;
+    sph_keccak512_context    ctx_keccak;
+    sph_skein512_context     ctx_skein;
+    sph_luffa512_context     ctx_luffa;
+    sph_cubehash512_context  ctx_cubehash;
+    sph_shavite512_context   ctx_shavite;
+    sph_simd512_context      ctx_simd;
+    sph_echo512_context      ctx_echo;
+    sph_hamsi512_context     ctx_hamsi;
+    sph_fugue512_context     ctx_fugue;
+    sph_shabal512_context    ctx_shabal;
+    sph_whirlpool_context    ctx_whirlpool;
     sph_sha512_context       ctx_sha512;
     sph_haval256_5_context   ctx_haval;
     sph_gost512_context      ctx_gost;
-    sph_radiogatun64_context ctx_radiogatun;    
+    sph_radiogatun64_context ctx_radiogatun;
     sph_panama_context       ctx_panama;
 
     static unsigned char pblank[1];
 
     uint512 hash[20];
 
-    for (int i=0;i<20;i++) 
+    for (int i=0;i<20;i++)
     {
         const void *toHash;
         int lenToHash;

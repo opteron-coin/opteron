@@ -1,5 +1,5 @@
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,12 +18,12 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/AstralProject/Astralcoin
+url=https://github.com/opteronProject/opteroncoin
 proc=2
 mem=2000
 lxc=true
 osslTarUrl=http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-osslPatchUrl=https://astralcoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+osslPatchUrl=https://opteroncoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 scriptName=$(basename -- "$0")
 signProg="gpg --detach-sign"
 commitFiles=true
@@ -32,7 +32,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the astral, gitian-builder, gitian.sigs, and astral-detached-sigs.
+Run this script from the directory containing the opteron, gitian-builder, gitian.sigs, and opteron-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -40,7 +40,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/AstralProject/Astralcoin
+-u|--url	Specify the URL of the repository. Default is https://github.com/opteronProject/opteroncoin
 -v|--verify 	Verify the Gitian build
 -b|--build	Do a Gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -231,8 +231,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/astral-core/gitian.sigs.git
-    git clone https://github.com/astral-core/astral-detached-sigs.git
+    git clone https://github.com/opteron-core/gitian.sigs.git
+    git clone https://github.com/opteron-core/opteron-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -246,7 +246,7 @@ then
 fi
 
 # Set up build
-pushd ./astral
+pushd ./opteron
 git fetch
 git checkout ${COMMIT}
 popd
@@ -255,17 +255,17 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./astral-binaries/${VERSION}
-	
+	mkdir -p ./opteron-binaries/${VERSION}
+
 	# Build Dependencies
 	echo ""
 	echo "Building Dependencies"
 	echo ""
-	pushd ./gitian-builder	
+	pushd ./gitian-builder
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../astral/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../opteron/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -273,9 +273,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit astral=${COMMIT} --url astral=${url} ../astral/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/astral-*.tar.gz build/out/src/astral-*.tar.gz ../astral-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit opteron=${COMMIT} --url opteron=${url} ../opteron/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/opteron-*.tar.gz build/out/src/opteron-*.tar.gz ../opteron-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -283,10 +283,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit astral=${COMMIT} --url astral=${url} ../astral/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/astral-*-win-unsigned.tar.gz inputs/astral-win-unsigned.tar.gz
-	    mv build/out/astral-*.zip build/out/astral-*.exe ../astral-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit opteron=${COMMIT} --url opteron=${url} ../opteron/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/opteron-*-win-unsigned.tar.gz inputs/opteron-win-unsigned.tar.gz
+	    mv build/out/opteron-*.zip build/out/opteron-*.exe ../opteron-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -294,10 +294,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit astral=${COMMIT} --url astral=${url} ../astral/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/astral-*-osx-unsigned.tar.gz inputs/astral-osx-unsigned.tar.gz
-	    mv build/out/astral-*.tar.gz build/out/astral-*.dmg ../astral-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit opteron=${COMMIT} --url opteron=${url} ../opteron/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/opteron-*-osx-unsigned.tar.gz inputs/opteron-osx-unsigned.tar.gz
+	    mv build/out/opteron-*.tar.gz build/out/opteron-*.dmg ../opteron-binaries/${VERSION}
 	fi
 	popd
 
@@ -324,34 +324,34 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../astral/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../opteron/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../astral/contrib/gitian-descriptors/gitian-win.yml
-	# Mac OSX	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../opteron/contrib/gitian-descriptors/gitian-win.yml
+	# Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
-	echo ""	
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../astral/contrib/gitian-descriptors/gitian-osx.yml
+	echo ""
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../opteron/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
 	popd
 fi
 
 # Sign binaries
 if [[ $sign = true ]]
 then
-	
+
         pushd ./gitian-builder
 	# Sign Windows
 	if [[ $windows = true ]]
@@ -359,10 +359,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../astral/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/astral-*win64-setup.exe ../astral-binaries/${VERSION}
-	    mv build/out/astral-*win32-setup.exe ../astral-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../opteron/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/opteron-*win64-setup.exe ../opteron-binaries/${VERSION}
+	    mv build/out/opteron-*win32-setup.exe ../opteron-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -370,9 +370,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/astral-osx-signed.dmg ../astral-binaries/${VERSION}/astral-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/opteron-osx-signed.dmg ../opteron-binaries/${VERSION}/opteron-${VERSION}-osx.dmg
 	fi
 	popd
 

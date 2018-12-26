@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Compare two or more astralds to each other.
+"""Compare two or more opteronds to each other.
 
 To use, create a class that implements get_tests(), and pass it in
 as the test generator to TestManager.  get_tests() should be a python
@@ -53,9 +53,9 @@ class TestNode(NodeConnCB):
         self.block_reject_map = {}
         self.tx_reject_map = {}
 
-        # When the pingmap is non-empty we're waiting for 
+        # When the pingmap is non-empty we're waiting for
         # a response
-        self.pingMap = {} 
+        self.pingMap = {}
         self.lastInv = []
         self.closed = False
 
@@ -150,7 +150,7 @@ class TestNode(NodeConnCB):
 #    nodes will be tested based on the outcome for the block.  If False,
 #    then inv's accumulate until all blocks are processed (or max inv size
 #    is reached) and then sent out in one inv message.  Then the final block
-#    will be synced across all connections, and the outcome of the final 
+#    will be synced across all connections, and the outcome of the final
 #    block will be tested.
 # sync_every_tx: analogous to behavior for sync_every_block, except if outcome
 #    on the final tx is None, then contents of entire mempool are compared

@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "astralconsensus.h"
+#include "opteronconsensus.h"
 
 #include "primitives/transaction.h"
 #include "pubkey.h"
@@ -56,7 +56,7 @@ private:
     size_t m_remaining;
 };
 
-inline int set_error(astralconsensus_error* ret, astralconsensus_error serror)
+inline int set_error(opteronconsensus_error* ret, opteronconsensus_error serror)
 {
     if (ret)
         *ret = serror;
@@ -74,56 +74,56 @@ ECCryptoClosure instance_of_eccryptoclosure;
 /** Check that all specified flags are part of the libconsensus interface. */
 static bool verify_flags(unsigned int flags)
 {
-    return (flags & ~(astralconsensus_SCRIPT_FLAGS_VERIFY_ALL)) == 0;
+    return (flags & ~(opteronconsensus_SCRIPT_FLAGS_VERIFY_ALL)) == 0;
 }
 
 static int verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, CAmount amount,
                                     const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, astralconsensus_error* err)
+                                    unsigned int nIn, unsigned int flags, opteronconsensus_error* err)
 {
     if (!verify_flags(flags)) {
-        return astralconsensus_ERR_INVALID_FLAGS;
+        return opteronconsensus_ERR_INVALID_FLAGS;
     }
     try {
         TxInputStream stream(SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen);
         CTransaction tx(deserialize, stream);
         if (nIn >= tx.vin.size())
-            return set_error(err, astralconsensus_ERR_TX_INDEX);
+            return set_error(err, opteronconsensus_ERR_TX_INDEX);
         if (GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION) != txToLen)
-            return set_error(err, astralconsensus_ERR_TX_SIZE_MISMATCH);
+            return set_error(err, opteronconsensus_ERR_TX_SIZE_MISMATCH);
 
         // Regardless of the verification result, the tx did not error.
-        set_error(err, astralconsensus_ERR_OK);
+        set_error(err, opteronconsensus_ERR_OK);
 
         PrecomputedTransactionData txdata(tx);
         return VerifyScript(tx.vin[nIn].scriptSig, CScript(scriptPubKey, scriptPubKey + scriptPubKeyLen), &tx.vin[nIn].scriptWitness, flags, TransactionSignatureChecker(&tx, nIn, amount, txdata), nullptr);
     } catch (const std::exception&) {
-        return set_error(err, astralconsensus_ERR_TX_DESERIALIZE); // Error deserializing
+        return set_error(err, opteronconsensus_ERR_TX_DESERIALIZE); // Error deserializing
     }
 }
 
-int astralconsensus_verify_script_with_amount(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
+int opteronconsensus_verify_script_with_amount(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
                                     const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, astralconsensus_error* err)
+                                    unsigned int nIn, unsigned int flags, opteronconsensus_error* err)
 {
     CAmount am(amount);
     return ::verify_script(scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err);
 }
 
 
-int astralconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
+int opteronconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
                                    const unsigned char *txTo        , unsigned int txToLen,
-                                   unsigned int nIn, unsigned int flags, astralconsensus_error* err)
+                                   unsigned int nIn, unsigned int flags, opteronconsensus_error* err)
 {
-    if (flags & astralconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
-        return set_error(err, astralconsensus_ERR_AMOUNT_REQUIRED);
+    if (flags & opteronconsensus_SCRIPT_FLAGS_VERIFY_WITNESS) {
+        return set_error(err, opteronconsensus_ERR_AMOUNT_REQUIRED);
     }
 
     CAmount am(0);
     return ::verify_script(scriptPubKey, scriptPubKeyLen, am, txTo, txToLen, nIn, flags, err);
 }
 
-unsigned int astralconsensus_version()
+unsigned int opteronconsensus_version()
 {
     // Just use the API version for now
     return RAVENCONSENSUS_API_VER;

@@ -1,6 +1,6 @@
-## Astralcoin Metadata Specification
+## opteroncoin Metadata Specification
 
-Additional fields may be added, but will be ignored by Astralcoin.
+Additional fields may be added, but will be ignored by opteroncoin.
 
 ```
 {
@@ -9,7 +9,7 @@ Additional fields may be added, but will be ignored by Astralcoin.
 
    "contract_hash": "<SHA256 hash in hex of contract_url contents>",
 
-   "contract_signature": "<Astralcoin signed contract_hash>",
+   "contract_signature": "<opteroncoin signed contract_hash>",
 
    "contract_address": "R9x4u22ru3zm5v8suWiXNji4ENWSG7eYkx",
 
@@ -41,8 +41,8 @@ Additional fields may be added, but will be ignored by Astralcoin.
 
    "forsale": true,
 
-   "forsale_price": "5000 ASTRAL",
-   
+   "forsale_price": "5000 opteron",
+
    "restricted": "rule144"
 
 }
@@ -86,6 +86,6 @@ All fields are optional. Clients, explorers, and wallets are not obligated to di
 
 **forsale** - Should be true or false.  Used by desirable token names that have been left as reissuable.  This is not for the cost of buying one token, but rather for buying the rights to own, control, and reissue the entire asset token.  This might be parsed by token broker websites.
 
-**forsale_price** - To give buyers an idea of the cost to own and admin the asset token.   Price followed by a space, followed by the currency.  Examples: "10000 ASTRAL" or "0.3 BTC" or "50000 USD"  This might be parsed by token broker websites.
+**forsale_price** - To give buyers an idea of the cost to own and admin the asset token.   Price followed by a space, followed by the currency.  Examples: "10000 opteron" or "0.3 BTC" or "50000 USD"  This might be parsed by token broker websites.
 
-**restricted** - Designate the token as being restricted.  One example is "rule144" which means sale may be restricted because of the type of token and the exemption used for issuance.  Other restrictions types can be used here as a signal to explorers, exchanges, or token brokers.  No enforcement of restrictions is built into the Astralcoin protocol. 
+**restricted** - Designate the token as being restricted.  One example is "rule144" which means sale may be restricted because of the type of token and the exemption used for issuance.  Other restrictions types can be used here as a signal to explorers, exchanges, or token brokers.  No enforcement of restrictions is built into the opteroncoin protocol.

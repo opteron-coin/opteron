@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,13 +21,13 @@ EXCLUDE = [
     'src/secp256k1/include/secp256k1_ecdh.h',
     'src/secp256k1/include/secp256k1_recovery.h',
     'src/secp256k1/include/secp256k1_schnorr.h',
-    'src/secp256k1/src/java/org_astral_NativeSecp256k1.c',
-    'src/secp256k1/src/java/org_astral_NativeSecp256k1.h',
-    'src/secp256k1/src/java/org_astral_Secp256k1Context.c',
-    'src/secp256k1/src/java/org_astral_Secp256k1Context.h',
+    'src/secp256k1/src/java/org_opteron_NativeSecp256k1.c',
+    'src/secp256k1/src/java/org_opteron_NativeSecp256k1.h',
+    'src/secp256k1/src/java/org_opteron_Secp256k1Context.c',
+    'src/secp256k1/src/java/org_opteron_Secp256k1Context.h',
     # auto generated:
     'src/univalue/lib/univalue_escapes.h',
-    'src/qt/astralstrings.cpp',
+    'src/qt/opteronstrings.cpp',
     'src/chainparamsseeds.h',
     # other external copyrights:
     'src/tinyformat.h',
@@ -84,11 +84,11 @@ def compile_copyright_regex(copyright_style, year_style, name):
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
-    "The Astral Core developers\n",
-    "The Astral Core developers \n",
-    "Astral Core Developers\n",
-    "the Astral Core developers\n",
-    "The Astral developers\n",
+    "The opteron Core developers\n",
+    "The opteron Core developers \n",
+    "opteron Core Developers\n",
+    "the opteron Core developers\n",
+    "The opteron developers\n",
     "The LevelDB Authors\. All rights reserved\.\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
@@ -278,14 +278,14 @@ Usage:
     $ ./copyright_header.py report <base_directory> [verbose]
 
 Arguments:
-    <base_directory> - The base directory of a astral source code repository.
+    <base_directory> - The base directory of a opteron source code repository.
     [verbose] - Includes a list of every file of each subcategory in the report.
 """
 
 def report_cmd(argv):
     if len(argv) == 2:
         sys.exit(REPORT_USAGE)
-        
+
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad <base_directory>: %s" % base_directory)
@@ -341,7 +341,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The Astral Core developers'
+HOLDER = 'The opteron Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):
@@ -409,28 +409,28 @@ def exec_update_header_year(base_directory):
 ################################################################################
 
 UPDATE_USAGE = """
-Updates all the copyright headers of "The Astral Core developers" which were
+Updates all the copyright headers of "The opteron Core developers" which were
 changed in a year more recent than is listed. For example:
 
 // Copyright (c) <firstYear>-<lastYear> The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 
 will be updated to:
 
 // Copyright (c) <firstYear>-<lastModifiedYear> The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 
 where <lastModifiedYear> is obtained from the 'git log' history.
 
 This subcommand also handles copyright headers that have only a single year. In those cases:
 
 // Copyright (c) <year> The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 
 will be updated to:
 
 // Copyright (c) <year>-<lastModifiedYear> The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 
 where the update is appropriate.
 
@@ -438,7 +438,7 @@ Usage:
     $ ./copyright_header.py update <base_directory>
 
 Arguments:
-    <base_directory> - The base directory of a astral source code repository.
+    <base_directory> - The base directory of a opteron source code repository.
 """
 
 def print_file_action_message(filename, action):
@@ -447,7 +447,7 @@ def print_file_action_message(filename, action):
 def update_cmd(argv):
     if len(argv) != 3:
         sys.exit(UPDATE_USAGE)
-    
+
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad base_directory: %s" % base_directory)
@@ -464,7 +464,7 @@ def get_header_lines(header, start_year, end_year):
 
 CPP_HEADER = '''
 // Copyright (c) %s The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -474,7 +474,7 @@ def get_cpp_header_lines_to_insert(start_year, end_year):
 
 PYTHON_HEADER = '''
 # Copyright (c) %s The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -511,7 +511,7 @@ def file_has_hashbang(file_lines):
 
 def insert_python_header(filename, file_lines, start_year, end_year):
     if file_has_hashbang(file_lines):
-        insert_idx = 1 
+        insert_idx = 1
     else:
         insert_idx = 0
     header_lines = get_python_header_lines_to_insert(start_year, end_year)
@@ -541,7 +541,7 @@ def exec_insert_header(filename, style):
 ################################################################################
 
 INSERT_USAGE = """
-Inserts a copyright header for "The Astral Core developers" at the top of the
+Inserts a copyright header for "The opteron Core developers" at the top of the
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has a '#!' starting the first line, the header is
 inserted in the line below it.
@@ -555,14 +555,14 @@ where <year_introduced> is according to the 'git log' history. If
 
 "<current_year>"
 
-If the file already has a copyright for "The Astral Core developers", the
+If the file already has a copyright for "The opteron Core developers", the
 script will exit.
 
 Usage:
     $ ./copyright_header.py insert <file>
 
 Arguments:
-    <file> - A source file in the astral repository.
+    <file> - A source file in the opteron repository.
 """
 
 def insert_cmd(argv):
@@ -575,19 +575,19 @@ def insert_cmd(argv):
     _, extension = os.path.splitext(filename)
     if extension not in ['.h', '.cpp', '.cc', '.c', '.py']:
         sys.exit("*** cannot insert for file extension %s" % extension)
-   
-    if extension == '.py': 
+
+    if extension == '.py':
         style = 'python'
     else:
         style = 'cpp'
     exec_insert_header(filename, style)
-         
+
 ################################################################################
 # UI
 ################################################################################
 
 USAGE = """
-copyright_header.py - utilities for managing copyright headers of 'The Astral
+copyright_header.py - utilities for managing copyright headers of 'The opteron
 Core developers' in repository source files.
 
 Usage:

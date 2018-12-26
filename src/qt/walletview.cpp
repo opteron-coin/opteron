@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 #include "addressbookpage.h"
 #include "askpassphrasedialog.h"
-#include "astralgui.h"
+#include "opterongui.h"
 #include "clientmodel.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -71,9 +71,9 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
 
-    /** ASTRAL START */
+    /** opteron START */
     addWidget(assetsPage);
-    /** ASTRAL END */
+    /** opteron END */
 
     // Clicking on a transaction on the overview pre-selects the transaction on the transaction history page
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), transactionView, SLOT(focusTransaction(QModelIndex)));
@@ -90,7 +90,7 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     // Pass through messages from transactionView
     connect(transactionView, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
 
-    /** ASTRAL START */
+    /** opteron START */
     connect(assetsPage, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
     /** RNV END */
 }
@@ -99,7 +99,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setAstralGUI(AstralGUI *gui)
+void WalletView::setopteronGUI(opteronGUI *gui)
 {
     if (gui)
     {
@@ -115,7 +115,7 @@ void WalletView::setAstralGUI(AstralGUI *gui)
         // Pass through transaction notifications
         connect(this, SIGNAL(incomingTransaction(QString,int,CAmount,QString,QString,QString,QString)), gui, SLOT(incomingTransaction(QString,int,CAmount,QString,QString,QString,QString)));
 
-        // Connect HD enabled state signal 
+        // Connect HD enabled state signal
         connect(this, SIGNAL(hdEnabledStatusChanged(int)), gui, SLOT(setHDStatus(int)));
 
         // Pass through checkAssets calls to the GUI
@@ -143,7 +143,7 @@ void WalletView::setWalletModel(WalletModel *_walletModel)
     usedReceivingAddressesPage->setModel(_walletModel ? _walletModel->getAddressTableModel() : nullptr);
     usedSendingAddressesPage->setModel(_walletModel ? _walletModel->getAddressTableModel() : nullptr);
 
-    /** ASTRAL START */
+    /** opteron START */
     assetsPage->setModel(_walletModel);
 
     if (_walletModel)
@@ -180,7 +180,7 @@ void WalletView::processNewTransaction(const QModelIndex& parent, int start, int
     if (!ttm || ttm->processingQueuedTransactions())
         return;
 
-    /** ASTRAL START */
+    /** opteron START */
     // With the addition of asset transactions, there can be multiple transaction that need notifications
     // so we need to loop through all new transaction that were added to the transaction table and display
     // notifications for each individual transaction
@@ -197,7 +197,7 @@ void WalletView::processNewTransaction(const QModelIndex& parent, int start, int
         Q_EMIT incomingTransaction(date, walletModel->getOptionsModel()->getDisplayUnit(), amount, type, address, label,
                                    assetName);
     }
-    /** ASTRAL END */
+    /** opteron END */
 
     /** Everytime we get an new transaction. We should check to see if assets are enabled or not */
     overviewPage->showAssets();
@@ -205,7 +205,7 @@ void WalletView::processNewTransaction(const QModelIndex& parent, int start, int
     Q_EMIT checkAssets();
     // If we receive a new transaction that contains an asset, we want all of our SendAssetEntries to update
     // so that the new received assets are displayed in the list
-    if (assetName != "ASTRAL")
+    if (assetName != "opteron")
         assetsPage->processNewTransaction();
 }
 
@@ -370,7 +370,7 @@ void WalletView::requestedSyncWarningInfo()
     Q_EMIT outOfSyncWarningClicked();
 }
 
-/** ASTRAL START */
+/** opteron START */
 void WalletView::gotoAssetsPage()
 {
     setCurrentWidget(assetsPage);
@@ -381,4 +381,4 @@ void WalletView::displayAssetInfo()
     overviewPage->displayAssetInfo();
     Q_EMIT checkAssets();
 }
-/** ASTRAL END */
+/** opteron END */

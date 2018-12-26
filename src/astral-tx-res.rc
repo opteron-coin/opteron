@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Astral"
-            VALUE "FileDescription",    "astral-tx (CLI Astral transaction editor utility)"
+            VALUE "CompanyName",        "opteron"
+            VALUE "FileDescription",    "opteron-tx (CLI opteron transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "astral-tx"
+            VALUE "InternalName",       "opteron-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "astral-tx.exe"
-            VALUE "ProductName",        "astral-tx"
+            VALUE "OriginalFilename",   "opteron-tx.exe"
+            VALUE "ProductName",        "opteron-tx"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

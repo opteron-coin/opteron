@@ -6,13 +6,13 @@ import subprocess
 import json
 
 
-#Set this to your astral-cli program
-cli = "astral-cli"
+#Set this to your opteron-cli program
+cli = "opteron-cli"
 
 mode = "-testnet"
 mode = ""
 rpc_port = 18290
-#Set this information in your astral.conf file (in datadir, not testnet3)
+#Set this information in your opteron.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
@@ -51,11 +51,11 @@ def get_bci():
 def decode_rawtx(txdata):
     #print("decoding: " + txdata)
     txjson = rpc_connection.decoderawtransaction(txdata)
-    return(txjson)    
+    return(txjson)
 
 def decode_script(script):
     scriptinfo = rpc_connection.decodescript(script)
-    return(scriptinfo)   
+    return(scriptinfo)
 
 def ipfs_add(file):
     print("Adding to IPFS")
@@ -65,7 +65,7 @@ def ipfs_add(file):
     print(res)
     return(res['Hash'])
 
-def ipfs_get(hash):    
+def ipfs_get(hash):
     import ipfsapi
     api = ipfsapi.connect('127.0.0.1', 5001)
     res = api.get(hash)
@@ -107,8 +107,8 @@ for i in range(23500,blockheight):
         for vout in tx_detail.get('vout'):
             #print("vout: " + str(vout.get('value')))
             #print(vout.get('scriptPubKey').get('asm'))
-            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_ASTRAL_ASSET"):
-                #print("Found OP_ASTRAL_ASSET")
+            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_opteron_ASSET"):
+                #print("Found OP_opteron_ASSET")
                 #print(vout.get('scriptPubKey').get('hex'))
                 asset_script = decode_script(vout.get('scriptPubKey').get('hex'))
                 asset_handler(asset_script)

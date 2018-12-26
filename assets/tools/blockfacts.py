@@ -6,13 +6,13 @@ import subprocess
 import json
 
 
-#Set this to your astral-cli program
-cli = "astral-cli"
+#Set this to your opteron-cli program
+cli = "opteron-cli"
 
 #mode = "-testnet"
 mode = ""
 rpc_port = 8290
-#Set this information in your astral.conf file (in datadir, not testnet3)
+#Set this information in your opteron.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 

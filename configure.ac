@@ -7,17 +7,17 @@ define(_CLIENT_VERSION_BUILD, 1)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2018)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Astral Core]])
-AC_INIT([Astral Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/AstralProject/Astralcoin/issues],[astral],[https://astralcoin.org/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[opteron Core]])
+AC_INIT([opteron Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/opteronProject/opteroncoin/issues],[opteron],[https://opteroncoin.org/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
-AC_CONFIG_HEADERS([src/config/astral-config.h])
+AC_CONFIG_HEADERS([src/config/opteron-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-RAVEN_DAEMON_NAME=astrald
-RAVEN_GUI_NAME=astral-qt
-RAVEN_CLI_NAME=astral-cli
-RAVEN_TX_NAME=astral-tx
+RAVEN_DAEMON_NAME=opterond
+RAVEN_GUI_NAME=opteron-qt
+RAVEN_CLI_NAME=opteron-cli
+RAVEN_TX_NAME=opteron-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -83,7 +83,7 @@ AC_PATH_TOOL(RANLIB, ranlib)
 AC_PATH_TOOL(STRIP, strip)
 AC_PATH_TOOL(GCOV, gcov)
 AC_PATH_PROG(LCOV, lcov)
-dnl Python 3.x is supported from 3.4 on (see https://github.com/AstralProject/Astralcoin/issues/7893)
+dnl Python 3.x is supported from 3.4 on (see https://github.com/opteronProject/opteroncoin/issues/7893)
 AC_PATH_PROGS([PYTHON], [python3.6 python3.5 python3.4 python3 python2.7 python2 python])
 AC_PATH_PROG(GENHTML, genhtml)
 AC_PATH_PROG([GIT], [git])
@@ -291,27 +291,27 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([cli],
   [AS_HELP_STRING([--with-cli],
-  [build astral-cli (default=yes)])],
-  [build_astral_cli=$withval],
-  [build_astral_cli=yes])
+  [build opteron-cli (default=yes)])],
+  [build_opteron_cli=$withval],
+  [build_opteron_cli=yes])
 
 AC_ARG_WITH([tx],
   [AS_HELP_STRING([--with-tx],
-  [build astral-tx (default=no)])],
-  [build_astral_tx=$withval],
-  [build_astral_tx=no])
+  [build opteron-tx (default=no)])],
+  [build_opteron_tx=$withval],
+  [build_opteron_tx=no])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
   [build libraries (default=yes)])],
-  [build_astral_libs=$withval],
-  [build_astral_libs=yes])
+  [build_opteron_libs=$withval],
+  [build_opteron_libs=yes])
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build astrald daemon (default=yes)])],
-  [build_astrald=$withval],
-  [build_astrald=yes])
+  [build opterond daemon (default=yes)])],
+  [build_opterond=$withval],
+  [build_opterond=yes])
 
 use_pkgconfig=yes
 case $host in
@@ -508,7 +508,7 @@ AC_C_BIGENDIAN
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
-# The following macro will add the necessary defines to astral-config.h, but
+# The following macro will add the necessary defines to opteron-config.h, but
 # they also need to be passed down to any subprojects. Pull the results out of
 # the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -731,10 +731,10 @@ fi
 
 RAVEN_QT_INIT
 
-dnl sets $astral_enable_qt, $astral_enable_qt_test, $astral_enable_qt_dbus
+dnl sets $opteron_enable_qt, $opteron_enable_qt_test, $opteron_enable_qt_dbus
 RAVEN_QT_CONFIGURE([$use_pkgconfig], [qt5])
 
-if test x$build_astral_cli$build_astral_tx$build_astrald$astral_enable_qt$use_tests$use_bench = xnononononono; then
+if test x$build_opteron_cli$build_opteron_tx$build_opterond$opteron_enable_qt$use_tests$use_bench = xnononononono; then
     use_boost=no
 else
     use_boost=yes
@@ -920,7 +920,7 @@ if test x$use_pkgconfig = xyes; then
       if test x$use_qr != xno; then
         RAVEN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
-      if test x$build_astral_cli$build_astral_tx$build_astrald$astral_enable_qt$use_tests != xnonononono; then
+      if test x$build_opteron_cli$build_opteron_tx$build_opterond$opteron_enable_qt$use_tests != xnonononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
         if test x$TARGET_OS != xwindows; then
           PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads],, [AC_MSG_ERROR(libevent_pthreads not found.)])
@@ -945,7 +945,7 @@ else
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
 
-  if test x$build_astral_cli$build_astral_tx$build_astrald$astral_enable_qt$use_tests != xnonononono; then
+  if test x$build_opteron_cli$build_opteron_tx$build_opterond$opteron_enable_qt$use_tests != xnonononono; then
     AC_CHECK_HEADER([event2/event.h],, AC_MSG_ERROR(libevent headers missing),)
     AC_CHECK_LIB([event],[main],EVENT_LIBS=-levent,AC_MSG_ERROR(libevent missing))
     if test x$TARGET_OS != xwindows; then
@@ -994,7 +994,7 @@ dnl univalue check
 
 need_bundled_univalue=yes
 
-if test x$build_astral_cli$build_astral_tx$build_astrald$astral_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_opteron_cli$build_opteron_tx$build_opterond$opteron_enable_qt$use_tests$use_bench = xnonononono; then
   need_bundled_univalue=no
 else
 
@@ -1040,25 +1040,25 @@ AC_SUBST(UNIVALUE_LIBS)
 
 RAVEN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
-AC_MSG_CHECKING([whether to build astrald])
-AM_CONDITIONAL([BUILD_RAVEND], [test x$build_astrald = xyes])
-AC_MSG_RESULT($build_astrald)
+AC_MSG_CHECKING([whether to build opterond])
+AM_CONDITIONAL([BUILD_RAVEND], [test x$build_opterond = xyes])
+AC_MSG_RESULT($build_opterond)
 
-AC_MSG_CHECKING([whether to build astral-cli])
-AM_CONDITIONAL([BUILD_RAVEN_CLI], [test x$build_astral_cli = xyes])
-AC_MSG_RESULT($build_astral_cli)
+AC_MSG_CHECKING([whether to build opteron-cli])
+AM_CONDITIONAL([BUILD_RAVEN_CLI], [test x$build_opteron_cli = xyes])
+AC_MSG_RESULT($build_opteron_cli)
 
-AC_MSG_CHECKING([whether to build astral-tx])
-AM_CONDITIONAL([BUILD_RAVEN_TX], [test x$build_astral_tx = xyes])
-AC_MSG_RESULT($build_astral_tx)
+AC_MSG_CHECKING([whether to build opteron-tx])
+AM_CONDITIONAL([BUILD_RAVEN_TX], [test x$build_opteron_tx = xyes])
+AC_MSG_RESULT($build_opteron_tx)
 
 AC_MSG_CHECKING([whether to build libraries])
-AM_CONDITIONAL([BUILD_RAVEN_LIBS], [test x$build_astral_libs = xyes])
-if test x$build_astral_libs = xyes; then
+AM_CONDITIONAL([BUILD_RAVEN_LIBS], [test x$build_opteron_libs = xyes])
+if test x$build_opteron_libs = xyes; then
   AC_DEFINE(HAVE_CONSENSUS_LIB, 1, [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libastralconsensus.pc:libastralconsensus.pc.in])
+  AC_CONFIG_FILES([libopteronconsensus.pc:libopteronconsensus.pc.in])
 fi
-AC_MSG_RESULT($build_astral_libs)
+AC_MSG_RESULT($build_opteron_libs)
 
 AC_LANG_POP
 
@@ -1120,13 +1120,13 @@ fi
 
 dnl these are only used when qt is enabled
 BUILD_TEST_QT=""
-if test x$astral_enable_qt != xno; then
+if test x$opteron_enable_qt != xno; then
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
-  if test x$astral_enable_qt_dbus != xno; then
+  if test x$opteron_enable_qt_dbus != xno; then
     AC_DEFINE([USE_DBUS],[1],[Define if dbus support should be compiled in])
   fi
-  AC_MSG_RESULT($astral_enable_qt_dbus)
+  AC_MSG_RESULT($opteron_enable_qt_dbus)
 
   dnl enable qr support
   AC_MSG_CHECKING([whether to build GUI with support for QR codes])
@@ -1149,8 +1149,8 @@ if test x$astral_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_astral-qt])
-  if test x$use_gui_tests$astral_enable_qt_test = xyesyes; then
+  AC_MSG_CHECKING([whether to build test_opteron-qt])
+  if test x$use_gui_tests$opteron_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -1160,7 +1160,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_ZMQ], [test "x$use_zmq" = "xyes"])
 
-AC_MSG_CHECKING([whether to build test_astral])
+AC_MSG_CHECKING([whether to build test_opteron])
 if test x$use_tests = xyes; then
   AC_MSG_RESULT([yes])
   BUILD_TEST="yes"
@@ -1176,7 +1176,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_astral_cli$build_astral_tx$build_astral_libs$build_astrald$astral_enable_qt$use_bench$use_tests = xnonononononono; then
+if test x$build_opteron_cli$build_opteron_tx$build_opteron_libs$build_opterond$opteron_enable_qt$use_bench$use_tests = xnonononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-cli --with-tx --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1185,7 +1185,7 @@ AM_CONDITIONAL([BUILD_DARWIN], [test x$BUILD_OS = xdarwin])
 AM_CONDITIONAL([TARGET_WINDOWS], [test x$TARGET_OS = xwindows])
 AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
 AM_CONDITIONAL([ENABLE_TESTS],[test x$BUILD_TEST = xyes])
-AM_CONDITIONAL([ENABLE_QT],[test x$astral_enable_qt = xyes])
+AM_CONDITIONAL([ENABLE_QT],[test x$opteron_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
@@ -1248,7 +1248,7 @@ AC_CONFIG_FILES([contrib/devtools/split-debug.sh],[chmod +x contrib/devtools/spl
 AC_CONFIG_FILES([doc/Doxyfile])
 AC_CONFIG_LINKS([contrib/filter-lcov.py:contrib/filter-lcov.py])
 AC_CONFIG_LINKS([test/functional/test_runner.py:test/functional/test_runner.py])
-AC_CONFIG_LINKS([test/util/astral-util-test.py:test/util/astral-util-test.py])
+AC_CONFIG_LINKS([test/util/opteron-util-test.py:test/util/opteron-util-test.py])
 AC_CONFIG_LINKS([src/crypto/md_helper.c:src/crypto/md_helper.c])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
@@ -1304,12 +1304,12 @@ esac
 
 echo
 echo "Options used to compile and link:"
-echo "  build astral-cli = $build_astral_cli"
-echo "  build astral-tx  = $build_astral_tx"
+echo "  build opteron-cli = $build_opteron_cli"
+echo "  build opteron-tx  = $build_opteron_tx"
 echo "  with wallet     = $enable_wallet"
-echo "  with gui / qt   = $astral_enable_qt"
-if test x$astral_enable_qt != xno; then
-    echo "    qt version    = $astral_qt_got_major_vers"
+echo "  with gui / qt   = $opteron_enable_qt"
+if test x$opteron_enable_qt != xno; then
+    echo "    qt version    = $opteron_qt_got_major_vers"
     echo "    with qr       = $use_qr"
 fi
 echo "  with zmq        = $use_zmq"

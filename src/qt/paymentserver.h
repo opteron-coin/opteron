@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 #define RAVEN_QT_PAYMENTSERVER_H
 
 // This class handles payment requests from clicking on
-// astral: URIs
+// opteron: URIs
 //
 // This is somewhat tricky, because we have to deal with
 // the situation where the user clicks on a link during

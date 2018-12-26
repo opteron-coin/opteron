@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test descendant package tracking code."""
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.mininode import COIN
 
 MAX_ANCESTORS = 25
 MAX_DESCENDANTS = 25
 
-class MempoolPackagesTest(AstralTestFramework):
+class MempoolPackagesTest(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-maxorphantx=1000"], ["-maxorphantx=1000", "-limitancestorcount=5"]]
@@ -101,7 +101,7 @@ class MempoolPackagesTest(AstralTestFramework):
         for x in chain:
             ancestor_fees += mempool[x]['fee']
             assert_equal(mempool[x]['ancestorfees'], ancestor_fees * COIN + 1000)
-        
+
         # Undo the prioritisetransaction for later tests
         self.nodes[0].prioritisetransaction(txid=chain[0], fee_delta=-1000)
 
@@ -233,7 +233,7 @@ class MempoolPackagesTest(AstralTestFramework):
         signedtx = self.nodes[0].signrawtransaction(rawtx)
         txid = self.nodes[0].sendrawtransaction(signedtx['hex'])
         sync_mempools(self.nodes)
-        
+
         # Now try to disconnect the tip on each node...
         self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
         self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the SegWit changeover logic."""
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.mininode import sha256, CTransaction, CTxIn, COutPoint, CTxOut, COIN, ToHex, FromHex
 from test_framework.address import script_to_p2sh, key_to_p2pkh
@@ -74,7 +74,7 @@ def find_unspent(node, min_value):
         if utxo['amount'] >= min_value:
             return utxo
 
-class SegWitTest(AstralTestFramework):
+class SegWitTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
@@ -109,7 +109,7 @@ class SegWitTest(AstralTestFramework):
 
     def run_test(self):
         self.nodes[0].generate(161) #block 161
- 
+
 #         self.log.info("Verify sigops are counted in GBT with pre-BIP141 rules before the fork")
 #         txid = self.nodes[0].sendtoaddress(self.nodes[0].getnewaddress(), 1)
 #         tmpl = self.nodes[0].getblocktemplate({})

@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        std::cerr << "Usage: test_astral_hash blockHex" << std::endl;
+        std::cerr << "Usage: test_opteron_hash blockHex" << std::endl;
         return 1;
     }
 

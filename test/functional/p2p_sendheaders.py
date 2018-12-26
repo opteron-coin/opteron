@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test behavior of headers messages to announce blocks.
 
-Setup: 
+Setup:
 
 - Two nodes, two p2p connections to node0. One p2p connection should only ever
   receive inv's (omitted from testing description below, this is our control).
@@ -75,7 +75,7 @@ e. Announce one more that doesn't connect.
 """
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.blocktools import create_block, create_coinbase
 
@@ -174,7 +174,7 @@ class TestNode(NodeConnCB):
         getblocks_message.locator.vHave = locator
         self.send_message(getblocks_message)
 
-class SendHeadersTest(AstralTestFramework):
+class SendHeadersTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -340,7 +340,7 @@ class SendHeadersTest(AstralTestFramework):
             assert_equal(inv_node.check_last_announcement(inv=[tip]), True)
             assert_equal(test_node.check_last_announcement(headers=new_block_hashes), True)
 
-            block_time += 8 
+            block_time += 8
 
             # Mine a too-large reorg, which should be announced with a single inv
             new_block_hashes = self.mine_reorg(length=8)
@@ -378,7 +378,7 @@ class SendHeadersTest(AstralTestFramework):
                     test_node.get_data([tip])
                     test_node.wait_for_block(tip)
                     # This time, try sending either a getheaders to trigger resumption
-                    # of headers announcements, or mine a new block and inv it, also 
+                    # of headers announcements, or mine a new block and inv it, also
                     # triggering resumption of headers announcements.
                     if j == 0:
                         test_node.get_headers(locator=[tip], hashstop=0)

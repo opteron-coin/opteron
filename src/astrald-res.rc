@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Astral"
-            VALUE "FileDescription",    "astrald (Astral node with a JSON-RPC server)"
+            VALUE "CompanyName",        "opteron"
+            VALUE "FileDescription",    "opterond (opteron node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "astrald"
+            VALUE "InternalName",       "opterond"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "astrald.exe"
-            VALUE "ProductName",        "astrald"
+            VALUE "OriginalFilename",   "opterond.exe"
+            VALUE "ProductName",        "opterond"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test listmyassets RPC command."""
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.mininode import *
 from io import BytesIO
 
-class ListMyAssetsTest(AstralTestFramework):
+class ListMyAssetsTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

@@ -1,4 +1,4 @@
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,12 +16,12 @@
 #include <unordered_map>
 #include <list>
 
-#define ASTRAL_R 114
-#define ASTRAL_V 118
-#define ASTRAL_N 110
-#define ASTRAL_Q 113
-#define ASTRAL_T 116
-#define ASTRAL_O 111
+#define opteron_R 114
+#define opteron_V 118
+#define opteron_N 110
+#define opteron_Q 113
+#define opteron_T 116
+#define opteron_O 111
 
 #define DEFAULT_UNITS 0
 #define DEFAULT_REISSUABLE 1

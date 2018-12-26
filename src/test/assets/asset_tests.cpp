@@ -1,10 +1,10 @@
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <assets/assets.h>
 
-#include <test/test_astral.h>
+#include <test/test_opteron.h>
 
 #include <boost/test/unit_test.hpp>
 #include "core_write.cpp"
@@ -22,7 +22,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
 
     BOOST_AUTO_TEST_CASE(name_validation_tests) {
         AssetType type;
-    
+
         // regular
         BOOST_CHECK(IsAssetNameValid("MIN", type));
         BOOST_CHECK(type == AssetType::ROOT);
@@ -48,19 +48,19 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         BOOST_CHECK(!IsAssetNameValid("AB_.C", type));
 
         //- Versions of RAVENCOIN NOT allowed
-        BOOST_CHECK(!IsAssetNameValid("ASTRAL", type));
+        BOOST_CHECK(!IsAssetNameValid("opteron", type));
         BOOST_CHECK(!IsAssetNameValid("RAVEN", type));
         BOOST_CHECK(!IsAssetNameValid("RAVENCOIN", type));
 
         //- Versions of RAVENCOIN ALLOWED
         BOOST_CHECK(IsAssetNameValid("RAVEN.COIN", type));
         BOOST_CHECK(IsAssetNameValid("RAVEN_COIN", type));
-        BOOST_CHECK(IsAssetNameValid("ASTRALSPYDER", type));
-        BOOST_CHECK(IsAssetNameValid("SPYDERASTRAL", type));
+        BOOST_CHECK(IsAssetNameValid("opteronSPYDER", type));
+        BOOST_CHECK(IsAssetNameValid("SPYDERopteron", type));
         BOOST_CHECK(IsAssetNameValid("RAVENSPYDER", type));
         BOOST_CHECK(IsAssetNameValid("SPYDERAVEN", type));
         BOOST_CHECK(IsAssetNameValid("BLACK_RAVENS", type));
-        BOOST_CHECK(IsAssetNameValid("SEASTRALOT", type));
+        BOOST_CHECK(IsAssetNameValid("SEopteronOT", type));
 
         // subs
         BOOST_CHECK(IsAssetNameValid("ABC/A", type));

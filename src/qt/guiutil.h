@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -30,7 +30,7 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Astral Qt UI.
+/** Utility functions used by the opteron Qt UI.
  */
 namespace GUIUtil
 {
@@ -45,10 +45,10 @@ namespace GUIUtil
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "astral:" URI into recipient object, return true on successful parsing
-    bool parseAstralURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseAstralURI(QString uri, SendCoinsRecipient *out);
-    QString formatAstralURI(const SendCoinsRecipient &info);
+    // Parse "opteron:" URI into recipient object, return true on successful parsing
+    bool parseopteronURI(const QUrl &uri, SendCoinsRecipient *out);
+    bool parseopteronURI(QString uri, SendCoinsRecipient *out);
+    QString formatopteronURI(const SendCoinsRecipient &info);
 
     // Returns true if given address+amount meets "dust" definition
     bool isDust(const QString& address, const CAmount& amount);
@@ -115,7 +115,7 @@ namespace GUIUtil
     void openDebugLogfile();
 
     // Open the config file
-    bool openAstralConf();
+    bool openopteronConf();
 
     // Replace invalid default fonts with known good ones
     void SubstituteFonts(const QString& language);
@@ -214,11 +214,11 @@ namespace GUIUtil
     protected:
         void mouseReleaseEvent(QMouseEvent *event);
     };
-    
+
     class ClickableProgressBar : public QProgressBar
     {
         Q_OBJECT
-        
+
     Q_SIGNALS:
         /** Emitted when the progressbar is clicked. The relative mouse coordinates of the click are
          * passed to the signal.

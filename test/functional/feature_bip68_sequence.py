@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test BIP68 implementation."""
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.blocktools import *
 
@@ -17,7 +17,7 @@ SEQUENCE_LOCKTIME_MASK = 0x0000ffff
 # RPC error for non-BIP68 final transactions
 NOT_FINAL_ERROR = "64: non-BIP68-final"
 
-class BIP68Test(AstralTestFramework):
+class BIP68Test(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [[], ["-acceptnonstdtxn=0"]]
@@ -39,7 +39,7 @@ class BIP68Test(AstralTestFramework):
     def test_disable_flag(self):
         # Create some unconfirmed inputs
         new_addr = self.nodes[0].getnewaddress()
-        self.nodes[0].sendtoaddress(new_addr, 2) # send 2 ASTRAL
+        self.nodes[0].sendtoaddress(new_addr, 2) # send 2 opteron
 
         utxos = self.nodes[0].listunspent(0, 0)
         assert(len(utxos) > 0)
@@ -53,7 +53,7 @@ class BIP68Test(AstralTestFramework):
         # If sequence locks were used, this would require 1 block for the
         # input to mature.
         sequence_value = SEQUENCE_LOCKTIME_DISABLE_FLAG | 1
-        tx1.vin = [CTxIn(COutPoint(int(utxo["txid"], 16), utxo["vout"]), nSequence=sequence_value)] 
+        tx1.vin = [CTxIn(COutPoint(int(utxo["txid"], 16), utxo["vout"]), nSequence=sequence_value)]
         tx1.vout = [CTxOut(value, CScript([b'a']))]
 
         tx1_signed = self.nodes[0].signrawtransaction(ToHex(tx1))["hex"]
@@ -115,7 +115,7 @@ class BIP68Test(AstralTestFramework):
 
             # Track whether any sequence locks used should fail
             should_pass = True
-            
+
             # Track whether this transaction was built with sequence locks
             using_sequence_locks = False
 
@@ -329,7 +329,7 @@ class BIP68Test(AstralTestFramework):
         tx2.rehash()
 
         self.nodes[0].sendrawtransaction(ToHex(tx2))
-        
+
         # Now make an invalid spend of tx2 according to BIP68
         sequence_value = 100 # 100 block relative locktime
 

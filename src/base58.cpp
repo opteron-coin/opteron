@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -214,13 +214,13 @@ int CBase58Data::CompareTo(const CBase58Data& b58) const
 namespace
 {
 
-class CAstralAddressVisitor : public boost::static_visitor<bool>
+class CopteronAddressVisitor : public boost::static_visitor<bool>
 {
 private:
-    CAstralAddress* addr;
+    CopteronAddress* addr;
 
 public:
-    explicit CAstralAddressVisitor(CAstralAddress* addrIn) : addr(addrIn) {}
+    explicit CopteronAddressVisitor(CopteronAddress* addrIn) : addr(addrIn) {}
 
     bool operator()(const CKeyID& id) const { return addr->Set(id); }
     bool operator()(const CScriptID& id) const { return addr->Set(id); }
@@ -229,29 +229,29 @@ public:
 
 } // namespace
 
-bool CAstralAddress::Set(const CKeyID& id)
+bool CopteronAddress::Set(const CKeyID& id)
 {
     SetData(Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS), &id, 20);
     return true;
 }
 
-bool CAstralAddress::Set(const CScriptID& id)
+bool CopteronAddress::Set(const CScriptID& id)
 {
     SetData(Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS), &id, 20);
     return true;
 }
 
-bool CAstralAddress::Set(const CTxDestination& dest)
+bool CopteronAddress::Set(const CTxDestination& dest)
 {
-    return boost::apply_visitor(CAstralAddressVisitor(this), dest);
+    return boost::apply_visitor(CopteronAddressVisitor(this), dest);
 }
 
-bool CAstralAddress::IsValid() const
+bool CopteronAddress::IsValid() const
 {
     return IsValid(Params());
 }
 
-bool CAstralAddress::IsValid(const CChainParams& params) const
+bool CopteronAddress::IsValid(const CChainParams& params) const
 {
     bool fCorrectSize = vchData.size() == 20;
     bool fKnownVersion = vchVersion == params.Base58Prefix(CChainParams::PUBKEY_ADDRESS) ||
@@ -259,7 +259,7 @@ bool CAstralAddress::IsValid(const CChainParams& params) const
     return fCorrectSize && fKnownVersion;
 }
 
-CTxDestination CAstralAddress::Get() const
+CTxDestination CopteronAddress::Get() const
 {
     if (!IsValid())
         return CNoDestination();
@@ -273,7 +273,7 @@ CTxDestination CAstralAddress::Get() const
         return CNoDestination();
 }
 
-bool CAstralAddress::GetIndexKey(uint160& hashBytes, int& type) const
+bool CopteronAddress::GetIndexKey(uint160& hashBytes, int& type) const
 {
     if (!IsValid()) {
         return false;
@@ -290,7 +290,7 @@ bool CAstralAddress::GetIndexKey(uint160& hashBytes, int& type) const
     return false;
 }
 
-void CAstralSecret::SetKey(const CKey& vchSecret)
+void CopteronSecret::SetKey(const CKey& vchSecret)
 {
     assert(vchSecret.IsValid());
     SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
@@ -298,7 +298,7 @@ void CAstralSecret::SetKey(const CKey& vchSecret)
         vchData.push_back(1);
 }
 
-CKey CAstralSecret::GetKey()
+CKey CopteronSecret::GetKey()
 {
     CKey ret;
     assert(vchData.size() >= 32);
@@ -306,41 +306,41 @@ CKey CAstralSecret::GetKey()
     return ret;
 }
 
-bool CAstralSecret::IsValid() const
+bool CopteronSecret::IsValid() const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
     bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CAstralSecret::SetString(const char* pszSecret)
+bool CopteronSecret::SetString(const char* pszSecret)
 {
     return CBase58Data::SetString(pszSecret) && IsValid();
 }
 
-bool CAstralSecret::SetString(const std::string& strSecret)
+bool CopteronSecret::SetString(const std::string& strSecret)
 {
     return SetString(strSecret.c_str());
 }
 
 std::string EncodeDestination(const CTxDestination& dest)
 {
-    CAstralAddress addr(dest);
+    CopteronAddress addr(dest);
     if (!addr.IsValid()) return "";
     return addr.ToString();
 }
 
 CTxDestination DecodeDestination(const std::string& str)
 {
-    return CAstralAddress(str).Get();
+    return CopteronAddress(str).Get();
 }
 
 bool IsValidDestinationString(const std::string& str, const CChainParams& params)
 {
-    return CAstralAddress(str).IsValid(params);
+    return CopteronAddress(str).IsValid(params);
 }
 
 bool IsValidDestinationString(const std::string& str)
 {
-    return CAstralAddress(str).IsValid();
+    return CopteronAddress(str).IsValid();
 }

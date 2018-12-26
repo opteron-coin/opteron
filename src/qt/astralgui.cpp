@@ -1,15 +1,15 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
-#include "astralgui.h"
+#include "opterongui.h"
 
-#include "astralunits.h"
+#include "opteronunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -69,7 +69,7 @@
 
 #endif
 
-const std::string AstralGUI::DEFAULT_UIPLATFORM =
+const std::string opteronGUI::DEFAULT_UIPLATFORM =
 #if defined(Q_OS_MAC)
         "macosx"
 #elif defined(Q_OS_WIN)
@@ -81,9 +81,9 @@ const std::string AstralGUI::DEFAULT_UIPLATFORM =
 
 /** Display name for default wallet name. Uses tilde to avoid name
  * collisions in the future with additional wallets */
-const QString AstralGUI::DEFAULT_WALLET = "~Default";
+const QString opteronGUI::DEFAULT_WALLET = "~Default";
 
-AstralGUI::AstralGUI(const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
+opteronGUI::opteronGUI(const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
     QMainWindow(parent),
     enableWallet(false),
     clientModel(0),
@@ -267,7 +267,7 @@ AstralGUI::AstralGUI(const PlatformStyle *_platformStyle, const NetworkStyle *ne
 #endif
 }
 
-AstralGUI::~AstralGUI()
+opteronGUI::~opteronGUI()
 {
     // Unsubscribe from notifications from core
     unsubscribeFromCoreSignals();
@@ -284,7 +284,7 @@ AstralGUI::~AstralGUI()
     delete rpcConsole;
 }
 
-void AstralGUI::createActions()
+void opteronGUI::createActions()
 {
     QActionGroup *tabGroup = new QActionGroup(this);
 
@@ -296,7 +296,7 @@ void AstralGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Astral address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a opteron address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -307,7 +307,7 @@ void AstralGUI::createActions()
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
     receiveCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/receiving_addresses"), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and astral: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and opteron: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
@@ -324,14 +324,14 @@ void AstralGUI::createActions()
     historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
     tabGroup->addAction(historyAction);
 
-    /** ASTRAL START */
+    /** opteron START */
     assetAction = new QAction(platformStyle->SingleColorIcon(":/icons/open"), tr("&Assets"), this);
     assetAction->setStatusTip(tr("Manage Assets"));
     assetAction->setToolTip(assetAction->statusTip());
     assetAction->setCheckable(true);
     assetAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(assetAction);
-    /** ASTRAL END */
+    /** opteron END */
 
 #ifdef ENABLE_WALLET
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
@@ -378,9 +378,9 @@ void AstralGUI::createActions()
     changePassphraseAction = new QAction(platformStyle->TextColorIcon(":/icons/key"), tr("&Change Passphrase..."), this);
     changePassphraseAction->setStatusTip(tr("Change the passphrase used for wallet encryption"));
     signMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Astral addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your opteron addresses to prove you own them"));
     verifyMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Astral addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified opteron addresses"));
 
     openRPCConsoleAction = new QAction(platformStyle->TextColorIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setStatusTip(tr("Open debugging and diagnostic console"));
@@ -393,11 +393,11 @@ void AstralGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(platformStyle->TextColorIcon(":/icons/open"), tr("Open &URI..."), this);
-    openAction->setStatusTip(tr("Open a astral: URI or payment request"));
+    openAction->setStatusTip(tr("Open a opteron: URI or payment request"));
 
     showHelpMessageAction = new QAction(platformStyle->TextColorIcon(":/icons/info"), tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Astral command-line options").arg(tr(PACKAGE_NAME)));
+    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible opteron command-line options").arg(tr(PACKAGE_NAME)));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -427,7 +427,7 @@ void AstralGUI::createActions()
     new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_D), this, SLOT(showDebugWindow()));
 }
 
-void AstralGUI::createMenuBar()
+void opteronGUI::createMenuBar()
 {
 #ifdef Q_OS_MAC
     // Create a decoupled menu bar on Mac which stays even if the window is closed
@@ -472,7 +472,7 @@ void AstralGUI::createMenuBar()
     help->addAction(aboutQtAction);
 }
 
-void AstralGUI::createToolBars()
+void opteronGUI::createToolBars()
 {
     if(walletFrame)
     {
@@ -485,14 +485,14 @@ void AstralGUI::createToolBars()
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
 
-        /** ASTRAL START */
+        /** opteron START */
         toolbar->addAction(assetAction);
-        /** ASTRAL END */
+        /** opteron END */
         overviewAction->setChecked(true);
     }
 }
 
-void AstralGUI::setClientModel(ClientModel *_clientModel)
+void opteronGUI::setClientModel(ClientModel *_clientModel)
 {
     this->clientModel = _clientModel;
     if(_clientModel)
@@ -524,13 +524,13 @@ void AstralGUI::setClientModel(ClientModel *_clientModel)
         }
 #endif // ENABLE_WALLET
         unitDisplayControl->setOptionsModel(_clientModel->getOptionsModel());
-        
+
         OptionsModel* optionsModel = _clientModel->getOptionsModel();
         if(optionsModel)
         {
             // be aware of the tray icon disable state change reported by the OptionsModel object.
             connect(optionsModel,SIGNAL(hideTrayIconChanged(bool)),this,SLOT(setTrayIconVisible(bool)));
-        
+
             // initialize the disable state of the tray icon with the current value in the model.
             setTrayIconVisible(optionsModel->getHideTrayIcon());
         }
@@ -555,7 +555,7 @@ void AstralGUI::setClientModel(ClientModel *_clientModel)
 }
 
 #ifdef ENABLE_WALLET
-bool AstralGUI::addWallet(const QString& name, WalletModel *walletModel)
+bool opteronGUI::addWallet(const QString& name, WalletModel *walletModel)
 {
     if(!walletFrame)
         return false;
@@ -563,14 +563,14 @@ bool AstralGUI::addWallet(const QString& name, WalletModel *walletModel)
     return walletFrame->addWallet(name, walletModel);
 }
 
-bool AstralGUI::setCurrentWallet(const QString& name)
+bool opteronGUI::setCurrentWallet(const QString& name)
 {
     if(!walletFrame)
         return false;
     return walletFrame->setCurrentWallet(name);
 }
 
-void AstralGUI::removeAllWallets()
+void opteronGUI::removeAllWallets()
 {
     if(!walletFrame)
         return;
@@ -579,7 +579,7 @@ void AstralGUI::removeAllWallets()
 }
 #endif // ENABLE_WALLET
 
-void AstralGUI::setWalletActionsEnabled(bool enabled)
+void opteronGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
@@ -596,12 +596,12 @@ void AstralGUI::setWalletActionsEnabled(bool enabled)
     usedReceivingAddressesAction->setEnabled(enabled);
     openAction->setEnabled(enabled);
 
-    /** ASTRAL START */
+    /** opteron START */
     assetAction->setEnabled(false);
-    /** ASTRAL END */
+    /** opteron END */
 }
 
-void AstralGUI::createTrayIcon(const NetworkStyle *networkStyle)
+void opteronGUI::createTrayIcon(const NetworkStyle *networkStyle)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
@@ -614,7 +614,7 @@ void AstralGUI::createTrayIcon(const NetworkStyle *networkStyle)
     notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
 }
 
-void AstralGUI::createTrayIconMenu()
+void opteronGUI::createTrayIconMenu()
 {
 #ifndef Q_OS_MAC
     // return if trayIcon is unset (only on non-Mac OSes)
@@ -651,7 +651,7 @@ void AstralGUI::createTrayIconMenu()
 }
 
 #ifndef Q_OS_MAC
-void AstralGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
+void opteronGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::Trigger)
     {
@@ -661,7 +661,7 @@ void AstralGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 }
 #endif
 
-void AstralGUI::optionsClicked()
+void opteronGUI::optionsClicked()
 {
     if(!clientModel || !clientModel->getOptionsModel())
         return;
@@ -671,7 +671,7 @@ void AstralGUI::optionsClicked()
     dlg.exec();
 }
 
-void AstralGUI::aboutClicked()
+void opteronGUI::aboutClicked()
 {
     if(!clientModel)
         return;
@@ -680,7 +680,7 @@ void AstralGUI::aboutClicked()
     dlg.exec();
 }
 
-void AstralGUI::showDebugWindow()
+void opteronGUI::showDebugWindow()
 {
     rpcConsole->showNormal();
     rpcConsole->show();
@@ -688,19 +688,19 @@ void AstralGUI::showDebugWindow()
     rpcConsole->activateWindow();
 }
 
-void AstralGUI::showDebugWindowActivateConsole()
+void opteronGUI::showDebugWindowActivateConsole()
 {
     rpcConsole->setTabFocus(RPCConsole::TAB_CONSOLE);
     showDebugWindow();
 }
 
-void AstralGUI::showHelpMessageClicked()
+void opteronGUI::showHelpMessageClicked()
 {
     helpMessageDialog->show();
 }
 
 #ifdef ENABLE_WALLET
-void AstralGUI::openClicked()
+void opteronGUI::openClicked()
 {
     OpenURIDialog dlg(this);
     if(dlg.exec())
@@ -709,50 +709,50 @@ void AstralGUI::openClicked()
     }
 }
 
-void AstralGUI::gotoOverviewPage()
+void opteronGUI::gotoOverviewPage()
 {
     overviewAction->setChecked(true);
     if (walletFrame) walletFrame->gotoOverviewPage();
 }
 
-void AstralGUI::gotoHistoryPage()
+void opteronGUI::gotoHistoryPage()
 {
     historyAction->setChecked(true);
     if (walletFrame) walletFrame->gotoHistoryPage();
 }
 
-void AstralGUI::gotoReceiveCoinsPage()
+void opteronGUI::gotoReceiveCoinsPage()
 {
     receiveCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoReceiveCoinsPage();
 }
 
-void AstralGUI::gotoSendCoinsPage(QString addr)
+void opteronGUI::gotoSendCoinsPage(QString addr)
 {
     sendCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
 }
 
-void AstralGUI::gotoSignMessageTab(QString addr)
+void opteronGUI::gotoSignMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoSignMessageTab(addr);
 }
 
-void AstralGUI::gotoVerifyMessageTab(QString addr)
+void opteronGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
 }
 
-/** ASTRAL START */
-void AstralGUI::gotoAssetsPage()
+/** opteron START */
+void opteronGUI::gotoAssetsPage()
 {
     assetAction->setChecked(true);
     if (walletFrame) walletFrame->gotoAssetsPage();
 };
-/** ASTRAL END */
+/** opteron END */
 #endif // ENABLE_WALLET
 
-void AstralGUI::updateNetworkState()
+void opteronGUI::updateNetworkState()
 {
     int count = clientModel->getNumConnections();
     QString icon;
@@ -768,7 +768,7 @@ void AstralGUI::updateNetworkState()
     QString tooltip;
 
     if (clientModel->getNetworkActive()) {
-        tooltip = tr("%n active connection(s) to Astral network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
+        tooltip = tr("%n active connection(s) to opteron network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
     } else {
         tooltip = tr("Network activity disabled.") + QString("<br>") + tr("Click to enable network activity again.");
         icon = ":/icons/network_disabled";
@@ -781,17 +781,17 @@ void AstralGUI::updateNetworkState()
     connectionsControl->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
 }
 
-void AstralGUI::setNumConnections(int count)
+void opteronGUI::setNumConnections(int count)
 {
     updateNetworkState();
 }
 
-void AstralGUI::setNetworkActive(bool networkActive)
+void opteronGUI::setNetworkActive(bool networkActive)
 {
     updateNetworkState();
 }
 
-void AstralGUI::updateHeadersSyncProgressLabel()
+void opteronGUI::updateHeadersSyncProgressLabel()
 {
     int64_t headersTipTime = clientModel->getHeaderTipTime();
     int headersTipHeight = clientModel->getHeaderTipHeight();
@@ -800,7 +800,7 @@ void AstralGUI::updateHeadersSyncProgressLabel()
         progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
 }
 
-void AstralGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
+void opteronGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
 {
     if (modalOverlay)
     {
@@ -917,9 +917,9 @@ void AstralGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVeri
     progressBar->setToolTip(tooltip);
 }
 
-void AstralGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
+void opteronGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("Astral"); // default title
+    QString strTitle = tr("opteron"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -945,7 +945,7 @@ void AstralGUI::message(const QString &title, const QString &message, unsigned i
             break;
         }
     }
-    // Append title to "Astral - "
+    // Append title to "opteron - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 
@@ -976,7 +976,7 @@ void AstralGUI::message(const QString &title, const QString &message, unsigned i
         notificator->notify((Notificator::Class)nNotifyIcon, strTitle, message);
 }
 
-void AstralGUI::changeEvent(QEvent *e)
+void opteronGUI::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
 #ifndef Q_OS_MAC // Ignored on Mac
@@ -995,7 +995,7 @@ void AstralGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void AstralGUI::closeEvent(QCloseEvent *event)
+void opteronGUI::closeEvent(QCloseEvent *event)
 {
 #ifndef Q_OS_MAC // Ignored on Mac
     if(clientModel && clientModel->getOptionsModel())
@@ -1018,7 +1018,7 @@ void AstralGUI::closeEvent(QCloseEvent *event)
 #endif
 }
 
-void AstralGUI::showEvent(QShowEvent *event)
+void opteronGUI::showEvent(QShowEvent *event)
 {
     // enable the debug window when the main window shows up
     openRPCConsoleAction->setEnabled(true);
@@ -1027,17 +1027,17 @@ void AstralGUI::showEvent(QShowEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-void AstralGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& assetName)
+void opteronGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& assetName)
 {
     // On new transaction, make an info balloon
     QString msg = tr("Date: %1\n").arg(date);
-    if (assetName == "ASTRAL")
-        msg += tr("Amount: %1\n").arg(AstralUnits::formatWithUnit(unit, amount, true));
+    if (assetName == "opteron")
+        msg += tr("Amount: %1\n").arg(opteronUnits::formatWithUnit(unit, amount, true));
     else
-        msg += tr("Amount: %1\n").arg(AstralUnits::formatWithCustomName(assetName, amount, MAX_ASSET_UNITS, true));
+        msg += tr("Amount: %1\n").arg(opteronUnits::formatWithCustomName(assetName, amount, MAX_ASSET_UNITS, true));
 
     msg += tr("Type: %1\n").arg(type);
-    
+
     if (!label.isEmpty())
         msg += tr("Label: %1\n").arg(label);
     else if (!address.isEmpty())
@@ -1046,7 +1046,7 @@ void AstralGUI::incomingTransaction(const QString& date, int unit, const CAmount
              msg, CClientUIInterface::MSG_INFORMATION);
 }
 
-void AstralGUI::checkAssets()
+void opteronGUI::checkAssets()
 {
     // Check that status of RIP2 and activate the assets icon if it is active
     if(AreAssetsDeployed()) {
@@ -1061,14 +1061,14 @@ void AstralGUI::checkAssets()
 }
 #endif // ENABLE_WALLET
 
-void AstralGUI::dragEnterEvent(QDragEnterEvent *event)
+void opteronGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs
     if(event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void AstralGUI::dropEvent(QDropEvent *event)
+void opteronGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -1080,7 +1080,7 @@ void AstralGUI::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
-bool AstralGUI::eventFilter(QObject *object, QEvent *event)
+bool opteronGUI::eventFilter(QObject *object, QEvent *event)
 {
     // Catch status tip events
     if (event->type() == QEvent::StatusTip)
@@ -1093,7 +1093,7 @@ bool AstralGUI::eventFilter(QObject *object, QEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-bool AstralGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
+bool opteronGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
 {
     // URI has to be valid
     if (walletFrame && walletFrame->handlePaymentRequest(recipient))
@@ -1105,16 +1105,16 @@ bool AstralGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
     return false;
 }
 
-void AstralGUI::setHDStatus(int hdEnabled)
+void opteronGUI::setHDStatus(int hdEnabled)
 {
     labelWalletHDStatusIcon->setPixmap(platformStyle->SingleColorIcon(hdEnabled ? ":/icons/hd_enabled" : ":/icons/hd_disabled").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
     labelWalletHDStatusIcon->setToolTip(hdEnabled ? tr("HD key generation is <b>enabled</b>") : tr("HD key generation is <b>disabled</b>"));
 
-    // eventually disable the QLabel to set its opacity to 50% 
+    // eventually disable the QLabel to set its opacity to 50%
     labelWalletHDStatusIcon->setEnabled(hdEnabled);
 }
 
-void AstralGUI::setEncryptionStatus(int status)
+void opteronGUI::setEncryptionStatus(int status)
 {
     switch(status)
     {
@@ -1144,7 +1144,7 @@ void AstralGUI::setEncryptionStatus(int status)
 }
 #endif // ENABLE_WALLET
 
-void AstralGUI::showNormalIfMinimized(bool fToggleHidden)
+void opteronGUI::showNormalIfMinimized(bool fToggleHidden)
 {
     if(!clientModel)
         return;
@@ -1169,12 +1169,12 @@ void AstralGUI::showNormalIfMinimized(bool fToggleHidden)
         hide();
 }
 
-void AstralGUI::toggleHidden()
+void opteronGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
 
-void AstralGUI::detectShutdown()
+void opteronGUI::detectShutdown()
 {
     if (ShutdownRequested())
     {
@@ -1184,7 +1184,7 @@ void AstralGUI::detectShutdown()
     }
 }
 
-void AstralGUI::showProgress(const QString &title, int nProgress)
+void opteronGUI::showProgress(const QString &title, int nProgress)
 {
     if (nProgress == 0)
     {
@@ -1207,7 +1207,7 @@ void AstralGUI::showProgress(const QString &title, int nProgress)
         progressDialog->setValue(nProgress);
 }
 
-void AstralGUI::setTrayIconVisible(bool fHideTrayIcon)
+void opteronGUI::setTrayIconVisible(bool fHideTrayIcon)
 {
     if (trayIcon)
     {
@@ -1215,13 +1215,13 @@ void AstralGUI::setTrayIconVisible(bool fHideTrayIcon)
     }
 }
 
-void AstralGUI::showModalOverlay()
+void opteronGUI::showModalOverlay()
 {
     if (modalOverlay && (progressBar->isVisible() || modalOverlay->isLayerVisible()))
         modalOverlay->toggleVisibility();
 }
 
-static bool ThreadSafeMessageBox(AstralGUI *gui, const std::string& message, const std::string& caption, unsigned int style)
+static bool ThreadSafeMessageBox(opteronGUI *gui, const std::string& message, const std::string& caption, unsigned int style)
 {
     bool modal = (style & CClientUIInterface::MODAL);
     // The SECURE flag has no effect in the Qt GUI.
@@ -1238,21 +1238,21 @@ static bool ThreadSafeMessageBox(AstralGUI *gui, const std::string& message, con
     return ret;
 }
 
-void AstralGUI::subscribeToCoreSignals()
+void opteronGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
     uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.connect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
-void AstralGUI::unsubscribeFromCoreSignals()
+void opteronGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
     uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
-void AstralGUI::toggleNetworkActive()
+void opteronGUI::toggleNetworkActive()
 {
     if (clientModel) {
         clientModel->setNetworkActive(!clientModel->getNetworkActive());
@@ -1265,12 +1265,12 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *pl
 {
     createContextMenu();
     setToolTip(tr("Unit to show amounts in. Click to select another unit."));
-    QList<AstralUnits::Unit> units = AstralUnits::availableUnits();
+    QList<opteronUnits::Unit> units = opteronUnits::availableUnits();
     int max_width = 0;
     const QFontMetrics fm(font());
-    for (const AstralUnits::Unit unit : units)
+    for (const opteronUnits::Unit unit : units)
     {
-        max_width = qMax(max_width, fm.width(AstralUnits::name(unit)));
+        max_width = qMax(max_width, fm.width(opteronUnits::name(unit)));
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1287,9 +1287,9 @@ void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent *event)
 void UnitDisplayStatusBarControl::createContextMenu()
 {
     menu = new QMenu(this);
-    for (AstralUnits::Unit u : AstralUnits::availableUnits())
+    for (opteronUnits::Unit u : opteronUnits::availableUnits())
     {
-        QAction *menuAction = new QAction(QString(AstralUnits::name(u)), this);
+        QAction *menuAction = new QAction(QString(opteronUnits::name(u)), this);
         menuAction->setData(QVariant(u));
         menu->addAction(menuAction);
     }
@@ -1314,7 +1314,7 @@ void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *_optionsModel)
 /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
 void UnitDisplayStatusBarControl::updateDisplayUnit(int newUnits)
 {
-    setText(AstralUnits::name(newUnits));
+    setText(opteronUnits::name(newUnits));
 }
 
 /** Shows context menu with Display Unit options by the mouse coordinates */

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -40,7 +40,7 @@ struct ChainTxData {
 
 /**
  * CChainParams defines various tweakable parameters of a given instance of the
- * Astral system. There are three: the main network on which people trade goods
+ * opteron system. There are three: the main network on which people trade goods
  * and services, the public test network which gets reset from time to time and
  * a regression test mode which is intended for private networks only. It has
  * minimal difficulty to ensure that blocks can be found instantly.
@@ -89,7 +89,7 @@ public:
     bool BIP66();
     bool CSVEnabled() const;
 
-    /** ASTRAL Start **/
+    /** opteron Start **/
     const CAmount& IssueAssetBurnAmount() const { return nIssueAssetBurnAmount; }
     const CAmount& ReissueAssetBurnAmount() const { return nReissueAssetBurnAmount; }
     const CAmount& IssueSubAssetBurnAmount() const { return nIssueSubAssetBurnAmount; }
@@ -106,7 +106,7 @@ public:
     int MaxReorganizationDepth() const { return nMaxReorganizationDepth; }
     int MinReorganizationPeers() const { return nMinReorganizationPeers; }
     int MinReorganizationAge() const { return nMinReorganizationAge; }
-    /** ASTRAL End **/
+    /** opteron End **/
 
 protected:
     CChainParams() {}
@@ -127,7 +127,7 @@ protected:
     CCheckpointData checkpointData;
     ChainTxData chainTxData;
 
-    /** ASTRAL Start **/
+    /** opteron Start **/
     // Burn Amounts
     CAmount nIssueAssetBurnAmount;
     CAmount nReissueAssetBurnAmount;
@@ -148,7 +148,7 @@ protected:
     int nMaxReorganizationDepth;
     int nMinReorganizationPeers;
     int nMinReorganizationAge;
-    /** ASTRAL End **/
+    /** opteron End **/
 };
 
 /**

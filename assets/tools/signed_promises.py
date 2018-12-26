@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Script to find signed contract_urls
-# Reads from a Astralcoin node - make sure its running
+# Reads from a opteroncoin node - make sure its running
 # Runs through the assets looking for ones with meta data
 # Checks the meta data for contract_url
 # Downloads the documents - (named by asset)
@@ -23,7 +23,7 @@ import json
 import hashlib
 
 
-cli = "astral-cli"
+cli = "opteron-cli"
 mode =  "-testnet"
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
@@ -53,7 +53,7 @@ def get_assets_with_ipfs_filter(assets):
             list_of_assets_without_ipfs.append(key)
 
     #Remove all the assets without ipfs_hash
-    for name in list_of_assets_without_ipfs:       
+    for name in list_of_assets_without_ipfs:
         del assets[name]
 
     return(assets)
@@ -66,7 +66,7 @@ def get_ipfs_files(assets):
             if not success:
                 list_of_bad_assets.append(key)
     #Remove all the assets without valid metadata files
-    for name in list_of_bad_assets:       
+    for name in list_of_bad_assets:
         del assets[name]
 
     return(assets)
@@ -102,7 +102,7 @@ def get_signed_assets(assets):
             if not success:
                 list_of_unsigned_assets.append(key)
     #Remove all the assets without valid signatures
-    for name in list_of_unsigned_assets:       
+    for name in list_of_unsigned_assets:
         del assets[name]
 
     return(assets)
@@ -110,7 +110,7 @@ def get_signed_assets(assets):
 def read_metadata(asset_name):
     with open(asset_name + '.json') as handle:
         metadata = json.loads(handle.read())
-    return(metadata)    
+    return(metadata)
 
 
 #Takes a url, hash (SHA256 of url contents), address of signer, signature of signed hash (in text)
@@ -126,7 +126,7 @@ def validate_contract(url, hash256, address, signature):
 
     print("Downloading: " + url + " and validating hash")
     try:
-        filedata = urllib2.urlopen(url, timeout=30)  
+        filedata = urllib2.urlopen(url, timeout=30)
         rawdata = filedata.read()
 
         hexdigest = hashlib.sha256(rawdata).hexdigest()
@@ -152,14 +152,14 @@ def verify_message(address, signature, hash256):
     rpc_connection = get_rpc_connection()
     result = rpc_connection.verifymessage(address, signature, hash256)
     print("Verify result: " + result)
-    return(result)    
+    return(result)
 
 def get_ipfs_file_wget(filename, hash):
     import urllib2
 
     print("Downloading: " + hash + " as " + filename)
     try:
-        filedata = urllib2.urlopen('https://ipfs.io/ipfs/' + hash, timeout=20)  
+        filedata = urllib2.urlopen('https://ipfs.io/ipfs/' + hash, timeout=20)
         datatowrite = filedata.read()
 
         datatowrite.strip()
@@ -168,7 +168,7 @@ def get_ipfs_file_wget(filename, hash):
             return
 
 
-        with open(filename, 'wb') as f:  
+        with open(filename, 'wb') as f:
             f.write(datatowrite)
         print("Saving metadata file")
     except urllib2.URLError as e:
@@ -192,6 +192,6 @@ def go(filter):
 
 
 go("")
-    
+
 
 

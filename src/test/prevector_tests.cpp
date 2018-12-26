@@ -1,5 +1,5 @@
 // Copyright (c) 2015-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 #include "serialize.h"
 #include "streams.h"
 
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 
 #include <boost/test/unit_test.hpp>
 
@@ -37,7 +37,7 @@ class prevector_tester {
         {
             local_check(a == b);
         }
-    void local_check(bool b) 
+    void local_check(bool b)
     {
         passed &= b;
     }

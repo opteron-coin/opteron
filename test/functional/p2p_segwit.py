@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test segwit transactions and blocks on P2P network."""
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.blocktools import create_block, create_coinbase, add_witness_commitment, get_witness_script, WITNESS_COMMITMENT_HEADER
@@ -108,7 +108,7 @@ def sign_P2PK_witness_input(script, txTo, inIdx, hashtype, value, key):
     txTo.rehash()
 
 
-class SegWitTest(AstralTestFramework):
+class SegWitTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
@@ -202,7 +202,7 @@ class SegWitTest(AstralTestFramework):
         # rule).
         self.test_node.test_witness_block(block, accepted=False)
         # TODO: fix synchronization so we can test reject reason
-        # Right now, astrald delays sending reject messages for blocks
+        # Right now, opterond delays sending reject messages for blocks
         # until the future, making synchronization here difficult.
         #assert_equal(self.test_node.last_message["reject"].reason, "unexpected-witness")
 
@@ -443,7 +443,7 @@ class SegWitTest(AstralTestFramework):
         block = self.build_next_block()
 
         assert(len(self.utxo) > 0)
-        
+
         # Create a P2WSH transaction.
         # The witness program will be a bunch of OP_2DROP's, followed by OP_TRUE.
         # This should give us plenty of room to tweak the spending tx's
@@ -526,7 +526,7 @@ class SegWitTest(AstralTestFramework):
         self.nodes[0].submitblock(bytes_to_hex_str(block.serialize(True)))
         assert(self.nodes[0].getbestblockhash() != block.hash)
 
-        # Now redo commitment with the standard nonce, but let astrald fill it in.
+        # Now redo commitment with the standard nonce, but let opterond fill it in.
         add_witness_commitment(block, nonce=0)
         block.vtx[0].wit = CTxWitness()
         block.solve()
@@ -555,7 +555,7 @@ class SegWitTest(AstralTestFramework):
         self.log.info("Testing extra witness data in tx")
 
         assert(len(self.utxo) > 0)
-        
+
         block = self.build_next_block()
 
         witness_program = CScript([OP_DROP, OP_TRUE])
@@ -723,7 +723,7 @@ class SegWitTest(AstralTestFramework):
         witness_program = CScript([OP_DROP, OP_TRUE])
         witness_hash = sha256(witness_program)
         scriptPubKey = CScript([OP_0, witness_hash])
-        
+
         # Create a transaction that splits our utxo into many outputs
         tx = CTransaction()
         tx.vin.append(CTxIn(COutPoint(self.utxo[0].sha256, self.utxo[0].n), b""))
@@ -1446,7 +1446,7 @@ class SegWitTest(AstralTestFramework):
         # This transaction should not be accepted into the mempool pre- or
         # post-segwit.  Mempool acceptance will use SCRIPT_VERIFY_WITNESS which
         # will require a witness to spend a witness program regardless of
-        # segwit activation.  Note that older astrald's that are not
+        # segwit activation.  Note that older opterond's that are not
         # segwit-aware would also reject this for failing CLEANSTACK.
         self.test_node.test_transaction_acceptance(spend_tx, with_witness=False, accepted=False)
 
@@ -1482,12 +1482,12 @@ class SegWitTest(AstralTestFramework):
     # Test the behavior of starting up a segwit-aware node after the softfork
     # has activated.  As segwit requires different block data than pre-segwit
     # nodes would have stored, this requires special handling.
-    # To enable this test, pass --oldbinary=<path-to-pre-segwit-astrald> to
+    # To enable this test, pass --oldbinary=<path-to-pre-segwit-opterond> to
     # the test.
     def test_upgrade_after_activation(self, node_id):
         self.log.info("Testing software upgrade after softfork activation")
 
-        assert(node_id != 0) # node0 is assumed to be a segwit-active astrald
+        assert(node_id != 0) # node0 is assumed to be a segwit-active opterond
 
         # Make sure the nodes are all up
         sync_blocks(self.nodes)
@@ -1568,7 +1568,7 @@ class SegWitTest(AstralTestFramework):
             tx2.wit.vtxinwit.append(CTxInWitness())
             tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program ]
             total_value += tx.vout[i].nValue
-        tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program_toomany ] 
+        tx2.wit.vtxinwit[-1].scriptWitness.stack = [ witness_program_toomany ]
         tx2.vout.append(CTxOut(total_value, CScript([OP_TRUE])))
         tx2.rehash()
 

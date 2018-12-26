@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test processing of feefilter messages."""
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 import time
 
@@ -37,7 +37,7 @@ class TestNode(NodeConnCB):
         with mininode_lock:
             self.txinvs = []
 
-class FeeFilterTest(AstralTestFramework):
+class FeeFilterTest(opteronTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -72,7 +72,7 @@ class FeeFilterTest(AstralTestFramework):
         # Change tx fee rate to 10 sat/byte and test they are no longer received
         node1.settxfee(Decimal("0.00010000"))
         [node1.sendtoaddress(node1.getnewaddress(), 1) for x in range(3)]
-        sync_mempools(self.nodes) # must be sure node 0 has received all txs 
+        sync_mempools(self.nodes) # must be sure node 0 has received all txs
 
         # Send one transaction from node0 that should be received, so that we
         # we can sync the test on receipt (if node1's txs were relayed, they'd

@@ -2,7 +2,7 @@
 
 This issue tracker is only for technical issues related to bitcoin-core.
 
-General astralcoin questions and/or support requests and are best directed to the [Astralcoin Discord](https://discord.gg/GwtXdyc).
+General opteroncoin questions and/or support requests and are best directed to the [opteroncoin Discord](https://discord.gg/GwtXdyc).
 
 For reporting security issues, please direct message one of the core developers in discord.
 

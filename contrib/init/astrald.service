@@ -1,15 +1,15 @@
 [Unit]
-Description=Astral's distributed currency daemon
+Description=opteron's distributed currency daemon
 After=network.target
 
 [Service]
-User=astral
-Group=astral
+User=opteron
+Group=opteron
 
 Type=forking
-PIDFile=/var/lib/astrald/astrald.pid
-ExecStart=/usr/bin/astrald -daemon -pid=/var/lib/astrald/astrald.pid \
--conf=/etc/astral/astral.conf -datadir=/var/lib/astrald -disablewallet
+PIDFile=/var/lib/opterond/opterond.pid
+ExecStart=/usr/bin/opterond -daemon -pid=/var/lib/opterond/opterond.pid \
+-conf=/etc/opteron/opteron.conf -datadir=/var/lib/opterond -disablewallet
 
 Restart=always
 PrivateTmp=true

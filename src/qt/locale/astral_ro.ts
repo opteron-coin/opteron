@@ -76,7 +76,7 @@
     </message>
 </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Semnează &amp;mesajul...</translation>
@@ -142,8 +142,8 @@
         <translation>Deschide &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Trimite monedele către o adresă Astral</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Trimite monedele către o adresă opteron</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>&amp;Verifică mesajul...</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -194,12 +194,12 @@
         <translation>Criptează cheile private care aparțin portofelului tău.</translation>
     </message>
     <message>
-        <source>Sign messages with your Astral addresses to prove you own them</source>
-        <translation>Semnează mesajele cu adresa ta de Astral pentru a face dovada că îți aparțin.</translation>
+        <source>Sign messages with your opteron addresses to prove you own them</source>
+        <translation>Semnează mesajele cu adresa ta de opteron pentru a face dovada că îți aparțin.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Astral addresses</source>
-        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de Astral specificată.</translation>
+        <source>Verify messages to ensure they were signed with specified opteron addresses</source>
+        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de opteron specificată.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -214,12 +214,12 @@
         <translation>&amp;Ajutor</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and astral: URIs)</source>
-        <translation>Cerere plată (generează coduri QR și astral: URIs)</translation>
+        <source>Request payments (generates QR codes and opteron: URIs)</source>
+        <translation>Cerere plată (generează coduri QR și opteron: URIs)</translation>
     </message>
     <message>
-        <source>Open a astral: URI or payment request</source>
-        <translation>Deschide un astral: URI sau cerere de plată</translation>
+        <source>Open a opteron: URI or payment request</source>
+        <translation>Deschide un opteron: URI sau cerere de plată</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -746,10 +746,10 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Information</source>

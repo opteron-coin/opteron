@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -184,9 +184,9 @@ enum opcodetype
     OP_NOP9 = 0xb8,
     OP_NOP10 = 0xb9,
 
-    /** ASTRAL START */
-    OP_ASTRAL_ASSET = 0xc0,
-    /** ASTRAL END */
+    /** opteron START */
+    OP_opteron_ASSET = 0xc0,
+    /** opteron END */
 
 
     // template matching params
@@ -633,7 +633,7 @@ public:
     }
 
     /**
-     * Pre-version-0.6, Astral always counted CHECKMULTISIGs
+     * Pre-version-0.6, opteron always counted CHECKMULTISIGs
      * as 20 sigops. With pay-to-script-hash, that changed:
      * CHECKMULTISIGs serialized in scriptSigs are
      * counted more accurately, assuming they are of the form
@@ -653,7 +653,7 @@ public:
     bool IsPayToWitnessScriptHash() const;
     bool IsWitnessProgram(int& version, std::vector<unsigned char>& program) const;
 
-    /** ASTRAL START */
+    /** opteron START */
     enum class txnouttype;
     bool IsAssetScript(int& nType, bool& fIsOwner, int& nStartingIndex) const;
     bool IsAssetScript(int& nType, bool& fIsOwner) const;
@@ -663,7 +663,7 @@ public:
     bool IsReissueAsset() const;
     bool IsTransferAsset() const;
     bool IsAsset() const;
-    /** ASTRAL END */
+    /** opteron END */
 
     /** Used for obsolete pay-to-pubkey addresses indexing. */
     bool IsPayToPublicKey() const;

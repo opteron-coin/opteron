@@ -1,11 +1,11 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "astralamountfield.h"
+#include "opteronamountfield.h"
 
-#include "astralunits.h"
+#include "opteronunits.h"
 #include "guiconstants.h"
 #include "qvaluecombobox.h"
 
@@ -25,7 +25,7 @@ class AmountSpinBox: public QAbstractSpinBox
 public:
     explicit AmountSpinBox(QWidget *parent):
         QAbstractSpinBox(parent),
-        currentUnit(AstralUnits::ASTRAL),
+        currentUnit(opteronUnits::opteron),
         singleStep(100000) // satoshis
     {
         setAlignment(Qt::AlignRight);
@@ -49,7 +49,7 @@ public:
         CAmount val = parse(input, &valid);
         if(valid)
         {
-            input = AstralUnits::format(currentUnit, val, false, AstralUnits::separatorAlways);
+            input = opteronUnits::format(currentUnit, val, false, opteronUnits::separatorAlways);
             lineEdit()->setText(input);
         }
     }
@@ -61,7 +61,7 @@ public:
 
     void setValue(const CAmount& value)
     {
-        lineEdit()->setText(AstralUnits::format(currentUnit, value, false, AstralUnits::separatorAlways));
+        lineEdit()->setText(opteronUnits::format(currentUnit, value, false, opteronUnits::separatorAlways));
         Q_EMIT valueChanged();
     }
 
@@ -70,7 +70,7 @@ public:
         bool valid = false;
         CAmount val = value(&valid);
         val = val + steps * singleStep;
-        val = qMin(qMax(val, CAmount(0)), AstralUnits::maxMoney());
+        val = qMin(qMax(val, CAmount(0)), opteronUnits::maxMoney());
         setValue(val);
     }
 
@@ -100,7 +100,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = fm.width(AstralUnits::format(AstralUnits::ASTRAL, AstralUnits::maxMoney(), false, AstralUnits::separatorAlways));
+            int w = fm.width(opteronUnits::format(opteronUnits::opteron, opteronUnits::maxMoney(), false, opteronUnits::separatorAlways));
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -138,10 +138,10 @@ private:
     CAmount parse(const QString &text, bool *valid_out=0) const
     {
         CAmount val = 0;
-        bool valid = AstralUnits::parse(currentUnit, text, &val);
+        bool valid = opteronUnits::parse(currentUnit, text, &val);
         if(valid)
         {
-            if(val < 0 || val > AstralUnits::maxMoney())
+            if(val < 0 || val > opteronUnits::maxMoney())
                 valid = false;
         }
         if(valid_out)
@@ -179,7 +179,7 @@ protected:
         {
             if(val > 0)
                 rv |= StepDownEnabled;
-            if(val < AstralUnits::maxMoney())
+            if(val < opteronUnits::maxMoney())
                 rv |= StepUpEnabled;
         }
         return rv;
@@ -189,9 +189,9 @@ Q_SIGNALS:
     void valueChanged();
 };
 
-#include "astralamountfield.moc"
+#include "opteronamountfield.moc"
 
-AstralAmountField::AstralAmountField(QWidget *parent) :
+opteronAmountField::opteronAmountField(QWidget *parent) :
     QWidget(parent),
     amount(0)
 {
@@ -203,7 +203,7 @@ AstralAmountField::AstralAmountField(QWidget *parent) :
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
     unit = new QValueComboBox(this);
-    unit->setModel(new AstralUnits(this));
+    unit->setModel(new opteronUnits(this));
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -221,19 +221,19 @@ AstralAmountField::AstralAmountField(QWidget *parent) :
     unitChanged(unit->currentIndex());
 }
 
-void AstralAmountField::clear()
+void opteronAmountField::clear()
 {
     amount->clear();
     unit->setCurrentIndex(0);
 }
 
-void AstralAmountField::setEnabled(bool fEnabled)
+void opteronAmountField::setEnabled(bool fEnabled)
 {
     amount->setEnabled(fEnabled);
     unit->setEnabled(fEnabled);
 }
 
-bool AstralAmountField::validate()
+bool opteronAmountField::validate()
 {
     bool valid = false;
     value(&valid);
@@ -241,7 +241,7 @@ bool AstralAmountField::validate()
     return valid;
 }
 
-void AstralAmountField::setValid(bool valid)
+void opteronAmountField::setValid(bool valid)
 {
     if (valid)
         amount->setStyleSheet("");
@@ -249,7 +249,7 @@ void AstralAmountField::setValid(bool valid)
         amount->setStyleSheet(STYLE_INVALID);
 }
 
-bool AstralAmountField::eventFilter(QObject *object, QEvent *event)
+bool opteronAmountField::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::FocusIn)
     {
@@ -259,45 +259,45 @@ bool AstralAmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *AstralAmountField::setupTabChain(QWidget *prev)
+QWidget *opteronAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
     QWidget::setTabOrder(amount, unit);
     return unit;
 }
 
-CAmount AstralAmountField::value(bool *valid_out) const
+CAmount opteronAmountField::value(bool *valid_out) const
 {
     return amount->value(valid_out);
 }
 
-void AstralAmountField::setValue(const CAmount& value)
+void opteronAmountField::setValue(const CAmount& value)
 {
     amount->setValue(value);
 }
 
-void AstralAmountField::setReadOnly(bool fReadOnly)
+void opteronAmountField::setReadOnly(bool fReadOnly)
 {
     amount->setReadOnly(fReadOnly);
 }
 
-void AstralAmountField::unitChanged(int idx)
+void opteronAmountField::unitChanged(int idx)
 {
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    int newUnit = unit->itemData(idx, AstralUnits::UnitRole).toInt();
+    int newUnit = unit->itemData(idx, opteronUnits::UnitRole).toInt();
 
     amount->setDisplayUnit(newUnit);
 }
 
-void AstralAmountField::setDisplayUnit(int newUnit)
+void opteronAmountField::setDisplayUnit(int newUnit)
 {
     unit->setValue(newUnit);
 }
 
-void AstralAmountField::setSingleStep(const CAmount& step)
+void opteronAmountField::setSingleStep(const CAmount& step)
 {
     amount->setSingleStep(step);
 }

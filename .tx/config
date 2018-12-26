@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[astral.qt-translation-014x]
-file_filter = src/qt/locale/astral_<lang>.ts
-source_file = src/qt/locale/astral_en.ts
+[opteron.qt-translation-014x]
+file_filter = src/qt/locale/opteron_<lang>.ts
+source_file = src/qt/locale/opteron_en.ts
 source_lang = en

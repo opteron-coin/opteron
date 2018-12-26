@@ -13,31 +13,31 @@
 %endif
 %endif
 
-Name:		astral
+Name:		opteron
 Version:	0.12.0
 Release:	2%{?dist}
 Summary:	Peer to Peer Cryptographic Currency
 
 Group:		Applications/System
 License:	MIT
-URL:		https://astral.org/
-Source0:	https://astral.org/bin/astral-core-%{version}/astral-%{version}.tar.gz
+URL:		https://opteron.org/
+Source0:	https://opteron.org/bin/opteron-core-%{version}/opteron-%{version}.tar.gz
 Source1:	http://download.oracle.com/berkeley-db/db-%{bdbv}.NC.tar.gz
 
-Source10:	https://raw.githubusercontent.com/astral/astral/v%{version}/contrib/debian/examples/astral.conf
+Source10:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/contrib/debian/examples/opteron.conf
 
 #man pages
-Source20:	https://raw.githubusercontent.com/astral/astral/v%{version}/doc/man/astrald.1
-Source21:	https://raw.githubusercontent.com/astral/astral/v%{version}/doc/man/astral-cli.1
-Source22:	https://raw.githubusercontent.com/astral/astral/v%{version}/doc/man/astral-qt.1
+Source20:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/doc/man/opterond.1
+Source21:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/doc/man/opteron-cli.1
+Source22:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/doc/man/opteron-qt.1
 
 #selinux
-Source30:	https://raw.githubusercontent.com/astral/astral/v%{version}/contrib/rpm/astral.te
-# Source31 - what about astral-tx and bench_astral ???
-Source31:	https://raw.githubusercontent.com/astral/astral/v%{version}/contrib/rpm/astral.fc
-Source32:	https://raw.githubusercontent.com/astral/astral/v%{version}/contrib/rpm/astral.if
+Source30:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/contrib/rpm/opteron.te
+# Source31 - what about opteron-tx and bench_opteron ???
+Source31:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/contrib/rpm/opteron.fc
+Source32:	https://raw.githubusercontent.com/opteron/opteron/v%{version}/contrib/rpm/opteron.if
 
-Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/Astral.svg
+Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/opteron.svg
 
 %if 0%{?_use_libressl:1}
 BuildRequires:	libressl-devel
@@ -50,13 +50,13 @@ BuildRequires:	autoconf automake libtool
 BuildRequires:	libevent-devel
 
 
-Patch0:		astral-0.12.0-libressl.patch
+Patch0:		opteron-0.12.0-libressl.patch
 
 
 %description
-Astral is a digital cryptographic currency that uses peer-to-peer technology to
+opteron is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
-issuing of astrals is carried out collectively by the network.
+issuing of opterons is carried out collectively by the network.
 
 %if %{_buildqt}
 %package core
@@ -79,42 +79,42 @@ BuildRequires:	%{_bindir}/inkscape
 BuildRequires:	%{_bindir}/convert
 
 %description core
-Astral is a digital cryptographic currency that uses peer-to-peer technology to
+opteron is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
-issuing of astrals is carried out collectively by the network.
+issuing of opterons is carried out collectively by the network.
 
 This package contains the Qt based graphical client and node. If you are looking
-to run a Astral wallet, this is probably the package you want.
+to run a opteron wallet, this is probably the package you want.
 %endif
 
 
 %package libs
-Summary:	Astral shared libraries
+Summary:	opteron shared libraries
 Group:		System Environment/Libraries
 
 %description libs
-This package provides the astralconsensus shared libraries. These libraries
+This package provides the opteronconsensus shared libraries. These libraries
 may be used by third party software to provide consensus verification
 functionality.
 
 Unless you know need this package, you probably do not.
 
 %package devel
-Summary:	Development files for astral
+Summary:	Development files for opteron
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 This package contains the header files and static library for the
-astralconsensus shared library. If you are developing or compiling software
+opteronconsensus shared library. If you are developing or compiling software
 that wants to link against that library, then you need this package installed.
 
 Most people do not need this package installed.
 
 %package server
-Summary:	The astral daemon
+Summary:	The opteron daemon
 Group:		System Environment/Daemons
-Requires:	astral-utils = %{version}-%{release}
+Requires:	opteron-utils = %{version}-%{release}
 Requires:	selinux-policy policycoreutils-python
 Requires(pre):	shadow-utils
 Requires(post):	%{_sbindir}/semodule %{_sbindir}/restorecon %{_sbindir}/fixfiles %{_sbindir}/sestatus
@@ -124,34 +124,34 @@ BuildRequires:	checkpolicy
 BuildRequires:	%{_datadir}/selinux/devel/Makefile
 
 %description server
-This package provides a stand-alone astral-core daemon. For most users, this
+This package provides a stand-alone opteron-core daemon. For most users, this
 package is only needed if they need a full-node without the graphical client.
 
 Some third party wallet software will want this package to provide the actual
-astral-core node they use to connect to the network.
+opteron-core node they use to connect to the network.
 
-If you use the graphical astral-core client then you almost certainly do not
+If you use the graphical opteron-core client then you almost certainly do not
 need this package.
 
 %package utils
-Summary:	Astral utilities
+Summary:	opteron utilities
 Group:		Applications/System
 
 %description utils
 This package provides several command line utilities for interacting with a
-astral-core daemon.
+opteron-core daemon.
 
-The astral-cli utility allows you to communicate and control a astral daemon
-over RPC, the astral-tx utility allows you to create a custom transaction, and
-the bench_astral utility can be used to perform some benchmarks.
+The opteron-cli utility allows you to communicate and control a opteron daemon
+over RPC, the opteron-tx utility allows you to create a custom transaction, and
+the bench_opteron utility can be used to perform some benchmarks.
 
-This package contains utilities needed by the astral-server package.
+This package contains utilities needed by the opteron-server package.
 
 
 %prep
 %setup -q
 %patch0 -p1 -b .libressl
-cp -p %{SOURCE10} ./astral.conf.example
+cp -p %{SOURCE10} ./opteron.conf.example
 tar -zxf %{SOURCE1}
 cp -p db-%{bdbv}.NC/LICENSE ./db-%{bdbv}.NC-LICENSE
 mkdir db4 SELinux
@@ -172,7 +172,7 @@ make %{?_smp_mflags}
 pushd SELinux
 for selinuxvariant in %{selinux_variants}; do
 	make NAME=${selinuxvariant} -f %{_datadir}/selinux/devel/Makefile
-	mv astral.pp astral.pp.${selinuxvariant}
+	mv opteron.pp opteron.pp.${selinuxvariant}
 	make NAME=${selinuxvariant} -f %{_datadir}/selinux/devel/Makefile clean
 done
 popd
@@ -182,42 +182,42 @@ popd
 make install DESTDIR=%{buildroot}
 
 mkdir -p -m755 %{buildroot}%{_sbindir}
-mv %{buildroot}%{_bindir}/astrald %{buildroot}%{_sbindir}/astrald
+mv %{buildroot}%{_bindir}/opterond %{buildroot}%{_sbindir}/opterond
 
 # systemd stuff
 mkdir -p %{buildroot}%{_tmpfilesdir}
-cat <<EOF > %{buildroot}%{_tmpfilesdir}/astral.conf
-d /run/astrald 0750 astral astral -
+cat <<EOF > %{buildroot}%{_tmpfilesdir}/opteron.conf
+d /run/opterond 0750 opteron opteron -
 EOF
-touch -a -m -t 201504280000 %{buildroot}%{_tmpfilesdir}/astral.conf
+touch -a -m -t 201504280000 %{buildroot}%{_tmpfilesdir}/opteron.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
-cat <<EOF > %{buildroot}%{_sysconfdir}/sysconfig/astral
-# Provide options to the astral daemon here, for example
+cat <<EOF > %{buildroot}%{_sysconfdir}/sysconfig/opteron
+# Provide options to the opteron daemon here, for example
 # OPTIONS="-testnet -disable-wallet"
 
 OPTIONS=""
 
 # System service defaults.
 # Don't change these unless you know what you're doing.
-CONFIG_FILE="%{_sysconfdir}/astral/astral.conf"
-DATA_DIR="%{_localstatedir}/lib/astral"
-PID_FILE="/run/astrald/astrald.pid"
+CONFIG_FILE="%{_sysconfdir}/opteron/opteron.conf"
+DATA_DIR="%{_localstatedir}/lib/opteron"
+PID_FILE="/run/opterond/opterond.pid"
 EOF
-touch -a -m -t 201504280000 %{buildroot}%{_sysconfdir}/sysconfig/astral
+touch -a -m -t 201504280000 %{buildroot}%{_sysconfdir}/sysconfig/opteron
 
 mkdir -p %{buildroot}%{_unitdir}
-cat <<EOF > %{buildroot}%{_unitdir}/astral.service
+cat <<EOF > %{buildroot}%{_unitdir}/opteron.service
 [Unit]
-Description=Astral daemon
+Description=opteron daemon
 After=syslog.target network.target
 
 [Service]
 Type=forking
-ExecStart=%{_sbindir}/astrald -daemon -conf=\${CONFIG_FILE} -datadir=\${DATA_DIR} -pid=\${PID_FILE} \$OPTIONS
-EnvironmentFile=%{_sysconfdir}/sysconfig/astral
-User=astral
-Group=astral
+ExecStart=%{_sbindir}/opterond -daemon -conf=\${CONFIG_FILE} -datadir=\${DATA_DIR} -pid=\${PID_FILE} \$OPTIONS
+EnvironmentFile=%{_sysconfdir}/sysconfig/opteron
+User=opteron
+Group=opteron
 
 Restart=on-failure
 PrivateTmp=true
@@ -229,63 +229,63 @@ StartLimitBurst=5
 [Install]
 WantedBy=multi-user.target
 EOF
-touch -a -m -t 201504280000 %{buildroot}%{_unitdir}/astral.service
+touch -a -m -t 201504280000 %{buildroot}%{_unitdir}/opteron.service
 #end systemd stuff
 
-mkdir %{buildroot}%{_sysconfdir}/astral
-mkdir -p %{buildroot}%{_localstatedir}/lib/astral
+mkdir %{buildroot}%{_sysconfdir}/opteron
+mkdir -p %{buildroot}%{_localstatedir}/lib/opteron
 
 #SELinux
 for selinuxvariant in %{selinux_variants}; do
 	install -d %{buildroot}%{_datadir}/selinux/${selinuxvariant}
-	install -p -m 644 SELinux/astral.pp.${selinuxvariant} %{buildroot}%{_datadir}/selinux/${selinuxvariant}/astral.pp
+	install -p -m 644 SELinux/opteron.pp.${selinuxvariant} %{buildroot}%{_datadir}/selinux/${selinuxvariant}/opteron.pp
 done
 
 %if %{_buildqt}
 # qt icons
-install -D -p share/pixmaps/astral.ico %{buildroot}%{_datadir}/pixmaps/astral.ico
+install -D -p share/pixmaps/opteron.ico %{buildroot}%{_datadir}/pixmaps/opteron.ico
 install -p share/pixmaps/nsis-header.bmp %{buildroot}%{_datadir}/pixmaps/
 install -p share/pixmaps/nsis-wizard.bmp %{buildroot}%{_datadir}/pixmaps/
-install -p %{SOURCE100} %{buildroot}%{_datadir}/pixmaps/astral.svg
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/astral16.png -w16 -h16
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/astral32.png -w32 -h32
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/astral64.png -w64 -h64
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/astral128.png -w128 -h128
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/astral256.png -w256 -h256
-%{_bindir}/convert -resize 16x16 %{buildroot}%{_datadir}/pixmaps/astral256.png %{buildroot}%{_datadir}/pixmaps/astral16.xpm
-%{_bindir}/convert -resize 32x32 %{buildroot}%{_datadir}/pixmaps/astral256.png %{buildroot}%{_datadir}/pixmaps/astral32.xpm
-%{_bindir}/convert -resize 64x64 %{buildroot}%{_datadir}/pixmaps/astral256.png %{buildroot}%{_datadir}/pixmaps/astral64.xpm
-%{_bindir}/convert -resize 128x128 %{buildroot}%{_datadir}/pixmaps/astral256.png %{buildroot}%{_datadir}/pixmaps/astral128.xpm
-%{_bindir}/convert %{buildroot}%{_datadir}/pixmaps/astral256.png %{buildroot}%{_datadir}/pixmaps/astral256.xpm
+install -p %{SOURCE100} %{buildroot}%{_datadir}/pixmaps/opteron.svg
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/opteron16.png -w16 -h16
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/opteron32.png -w32 -h32
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/opteron64.png -w64 -h64
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/opteron128.png -w128 -h128
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/opteron256.png -w256 -h256
+%{_bindir}/convert -resize 16x16 %{buildroot}%{_datadir}/pixmaps/opteron256.png %{buildroot}%{_datadir}/pixmaps/opteron16.xpm
+%{_bindir}/convert -resize 32x32 %{buildroot}%{_datadir}/pixmaps/opteron256.png %{buildroot}%{_datadir}/pixmaps/opteron32.xpm
+%{_bindir}/convert -resize 64x64 %{buildroot}%{_datadir}/pixmaps/opteron256.png %{buildroot}%{_datadir}/pixmaps/opteron64.xpm
+%{_bindir}/convert -resize 128x128 %{buildroot}%{_datadir}/pixmaps/opteron256.png %{buildroot}%{_datadir}/pixmaps/opteron128.xpm
+%{_bindir}/convert %{buildroot}%{_datadir}/pixmaps/opteron256.png %{buildroot}%{_datadir}/pixmaps/opteron256.xpm
 touch %{buildroot}%{_datadir}/pixmaps/*.png -r %{SOURCE100}
 touch %{buildroot}%{_datadir}/pixmaps/*.xpm -r %{SOURCE100}
 
 # Desktop File - change the touch timestamp if modifying
 mkdir -p %{buildroot}%{_datadir}/applications
-cat <<EOF > %{buildroot}%{_datadir}/applications/astral-core.desktop
+cat <<EOF > %{buildroot}%{_datadir}/applications/opteron-core.desktop
 [Desktop Entry]
 Encoding=UTF-8
-Name=Astral
-Comment=Astral P2P Cryptocurrency
-Comment[fr]=Astral, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Astral, eşten eşe kriptografik sanal para birimi
-Exec=astral-qt %u
+Name=opteron
+Comment=opteron P2P Cryptocurrency
+Comment[fr]=opteron, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=opteron, eşten eşe kriptografik sanal para birimi
+Exec=opteron-qt %u
 Terminal=false
 Type=Application
-Icon=astral128
-MimeType=x-scheme-handler/astral;
+Icon=opteron128
+MimeType=x-scheme-handler/opteron;
 Categories=Office;Finance;
 EOF
 # change touch date when modifying desktop
-touch -a -m -t 201511100546 %{buildroot}%{_datadir}/applications/astral-core.desktop
-%{_bindir}/desktop-file-validate %{buildroot}%{_datadir}/applications/astral-core.desktop
+touch -a -m -t 201511100546 %{buildroot}%{_datadir}/applications/opteron-core.desktop
+%{_bindir}/desktop-file-validate %{buildroot}%{_datadir}/applications/opteron-core.desktop
 
 # KDE protocol - change the touch timestamp if modifying
 mkdir -p %{buildroot}%{_datadir}/kde4/services
-cat <<EOF > %{buildroot}%{_datadir}/kde4/services/astral-core.protocol
+cat <<EOF > %{buildroot}%{_datadir}/kde4/services/opteron-core.protocol
 [Protocol]
-exec=astral-qt '%u'
-protocol=astral
+exec=opteron-qt '%u'
+protocol=opteron
 input=none
 output=none
 helper=true
@@ -296,14 +296,14 @@ makedir=false
 deleting=false
 EOF
 # change touch date when modifying protocol
-touch -a -m -t 201511100546 %{buildroot}%{_datadir}/kde4/services/astral-core.protocol
+touch -a -m -t 201511100546 %{buildroot}%{_datadir}/kde4/services/opteron-core.protocol
 %endif
 
 # man pages
-install -D -p %{SOURCE20} %{buildroot}%{_mandir}/man1/astrald.1
-install -p %{SOURCE21} %{buildroot}%{_mandir}/man1/astral-cli.1
+install -D -p %{SOURCE20} %{buildroot}%{_mandir}/man1/opterond.1
+install -p %{SOURCE21} %{buildroot}%{_mandir}/man1/opteron-cli.1
 %if %{_buildqt}
-install -p %{SOURCE22} %{buildroot}%{_mandir}/man1/astral-qt.1
+install -p %{SOURCE22} %{buildroot}%{_mandir}/man1/opteron-qt.1
 %endif
 
 # nuke these, we do extensive testing of binaries in %%check before packaging
@@ -311,7 +311,7 @@ rm -f %{buildroot}%{_bindir}/test_*
 
 %check
 make check
-srcdir=src test/astral-util-test.py
+srcdir=src test/opteron-util-test.py
 test/functional/test_runner.py --extended
 
 %post libs -p /sbin/ldconfig
@@ -319,37 +319,37 @@ test/functional/test_runner.py --extended
 %postun libs -p /sbin/ldconfig
 
 %pre server
-getent group astral >/dev/null || groupadd -r astral
-getent passwd astral >/dev/null ||
-	useradd -r -g astral -d /var/lib/astral -s /sbin/nologin \
-	-c "Astral wallet server" astral
+getent group opteron >/dev/null || groupadd -r opteron
+getent passwd opteron >/dev/null ||
+	useradd -r -g opteron -d /var/lib/opteron -s /sbin/nologin \
+	-c "opteron wallet server" opteron
 exit 0
 
 %post server
-%systemd_post astral.service
+%systemd_post opteron.service
 # SELinux
 if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 for selinuxvariant in %{selinux_variants}; do
-	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/astral.pp &> /dev/null || :
+	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/opteron.pp &> /dev/null || :
 done
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 8290
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 8291
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 18290
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 18291
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 18443
-%{_sbindir}/semanage port -a -t astral_port_t -p tcp 18444
-%{_sbindir}/fixfiles -R astral-server restore &> /dev/null || :
-%{_sbindir}/restorecon -R %{_localstatedir}/lib/astral || :
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 8290
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 8291
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18290
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18291
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18443
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18444
+%{_sbindir}/fixfiles -R opteron-server restore &> /dev/null || :
+%{_sbindir}/restorecon -R %{_localstatedir}/lib/opteron || :
 fi
 
 %posttrans server
 %{_bindir}/systemd-tmpfiles --create
 
 %preun server
-%systemd_preun astral.service
+%systemd_preun opteron.service
 
 %postun server
-%systemd_postun astral.service
+%systemd_postun opteron.service
 # SELinux
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
@@ -360,11 +360,11 @@ if [ $1 -eq 0 ]; then
 	%{_sbindir}/semanage port -d -p tcp 18443
 	%{_sbindir}/semanage port -d -p tcp 18444
 	for selinuxvariant in %{selinux_variants}; do
-		%{_sbindir}/semodule -s ${selinuxvariant} -r astral &> /dev/null || :
+		%{_sbindir}/semodule -s ${selinuxvariant} -r opteron &> /dev/null || :
 	done
-	%{_sbindir}/fixfiles -R astral-server restore &> /dev/null || :
-	[ -d %{_localstatedir}/lib/astral ] && \
-		%{_sbindir}/restorecon -R %{_localstatedir}/lib/astral &> /dev/null || :
+	%{_sbindir}/fixfiles -R opteron-server restore &> /dev/null || :
+	[ -d %{_localstatedir}/lib/opteron ] && \
+		%{_sbindir}/restorecon -R %{_localstatedir}/lib/opteron &> /dev/null || :
 	fi
 fi
 
@@ -375,16 +375,16 @@ rm -rf %{buildroot}
 %files core
 %defattr(-,root,root,-)
 %license COPYING db-%{bdbv}.NC-LICENSE
-%doc COPYING astral.conf.example doc/README.md doc/bips.md doc/files.md doc/multiwallet-qt.md doc/reduce-traffic.md doc/release-notes.md doc/tor.md
-%attr(0755,root,root) %{_bindir}/astral-qt
-%attr(0644,root,root) %{_datadir}/applications/astral-core.desktop
-%attr(0644,root,root) %{_datadir}/kde4/services/astral-core.protocol
+%doc COPYING opteron.conf.example doc/README.md doc/bips.md doc/files.md doc/multiwallet-qt.md doc/reduce-traffic.md doc/release-notes.md doc/tor.md
+%attr(0755,root,root) %{_bindir}/opteron-qt
+%attr(0644,root,root) %{_datadir}/applications/opteron-core.desktop
+%attr(0644,root,root) %{_datadir}/kde4/services/opteron-core.protocol
 %attr(0644,root,root) %{_datadir}/pixmaps/*.ico
 %attr(0644,root,root) %{_datadir}/pixmaps/*.bmp
 %attr(0644,root,root) %{_datadir}/pixmaps/*.svg
 %attr(0644,root,root) %{_datadir}/pixmaps/*.png
 %attr(0644,root,root) %{_datadir}/pixmaps/*.xpm
-%attr(0644,root,root) %{_mandir}/man1/astral-qt.1*
+%attr(0644,root,root) %{_mandir}/man1/opteron-qt.1*
 %endif
 
 %files libs
@@ -406,30 +406,30 @@ rm -rf %{buildroot}
 %files server
 %defattr(-,root,root,-)
 %license COPYING db-%{bdbv}.NC-LICENSE
-%doc COPYING astral.conf.example doc/README.md doc/REST-interface.md doc/bips.md doc/dnsseed-policy.md doc/files.md doc/reduce-traffic.md doc/release-notes.md doc/tor.md
-%attr(0755,root,root) %{_sbindir}/astrald
-%attr(0644,root,root) %{_tmpfilesdir}/astral.conf
-%attr(0644,root,root) %{_unitdir}/astral.service
-%dir %attr(0750,astral,astral) %{_sysconfdir}/astral
-%dir %attr(0750,astral,astral) %{_localstatedir}/lib/astral
-%config(noreplace) %attr(0600,root,root) %{_sysconfdir}/sysconfig/astral
+%doc COPYING opteron.conf.example doc/README.md doc/REST-interface.md doc/bips.md doc/dnsseed-policy.md doc/files.md doc/reduce-traffic.md doc/release-notes.md doc/tor.md
+%attr(0755,root,root) %{_sbindir}/opterond
+%attr(0644,root,root) %{_tmpfilesdir}/opteron.conf
+%attr(0644,root,root) %{_unitdir}/opteron.service
+%dir %attr(0750,opteron,opteron) %{_sysconfdir}/opteron
+%dir %attr(0750,opteron,opteron) %{_localstatedir}/lib/opteron
+%config(noreplace) %attr(0600,root,root) %{_sysconfdir}/sysconfig/opteron
 %attr(0644,root,root) %{_datadir}/selinux/*/*.pp
-%attr(0644,root,root) %{_mandir}/man1/astrald.1*
+%attr(0644,root,root) %{_mandir}/man1/opterond.1*
 
 %files utils
 %defattr(-,root,root,-)
 %license COPYING
-%doc COPYING astral.conf.example doc/README.md
-%attr(0755,root,root) %{_bindir}/astral-cli
-%attr(0755,root,root) %{_bindir}/astral-tx
-%attr(0755,root,root) %{_bindir}/bench_astral
-%attr(0644,root,root) %{_mandir}/man1/astral-cli.1*
+%doc COPYING opteron.conf.example doc/README.md
+%attr(0755,root,root) %{_bindir}/opteron-cli
+%attr(0755,root,root) %{_bindir}/opteron-tx
+%attr(0755,root,root) %{_bindir}/bench_opteron
+%attr(0644,root,root) %{_mandir}/man1/opteron-cli.1*
 
 
 
 %changelog
 * Fri Feb 26 2016 Alice Wonder <buildmaster@librelamp.com> - 0.12.0-2
-- Rename Qt package from astral to astral-core
+- Rename Qt package from opteron to opteron-core
 - Make building of the Qt package optional
 - When building the Qt package, default to Qt5 but allow building
 -  against Qt4
@@ -439,4 +439,4 @@ rm -rf %{buildroot}
 - Initial spec file for 0.12.0 release
 
 # This spec file is written from scratch but a lot of the packaging decisions are directly
-# based upon the 0.11.2 package spec file from https://www.ringingliberty.com/astral/
+# based upon the 0.11.2 package spec file from https://www.ringingliberty.com/opteron/

@@ -8,27 +8,27 @@ import subprocess
 import json
 
 
-#Set this to your astral-cli program
-cli = "astral-cli"
+#Set this to your opteron-cli program
+cli = "opteron-cli"
 
 mode =  "-testnet"
 rpc_port = 18290
 #mode =  "-regtest"
 #rpc_port = 18443
 
-#Set this information in your astral.conf file (in datadir, not testnet3)
+#Set this information in your opteron.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
 def listassets(filter):
     rpc_connection = get_rpc_connection()
     result = rpc_connection.listassets(filter, True)
-    return(result) 
+    return(result)
 
 def listaddressesbyasset(asset):
     rpc_connection = get_rpc_connection()
     result = rpc_connection.listaddressesbyasset(asset)
-    return(result) 
+    return(result)
 
 def rpc_call(params):
     process = subprocess.Popen([cli, mode, params], stdout=subprocess.PIPE)
@@ -52,7 +52,7 @@ def audit(filter):
     print("Auditing: " + filter)
     #print(assets)
     print("Asset count: " + str(len(assets)))
-    count = 0  
+    count = 0
     max_dist_asset_name = ""
     max_dist_address_count = 0
     for asset, properties in assets.items():

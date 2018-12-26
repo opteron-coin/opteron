@@ -152,7 +152,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Подписать &amp;сообщение...</translation>
@@ -230,8 +230,8 @@
         <translation>&amp;Проверить сообщение...</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral Core</translation>
+        <source>opteron</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -442,8 +442,8 @@
         <translation>Пробросить порт через &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Astral network through a SOCKS5 proxy.</source>
-        <translation>Подключится к сети Astral через SOCKS5 прокси.</translation>
+        <source>Connect to the opteron network through a SOCKS5 proxy.</source>
+        <translation>Подключится к сети opteron через SOCKS5 прокси.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -522,7 +522,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a Astral address (e.g. %1)</source>
+        <source>Enter a opteron address (e.g. %1)</source>
         <translation>Введите биткоин-адрес (напр. %1)</translation>
     </message>
     <message numerus="yes">
@@ -830,14 +830,14 @@
     </message>
     </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
-        <translation>astral-core</translation>
+        <translation>opteron-core</translation>
     </message>
     <message>
         <source>Information</source>

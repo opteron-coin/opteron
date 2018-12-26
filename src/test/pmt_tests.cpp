@@ -1,5 +1,5 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 #include "uint256.h"
 #include "arith_uint256.h"
 #include "version.h"
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 
 #include <vector>
 

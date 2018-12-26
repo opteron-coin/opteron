@@ -1,7 +1,7 @@
 Description
 ------------
 
-This directory contains data-driven tests for various aspects of Astral.
+This directory contains data-driven tests for various aspects of opteron.
 
 License
 --------

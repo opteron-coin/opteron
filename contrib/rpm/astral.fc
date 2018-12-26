@@ -1,8 +1,8 @@
-/usr/bin/astral-cli		--	gen_context(system_u:object_r:astral_exec_t,s0)
-/usr/sbin/astrald		--	gen_context(system_u:object_r:astral_exec_t,s0)
-/usr/lib(64)?/astral/astrald		--	gen_context(system_u:object_r:astral_exec_t,s0)
+/usr/bin/opteron-cli		--	gen_context(system_u:object_r:opteron_exec_t,s0)
+/usr/sbin/opterond		--	gen_context(system_u:object_r:opteron_exec_t,s0)
+/usr/lib(64)?/opteron/opterond		--	gen_context(system_u:object_r:opteron_exec_t,s0)
 
-/etc/astral(/.*)?		gen_context(system_u:object_r:astral_conf_t,s0)
-/var/lib/astral(/.*)?		gen_context(system_u:object_r:astral_var_lib_t,s0)
+/etc/opteron(/.*)?		gen_context(system_u:object_r:opteron_conf_t,s0)
+/var/lib/opteron(/.*)?		gen_context(system_u:object_r:opteron_var_lib_t,s0)
 
-(/var)?/run/astrald(/.*)?   gen_context(system_u:object_r:astral_var_run_t,s0)
+(/var)?/run/opterond(/.*)?   gen_context(system_u:object_r:opteron_var_run_t,s0)

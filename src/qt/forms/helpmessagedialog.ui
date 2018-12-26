@@ -52,7 +52,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../astral.qrc">:/icons/astral</pixmap>
+        <pixmap resource="../opteron.qrc">:/icons/opteron</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -150,7 +150,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../astral.qrc"/>
+  <include location="../opteron.qrc"/>
  </resources>
  <connections>
   <connection>

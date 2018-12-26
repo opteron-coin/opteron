@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 #define RAVEN_QT_RAVENGUI_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/astral-config.h"
+#include "config/opteron-config.h"
 #endif
 
 #include "amount.h"
@@ -39,10 +39,10 @@ class QProgressDialog;
 QT_END_NAMESPACE
 
 /**
-  Astral GUI main class. This class represents the main window of the Astral UI. It communicates with both the client and
+  opteron GUI main class. This class represents the main window of the opteron UI. It communicates with both the client and
   wallet models to give the user an up-to-date view of the current core state.
 */
-class AstralGUI : public QMainWindow
+class opteronGUI : public QMainWindow
 {
     Q_OBJECT
 
@@ -50,8 +50,8 @@ public:
     static const QString DEFAULT_WALLET;
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit AstralGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
-    ~AstralGUI();
+    explicit opteronGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = 0);
+    ~opteronGUI();
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
@@ -60,7 +60,7 @@ public:
 
 #ifdef ENABLE_WALLET
     /** Set the wallet model.
-        The wallet model represents a astral wallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a opteron wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     bool addWallet(const QString& name, WalletModel *walletModel);
@@ -113,9 +113,9 @@ private:
     QAction *openAction;
     QAction *showHelpMessageAction;
 
-    /** ASTRAL START */
+    /** opteron START */
     QAction *assetAction;
-    /** ASTRAL END */
+    /** opteron END */
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
@@ -216,10 +216,10 @@ private Q_SLOTS:
     /** Show open dialog */
     void openClicked();
 
-    /** ASTRAL START */
+    /** opteron START */
     /** Switch to assets page */
     void gotoAssetsPage();
-    /** ASTRAL END */
+    /** opteron END */
 
 #endif // ENABLE_WALLET
     /** Show configuration dialog */
@@ -247,7 +247,7 @@ private Q_SLOTS:
 
     /** Show progress dialog e.g. for verifychain */
     void showProgress(const QString &title, int nProgress);
-    
+
     /** When hideTrayIcon setting is changed in OptionsModel hide or show the icon accordingly. */
     void setTrayIconVisible(bool);
 

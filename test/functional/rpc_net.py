@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017 The Bitcoin Core developers
-# Copyright (c) 2017-2018 The Astral Core developers
+# Copyright (c) 2017-2018 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test RPC calls related to net.
@@ -10,7 +10,7 @@ Tests correspond to code in rpc/net.cpp.
 
 import time
 
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -18,7 +18,7 @@ from test_framework.util import (
     p2p_port,
 )
 
-class NetTest(AstralTestFramework):
+class NetTest(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

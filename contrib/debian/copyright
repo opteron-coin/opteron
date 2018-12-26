@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Astral
+Upstream-Name: opteron
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#astral@freenode.net
-Source: https://github.com/AstralProject/Astralcoin
+ irc://#opteron@freenode.net
+Source: https://github.com/opteronProject/opteroncoin
 
 Files: *
-Copyright: 2009-2017, Astral Core Developers
+Copyright: 2009-2017, opteron Core Developers
 License: Expat
-Comment: The Astral Core Developers encompasses the current developers listed on astral.org,
+Comment: The opteron Core Developers encompasses the current developers listed on opteron.org,
          as well as the numerous contributors to the project.
 
 Files: debian/*
@@ -78,12 +78,12 @@ License: Expat
 Comment: Modifications of Stephan Hutchings Typicons
 
 Files: src/qt/res/icons/about.png
-       src/qt/res/icons/astral.*
-       share/pixmaps/astral*
-       src/qt/res/src/astral.svg
+       src/qt/res/icons/opteron.*
+       share/pixmaps/opteron*
+       src/qt/res/src/opteron.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://astraltalk.org/?topic=1756.0
+Comment: Site: https://opterontalk.org/?topic=1756.0
 
 
 License: Expat

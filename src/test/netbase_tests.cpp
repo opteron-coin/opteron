@@ -1,10 +1,10 @@
 // Copyright (c) 2012-2016 The Bitcoin Core developers
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "netbase.h"
-#include "test/test_astral.h"
+#include "test/test_opteron.h"
 #include "utilstrencodings.h"
 
 #include <string>
@@ -83,10 +83,10 @@ bool static TestSplitHost(std::string test, std::string host, int port)
 
 BOOST_AUTO_TEST_CASE(netbase_splithost)
 {
-    BOOST_CHECK(TestSplitHost("www.astral.org", "www.astral.org", -1));
-    BOOST_CHECK(TestSplitHost("[www.astral.org]", "www.astral.org", -1));
-    BOOST_CHECK(TestSplitHost("www.astral.org:80", "www.astral.org", 80));
-    BOOST_CHECK(TestSplitHost("[www.astral.org]:80", "www.astral.org", 80));
+    BOOST_CHECK(TestSplitHost("www.opteron.org", "www.opteron.org", -1));
+    BOOST_CHECK(TestSplitHost("[www.opteron.org]", "www.opteron.org", -1));
+    BOOST_CHECK(TestSplitHost("www.opteron.org:80", "www.opteron.org", 80));
+    BOOST_CHECK(TestSplitHost("[www.opteron.org]:80", "www.opteron.org", 80));
     BOOST_CHECK(TestSplitHost("127.0.0.1", "127.0.0.1", -1));
     BOOST_CHECK(TestSplitHost("127.0.0.1:8291", "127.0.0.1", 8291));
     BOOST_CHECK(TestSplitHost("[127.0.0.1]", "127.0.0.1", -1));

@@ -62,12 +62,12 @@
         <translation>Mottagaradresser</translation>
     </message>
     <message>
-        <source>These are your Astral addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Detta är dina Astral adresser för att skicka betalningar. Kolla alltid summan och den mottagande adressen innan du skickar Astrals.</translation>
+        <source>These are your opteron addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Detta är dina opteron adresser för att skicka betalningar. Kolla alltid summan och den mottagande adressen innan du skickar opterons.</translation>
     </message>
     <message>
-        <source>These are your Astral addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Detta är dina Astral adresser för att ta emot betalningar. Det rekommenderas att använda en ny mottagningsadress för varje transaktion.</translation>
+        <source>These are your opteron addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Detta är dina opteron adresser för att ta emot betalningar. Det rekommenderas att använda en ny mottagningsadress för varje transaktion.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -181,7 +181,7 @@ Var vänlig och försök igen.</translation>
         <translation>Plånbok krypterad</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your astrals from being stolen by malware infecting your computer.</source>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your opterons from being stolen by malware infecting your computer.</source>
         <translation>%1 kommer nu att stänga ner för att färdigställa krypteringen. Tänk på att en krypterad plånbok inte skyddar mot stöld om din dator är infekterad med en keylogger.</translation>
     </message>
     <message>
@@ -233,7 +233,7 @@ Var vänlig och försök igen.</translation>
     </message>
 </context>
 <context>
-    <name>AstralGUI</name>
+    <name>opteronGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signera &amp;meddelande...</translation>
@@ -339,8 +339,8 @@ Var vänlig och försök igen.</translation>
         <translation>Återindexerar block på disken...</translation>
     </message>
     <message>
-        <source>Send coins to a Astral address</source>
-        <translation>Skicka astrals till en Astral-adress</translation>
+        <source>Send coins to a opteron address</source>
+        <translation>Skicka opterons till en opteron-adress</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -363,8 +363,8 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Verifiera meddelande...</translation>
     </message>
     <message>
-        <source>Astral</source>
-        <translation>Astral</translation>
+        <source>opteron</source>
+        <translation>opteron</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -391,12 +391,12 @@ Var vänlig och försök igen.</translation>
         <translation>Kryptera de privata nycklar som tillhör din plånbok</translation>
     </message>
     <message>
-        <source>Sign messages with your Astral addresses to prove you own them</source>
-        <translation>Signera meddelanden med din Astral-adress för att bevisa att du äger dem</translation>
+        <source>Sign messages with your opteron addresses to prove you own them</source>
+        <translation>Signera meddelanden med din opteron-adress för att bevisa att du äger dem</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Astral addresses</source>
-        <translation>Verifiera meddelanden för att vara säker på att de var signerade med specificerade Astral-adresser</translation>
+        <source>Verify messages to ensure they were signed with specified opteron addresses</source>
+        <translation>Verifiera meddelanden för att vara säker på att de var signerade med specificerade opteron-adresser</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -415,8 +415,8 @@ Var vänlig och försök igen.</translation>
         <translation>Verktygsfält för tabbar</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and astral: URIs)</source>
-        <translation>Begär betalning (genererar QR-koder och astral-URI)</translation>
+        <source>Request payments (generates QR codes and opteron: URIs)</source>
+        <translation>Begär betalning (genererar QR-koder och opteron-URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -427,16 +427,16 @@ Var vänlig och försök igen.</translation>
         <translation>Visa listan av använda mottagningsadresser och etiketter</translation>
     </message>
     <message>
-        <source>Open a astral: URI or payment request</source>
-        <translation>Öppna en astral: URI eller betalningsbegäran</translation>
+        <source>Open a opteron: URI or payment request</source>
+        <translation>Öppna en opteron: URI eller betalningsbegäran</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Kommandoradsalternativ</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Astral network</source>
-        <translation><numerusform>%n aktiva anslutningar till Astral-nätverket.</numerusform><numerusform>%n aktiva anslutningar till Astral-nätverket.</numerusform></translation>
+        <source>%n active connection(s) to opteron network</source>
+        <translation><numerusform>%n aktiva anslutningar till opteron-nätverket.</numerusform><numerusform>%n aktiva anslutningar till opteron-nätverket.</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -479,8 +479,8 @@ Var vänlig och försök igen.</translation>
         <translation>Uppdaterad</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Astral command-line options</source>
-        <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga Astral kommandoradsalternativ.</translation>
+        <source>Show the %1 help message to get a list with possible opteron command-line options</source>
+        <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga opteron kommandoradsalternativ.</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -549,8 +549,8 @@ Var vänlig och försök igen.</translation>
         <translation>Denna plånbok är &lt;b&gt;krypterad&lt;/b&gt; och för närvarande &lt;b&gt;låst&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Astral can no longer continue safely and will quit.</source>
-        <translation>Ett kritiskt fel uppstod. Astral kan inte fortsätta att köra säkert och kommer att avslutas.</translation>
+        <source>A fatal error occurred. opteron can no longer continue safely and will quit.</source>
+        <translation>Ett kritiskt fel uppstod. opteron kan inte fortsätta att köra säkert och kommer att avslutas.</translation>
     </message>
 </context>
 <context>
@@ -743,8 +743,8 @@ Var vänlig och försök igen.</translation>
         <translation>Redigera avsändaradress</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Astral address.</source>
-        <translation>Den angivna adressen "%1" är inte en giltig Astral-adress.</translation>
+        <source>The entered address "%1" is not a valid opteron address.</source>
+        <translation>Den angivna adressen "%1" är inte en giltig opteron-adress.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -852,8 +852,8 @@ Var vänlig och försök igen.</translation>
         <translation>Eftersom detta är första gången programmet startas får du välja var %1 skall lagra sitt data.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Astral block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>%1 kommer att ladda ner och spara en kopia av Astral blockkedjan. Åtminstone %2GB av data kommer att sparas i denna katalog, och den kommer att växa över tiden. Plånboken kommer också att sparas i denna katalog.</translation>
+        <source>%1 will download and store a copy of the opteron block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>%1 kommer att ladda ner och spara en kopia av opteron blockkedjan. Åtminstone %2GB av data kommer att sparas i denna katalog, och den kommer att växa över tiden. Plånboken kommer också att sparas i denna katalog.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -887,8 +887,8 @@ Var vänlig och försök igen.</translation>
         <translation>Formulär</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the astral network, as detailed below.</source>
-        <translation>Nyligen gjorda transaktioner visas inte korrekt och därför kan ditt din plånboks saldo visas felaktigt. Denna information kommer att visas korrekt så snart din plånbok har synkroniserat klart med astral nätverket, enligt detaljer nedan.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the opteron network, as detailed below.</source>
+        <translation>Nyligen gjorda transaktioner visas inte korrekt och därför kan ditt din plånboks saldo visas felaktigt. Denna information kommer att visas korrekt så snart din plånbok har synkroniserat klart med opteron nätverket, enligt detaljer nedan.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1045,16 +1045,16 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Spendera obekräftad växel</translation>
     </message>
     <message>
-        <source>Automatically open the Astral client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Öppna automatiskt Astral-klientens port på routern. Detta fungerar endast om din router har UPnP aktiverat.</translation>
+        <source>Automatically open the opteron client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Öppna automatiskt opteron-klientens port på routern. Detta fungerar endast om din router har UPnP aktiverat.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Tilldela port med hjälp av &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Astral network through a SOCKS5 proxy.</source>
-        <translation>Anslut till Astral-nätverket genom en SOCKS5-proxy.</translation>
+        <source>Connect to the opteron network through a SOCKS5 proxy.</source>
+        <translation>Anslut till opteron-nätverket genom en SOCKS5-proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1093,8 +1093,8 @@ Var vänlig och försök igen.</translation>
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Astral network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Anslut till Astral-nätverket genom en separat SOCKS5-proxy för dolda tjänster i Tor.</translation>
+        <source>Connect to the opteron network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Anslut till opteron-nätverket genom en separat SOCKS5-proxy för dolda tjänster i Tor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1192,8 +1192,8 @@ Var vänlig och försök igen.</translation>
         <translation>Formulär</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Astral network after a connection is established, but this process has not completed yet.</source>
-        <translation>Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med Astral-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the opteron network after a connection is established, but this process has not completed yet.</source>
+        <translation>Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med opteron-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1267,8 +1267,8 @@ Var vänlig och försök igen.</translation>
         <translation>Fel vid betalningsbegäran</translation>
     </message>
     <message>
-        <source>Cannot start astral: click-to-pay handler</source>
-        <translation>Kan inte starta astral: klicka-och-betala handhavare</translation>
+        <source>Cannot start opteron: click-to-pay handler</source>
+        <translation>Kan inte starta opteron: klicka-och-betala handhavare</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1283,8 +1283,8 @@ Var vänlig och försök igen.</translation>
         <translation>Ogiltig betalningsadress %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Astral address or malformed URI parameters.</source>
-        <translation>URI kan inte tolkas! Detta kan orsakas av en ogiltig Astral-adress eller felaktiga URI parametrar.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid opteron address or malformed URI parameters.</source>
+        <translation>URI kan inte tolkas! Detta kan orsakas av en ogiltig opteron-adress eller felaktiga URI parametrar.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1373,8 +1373,8 @@ Var vänlig och försök igen.</translation>
         <translation>Mängd</translation>
     </message>
     <message>
-        <source>Enter a Astral address (e.g. %1)</source>
-        <translation>Ange en Astral-adress (t.ex. %1)</translation>
+        <source>Enter a opteron address (e.g. %1)</source>
+        <translation>Ange en opteron-adress (t.ex. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1789,8 +1789,8 @@ Var vänlig och försök igen.</translation>
         <translation>Åt&amp;eranvänd en existerande mottagningsadress (rekommenderas inte)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Astral network.</source>
-        <translation>Ett frivilligt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. NB: Meddelandet kommer inte att sändas med betalningen över Astralnätverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the opteron network.</source>
+        <translation>Ett frivilligt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. NB: Meddelandet kommer inte att sändas med betalningen över opteronnätverket.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2022,8 +2022,8 @@ Var vänlig och försök igen.</translation>
         <translation>totalt minst</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for astral transactions than the network can process.</source>
-        <translation>Att betala endast den minsta avgiften är bara bra så länge det är mindre transaktionsvolym än utrymme i blocken. Men tänk på att det kan hamna i en aldrig bekräftar transaktion när det finns mer efterfrågan på astral transaktioner än nätverket kan bearbeta.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for opteron transactions than the network can process.</source>
+        <translation>Att betala endast den minsta avgiften är bara bra så länge det är mindre transaktionsvolym än utrymme i blocken. Men tänk på att det kan hamna i en aldrig bekräftar transaktion när det finns mer efterfrågan på opteron transaktioner än nätverket kan bearbeta.</translation>
     </message>
     <message>
         <source>(read the tooltip)</source>
@@ -2182,8 +2182,8 @@ Var vänlig och försök igen.</translation>
         <translation>Betala endast den nödvändiga avgiften på %1</translation>
     </message>
     <message>
-        <source>Warning: Invalid Astral address</source>
-        <translation>Varning: Felaktig Astraladress</translation>
+        <source>Warning: Invalid opteron address</source>
+        <translation>Varning: Felaktig opteronadress</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2225,8 +2225,8 @@ Var vänlig och försök igen.</translation>
         <translation>Detta är en normal betalning.</translation>
     </message>
     <message>
-        <source>The Astral address to send the payment to</source>
-        <translation>Astraladress att sända betalning till</translation>
+        <source>The opteron address to send the payment to</source>
+        <translation>opteronadress att sända betalning till</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2245,8 +2245,8 @@ Var vänlig och försök igen.</translation>
         <translation>Radera denna post</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less astrals than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Avgiften dras från beloppet som skickas. Mottagaren kommer att få mindre astrals än du angivit i belopp-fältet. Om flera mottagare valts kommer avgiften delas jämt.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less opterons than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Avgiften dras från beloppet som skickas. Mottagaren kommer att få mindre opterons än du angivit i belopp-fältet. Om flera mottagare valts kommer avgiften delas jämt.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2269,8 +2269,8 @@ Var vänlig och försök igen.</translation>
         <translation>Ange en etikett för denna adress att adderas till listan över använda adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the astral: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Astral network.</source>
-        <translation>Ett meddelande som bifogades astral-URI, vilket lagras med transaktionen som referens. NB: Meddelandet kommer inte att sändas över Astralnätverket.</translation>
+        <source>A message that was attached to the opteron: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the opteron network.</source>
+        <translation>Ett meddelande som bifogades opteron-URI, vilket lagras med transaktionen som referens. NB: Meddelandet kommer inte att sändas över opteronnätverket.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2314,12 +2314,12 @@ Var vänlig och försök igen.</translation>
         <translation>&amp;Signera Meddelande</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive astrals sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Du kan underteckna meddelanden/avtal med dina adresser för att bevisa att du kan ta emot astrals som skickats till dem. Var försiktig så du inte undertecknar något oklart eller konstigt, eftersom phishing-angrepp kan försöka få dig att underteckna din identitet till dem. Underteckna endast väldetaljerade meddelanden som du godkänner.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive opterons sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Du kan underteckna meddelanden/avtal med dina adresser för att bevisa att du kan ta emot opterons som skickats till dem. Var försiktig så du inte undertecknar något oklart eller konstigt, eftersom phishing-angrepp kan försöka få dig att underteckna din identitet till dem. Underteckna endast väldetaljerade meddelanden som du godkänner.</translation>
     </message>
     <message>
-        <source>The Astral address to sign the message with</source>
-        <translation>Astraladress att signera meddelandet med</translation>
+        <source>The opteron address to sign the message with</source>
+        <translation>opteronadress att signera meddelandet med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2350,7 +2350,7 @@ Var vänlig och försök igen.</translation>
         <translation>Kopiera signaturen till systemets Urklipp</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Astral address</source>
+        <source>Sign the message to prove you own this opteron address</source>
         <translation>Signera meddelandet för att bevisa att du äger denna adress</translation>
     </message>
     <message>
@@ -2374,12 +2374,12 @@ Var vänlig och försök igen.</translation>
         <translation>Ange mottagarens adress, meddelande (kopiera radbrytningar, mellanrum, flikar, etc. exakt) och signatur nedan för att verifiera meddelandet. Undvik att läsa in mera information i signaturen än vad som stod i själva undertecknade meddelandet, för att undvika ett man-in-the-middle-angrepp. Notera att detta endast bevisar att undertecknad tar emot med adressen, det bevisar inte vem som skickat transaktionen!</translation>
     </message>
     <message>
-        <source>The Astral address the message was signed with</source>
-        <translation>Astraladressen som meddelandet signerades med</translation>
+        <source>The opteron address the message was signed with</source>
+        <translation>opteronadressen som meddelandet signerades med</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Astral address</source>
-        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den angivna Astral-adressen</translation>
+        <source>Verify the message to ensure it was signed with the specified opteron address</source>
+        <translation>Verifiera meddelandet för att vara säker på att den var signerad med den angivna opteron-adressen</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2894,7 +2894,7 @@ Var vänlig och försök igen.</translation>
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Skicka Astrals</translation>
+        <translation>Skicka opterons</translation>
     </message>
 </context>
 <context>
@@ -2933,7 +2933,7 @@ Var vänlig och försök igen.</translation>
     </message>
 </context>
 <context>
-    <name>astral-core</name>
+    <name>opteron-core</name>
     <message>
         <source>Options:</source>
         <translation>Inställningar:</translation>
@@ -3003,8 +3003,8 @@ Var vänlig och försök igen.</translation>
         <translation>Kunde inte starta HTTP-server. Se avlusningsloggen för detaljer.</translation>
     </message>
     <message>
-        <source>Astral Core</source>
-        <translation>Astral Core</translation>
+        <source>opteron Core</source>
+        <translation>opteron Core</translation>
     </message>
     <message>
         <source>The %s developers</source>
@@ -3792,7 +3792,7 @@ Var vänlig och försök igen.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
-        <translation>Otillräckligt med astrals</translation>
+        <translation>Otillräckligt med opterons</translation>
     </message>
     <message>
         <source>Loading block index...</source>

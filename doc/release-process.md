@@ -3,9 +3,9 @@ Release Process
 
 Before every release candidate:
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/AstralProject/Astralcoin/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/opteronProject/opteroncoin/blob/master/doc/translation_process.md#synchronising-translations).
 
-* Update manpages, see [gen-manpages.sh](https://github.com/AstralProject/Astralcoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/opteronProject/opteroncoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
 
 Before every minor and major release:
 
@@ -21,7 +21,7 @@ Before every minor and major release:
 
 Before every major release:
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/AstralProject/Astralcoin/pull/7415) for an example.
+* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/opteronProject/opteroncoin/pull/7415) for an example.
 * Update [`BLOCK_CHAIN_SIZE`](/src/qt/intro.cpp) to the current size plus some overhead.
 * Update `src/chainparams.cpp` chainTxData with statistics about the transaction count and rate.
 * Update version of `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
@@ -33,12 +33,12 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/astral-core/gitian.sigs.git
-    git clone https://github.com/astral-core/astral-detached-sigs.git
+    git clone https://github.com/opteron-core/gitian.sigs.git
+    git clone https://github.com/opteron-core/opteron-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/AstralProject/Astralcoin.git
+    git clone https://github.com/opteronProject/opteroncoin.git
 
-### Astral maintainers/release engineers, suggestion for writing release notes
+### opteron maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -61,7 +61,7 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 
 Setup Gitian descriptors:
 
-    pushd ./astral
+    pushd ./opteron
     export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
     export VERSION=(new version, e.g. 0.8.0)
     git fetch
@@ -84,7 +84,7 @@ Ensure gitian-builder is up-to-date:
 
     pushd ./gitian-builder
     mkdir -p inputs
-    wget -P inputs https://astralcoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+    wget -P inputs https://opteroncoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
     wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
     popd
 
@@ -95,7 +95,7 @@ Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, a
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
     pushd ./gitian-builder
-    make -C ../astral/depends download SOURCES_PATH=`pwd`/cache/common
+    make -C ../opteron/depends download SOURCES_PATH=`pwd`/cache/common
     popd
 
 Only missing files will be fetched, so this is safe to re-run for each build.
@@ -103,50 +103,50 @@ Only missing files will be fetched, so this is safe to re-run for each build.
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
 
     pushd ./gitian-builder
-    ./bin/gbuild --url astral=/path/to/astral,signature=/path/to/sigs {rest of arguments}
+    ./bin/gbuild --url opteron=/path/to/opteron,signature=/path/to/sigs {rest of arguments}
     popd
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Astral Core for Linux, Windows, and OS X:
+### Build and sign opteron Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --num-make 2 --memory 3000 --commit astral=v${VERSION} ../astral/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/astral-*.tar.gz build/out/src/astral-*.tar.gz ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit opteron=v${VERSION} ../opteron/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-linux.yml
+    mv build/out/opteron-*.tar.gz build/out/src/opteron-*.tar.gz ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit astral=v${VERSION} ../astral/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/astral-*-win-unsigned.tar.gz inputs/astral-win-unsigned.tar.gz
-    mv build/out/astral-*.zip build/out/astral-*.exe ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit opteron=v${VERSION} ../opteron/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-win.yml
+    mv build/out/opteron-*-win-unsigned.tar.gz inputs/opteron-win-unsigned.tar.gz
+    mv build/out/opteron-*.zip build/out/opteron-*.exe ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit astral=v${VERSION} ../astral/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/astral-*-osx-unsigned.tar.gz inputs/astral-osx-unsigned.tar.gz
-    mv build/out/astral-*.tar.gz build/out/astral-*.dmg ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit opteron=v${VERSION} ../opteron/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-osx.yml
+    mv build/out/opteron-*-osx-unsigned.tar.gz inputs/opteron-osx-unsigned.tar.gz
+    mv build/out/opteron-*.tar.gz build/out/opteron-*.dmg ../
     popd
 
 Build output expected:
 
-  1. source tarball (`astral-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`astral-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`astral-${VERSION}-win[32|64]-setup-unsigned.exe`, `astral-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`astral-${VERSION}-osx-unsigned.dmg`, `astral-${VERSION}-osx64.tar.gz`)
+  1. source tarball (`opteron-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`opteron-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`opteron-${VERSION}-win[32|64]-setup-unsigned.exe`, `opteron-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`opteron-${VERSION}-osx-unsigned.dmg`, `opteron-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
-    gpg --import astral/contrib/gitian-keys/*.pgp
+    gpg --import opteron/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../astral/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../astral/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../astral/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../opteron/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../opteron/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../opteron/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
@@ -167,22 +167,22 @@ Codesigner only: Create Windows/OS X detached signatures:
 
 Codesigner only: Sign the osx binary:
 
-    transfer astral-osx-unsigned.tar.gz to osx for signing
-    tar xf astral-osx-unsigned.tar.gz
+    transfer opteron-osx-unsigned.tar.gz to osx for signing
+    tar xf opteron-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID"
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf astral-win-unsigned.tar.gz
+    tar xf opteron-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/astral-detached-sigs
+    cd ~/opteron-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -195,25 +195,25 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [astral-detached-sigs](https://github.com/astral-core/astral-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [opteron-detached-sigs](https://github.com/opteron-core/opteron-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../astral/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/astral-osx-signed.dmg ../astral-${VERSION}-osx.dmg
+    ./bin/gbuild -i --commit signature=v${VERSION} ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../opteron/contrib/gitian-descriptors/gitian-osx-signer.yml
+    mv build/out/opteron-osx-signed.dmg ../opteron-${VERSION}-osx.dmg
     popd
 
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../astral/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../astral/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../astral/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/astral-*win64-setup.exe ../astral-${VERSION}-win64-setup.exe
-    mv build/out/astral-*win32-setup.exe ../astral-${VERSION}-win32-setup.exe
+    ./bin/gbuild -i --commit signature=v${VERSION} ../opteron/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../opteron/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../opteron/contrib/gitian-descriptors/gitian-win-signer.yml
+    mv build/out/opteron-*win64-setup.exe ../opteron-${VERSION}-win64-setup.exe
+    mv build/out/opteron-*win32-setup.exe ../opteron-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
@@ -235,23 +235,23 @@ sha256sum * > SHA256SUMS
 
 The list of files should be:
 ```
-astral-${VERSION}-aarch64-linux-gnu.tar.gz
-astral-${VERSION}-arm-linux-gnueabihf.tar.gz
-astral-${VERSION}-i686-pc-linux-gnu.tar.gz
-astral-${VERSION}-x86_64-linux-gnu.tar.gz
-astral-${VERSION}-osx64.tar.gz
-astral-${VERSION}-osx.dmg
-astral-${VERSION}.tar.gz
-astral-${VERSION}-win32-setup.exe
-astral-${VERSION}-win32.zip
-astral-${VERSION}-win64-setup.exe
-astral-${VERSION}-win64.zip
+opteron-${VERSION}-aarch64-linux-gnu.tar.gz
+opteron-${VERSION}-arm-linux-gnueabihf.tar.gz
+opteron-${VERSION}-i686-pc-linux-gnu.tar.gz
+opteron-${VERSION}-x86_64-linux-gnu.tar.gz
+opteron-${VERSION}-osx64.tar.gz
+opteron-${VERSION}-osx.dmg
+opteron-${VERSION}.tar.gz
+opteron-${VERSION}-win32-setup.exe
+opteron-${VERSION}-win32.zip
+opteron-${VERSION}-win64-setup.exe
+opteron-${VERSION}-win64.zip
 ```
 The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the astral.org server, nor put them in the torrent*.
+space *do not upload these to the opteron.org server, nor put them in the torrent*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -261,49 +261,49 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the astral.org server
-  into `/var/www/bin/astral-core-${VERSION}`
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the opteron.org server
+  into `/var/www/bin/opteron-core-${VERSION}`
 
 - A `.torrent` will appear in the directory after a few minutes. Optionally help seed this torrent. To get the `magnet:` URI use:
 ```bash
 transmission-show -m <torrent file>
 ```
 Insert the magnet URI into the announcement sent to mailing lists. This permits
-people without access to `astral.org` to download the binary distribution.
+people without access to `opteron.org` to download the binary distribution.
 Also put it into the `optional_magnetlink:` slot in the YAML file for
-astral.org (see below for astral.org update instructions).
+opteron.org (see below for opteron.org update instructions).
 
-- Update astral.org version
+- Update opteron.org version
 
-  - First, check to see if the Astral.org maintainers have prepared a
-    release: https://github.com/astral-dot-org/astral.org/labels/Releases
+  - First, check to see if the opteron.org maintainers have prepared a
+    release: https://github.com/opteron-dot-org/opteron.org/labels/Releases
 
       - If they have, it will have previously failed their Travis CI
         checks because the final release files weren't uploaded.
         Trigger a Travis CI rebuild---if it passes, merge.
 
-  - If they have not prepared a release, follow the Astral.org release
-    instructions: https://github.com/astral-dot-org/astral.org#release-notes
+  - If they have not prepared a release, follow the opteron.org release
+    instructions: https://github.com/opteron-dot-org/opteron.org#release-notes
 
   - After the pull request is merged, the website will automatically show the newest version within 15 minutes, as well
     as update the OS download links. Ping @saivann/@harding (saivann/harding on Freenode) in case anything goes wrong
 
 - Announce the release:
 
-  - astral-dev and astral-core-dev mailing list
+  - opteron-dev and opteron-core-dev mailing list
 
-  - Astral Core announcements list https://astralcoin.org/en/list/announcements/join/
+  - opteron Core announcements list https://opteroncoin.org/en/list/announcements/join/
 
-  - astralcore.org blog post
+  - opteroncore.org blog post
 
-  - Update title of #astral on Freenode IRC
+  - Update title of #opteron on Freenode IRC
 
-  - Optionally twitter, reddit /r/Astral, ... but this will usually sort out itself
+  - Optionally twitter, reddit /r/opteron, ... but this will usually sort out itself
 
-  - Notify BlueMatt so that he can start building [the PPAs](https://launchpad.net/~astral/+archive/ubuntu/astral)
+  - Notify BlueMatt so that he can start building [the PPAs](https://launchpad.net/~opteron/+archive/ubuntu/opteron)
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/AstralProject/Astralcoin/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/opteronProject/opteroncoin/releases/new) with a link to the archived release notes.
 
   - Celebrate

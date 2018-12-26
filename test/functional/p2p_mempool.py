@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test p2p mempool message.
@@ -10,10 +10,10 @@ filters are not enabled.
 """
 
 from test_framework.mininode import *
-from test_framework.test_framework import AstralTestFramework
+from test_framework.test_framework import opteronTestFramework
 from test_framework.util import *
 
-class P2PMempoolTests(AstralTestFramework):
+class P2PMempoolTests(opteronTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -33,6 +33,6 @@ class P2PMempoolTests(AstralTestFramework):
 
         #mininode must be disconnected at this point
         assert_equal(len(self.nodes[0].getpeerinfo()), 0)
-    
+
 if __name__ == '__main__':
     P2PMempoolTests().main()

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2016 The Bitcoin Core developers
-# Copyright (c) 2017 The Astral Core developers
+# Copyright (c) 2017 The opteron Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """
     ZMQ example using python3's asyncio
 
-    Astral should be started with the command line arguments:
-        astrald -testnet -daemon \
+    opteron should be started with the command line arguments:
+        opterond -testnet -daemon \
                 -zmqpubhashblock=tcp://127.0.0.1:28290 \
                 -zmqpubrawtx=tcp://127.0.0.1:28290 \
                 -zmqpubhashtx=tcp://127.0.0.1:28290 \
@@ -25,7 +25,7 @@ import codecs
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
 
-print("Getting Astralcoin msgs")
+print("Getting opteroncoin msgs")
 socket.connect("tcp://localhost:28290")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashtx")
@@ -58,8 +58,8 @@ while True:
 		while(pos != -1):
 			pos = astr.find('72766e', start)
 			if (pos > -1):
-				print("FOUND ASTRAL issuance at " + str(pos))
-				print("After ASTRAL: " + astr[pos+6:pos+8])
+				print("FOUND opteron issuance at " + str(pos))
+				print("After opteron: " + astr[pos+6:pos+8])
 				sizestr = astr[pos+8:pos+10]
 				print("sizestr: " + sizestr)
 				#print(str(astr[pos+8:pos+10]))
@@ -68,7 +68,7 @@ while True:
 				print("Name: " + bytes.fromhex(astr[pos+10:pos+10+size*2]).decode('utf-8'))
 			pos = astr.find('72766e', start)
 			if (pos > -1):
-				print("FOUND ASTRAL something at " + str(pos))
+				print("FOUND opteron something at " + str(pos))
 			start += pos+8
 			print(astr)
 

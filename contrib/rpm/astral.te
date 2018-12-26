@@ -1,81 +1,81 @@
-policy_module(astral, 1.100.1)
+policy_module(opteron, 1.100.1)
 
 ########################################
 #
 # Declarations
 #
 
-type astral_t;
-type astral_exec_t;
-init_daemon_domain(astral_t, astral_exec_t)
+type opteron_t;
+type opteron_exec_t;
+init_daemon_domain(opteron_t, opteron_exec_t)
 
-permissive astral_t;
+permissive opteron_t;
 
-type astral_initrc_exec_t;
-init_script_file(astral_initrc_exec_t)
+type opteron_initrc_exec_t;
+init_script_file(opteron_initrc_exec_t)
 
-type astral_conf_t;
-files_type(astral_conf_t)
+type opteron_conf_t;
+files_type(opteron_conf_t)
 
-type astral_var_lib_t;
-files_type(astral_var_lib_t)
+type opteron_var_lib_t;
+files_type(opteron_var_lib_t)
 
-type astral_var_run_t;
-files_type(astral_var_run_t)
+type opteron_var_run_t;
+files_type(opteron_var_run_t)
 
-type astral_port_t;
-corenet_port(astral_port_t)
+type opteron_port_t;
+corenet_port(opteron_port_t)
 
 ########################################
 #
-# astral local policy
+# opteron local policy
 #
-allow astral_t self:process { fork };
+allow opteron_t self:process { fork };
 
-allow astral_t self:fifo_file rw_fifo_file_perms;
-allow astral_t self:unix_stream_socket create_stream_socket_perms;
+allow opteron_t self:fifo_file rw_fifo_file_perms;
+allow opteron_t self:unix_stream_socket create_stream_socket_perms;
 
-manage_dirs_pattern(astral_t, astral_conf_t, astral_conf_t)
-manage_files_pattern(astral_t, astral_conf_t, astral_conf_t)
+manage_dirs_pattern(opteron_t, opteron_conf_t, opteron_conf_t)
+manage_files_pattern(opteron_t, opteron_conf_t, opteron_conf_t)
 
-manage_dirs_pattern(astral_t, astral_var_lib_t, astral_var_lib_t)
-manage_files_pattern(astral_t, astral_var_lib_t, astral_var_lib_t)
-files_var_lib_filetrans(astral_t, astral_var_lib_t, { dir file })
+manage_dirs_pattern(opteron_t, opteron_var_lib_t, opteron_var_lib_t)
+manage_files_pattern(opteron_t, opteron_var_lib_t, opteron_var_lib_t)
+files_var_lib_filetrans(opteron_t, opteron_var_lib_t, { dir file })
 
-manage_dirs_pattern(astral_t, astral_var_run_t, astral_var_run_t)
-manage_files_pattern(astral_t, astral_var_run_t, astral_var_run_t)
+manage_dirs_pattern(opteron_t, opteron_var_run_t, opteron_var_run_t)
+manage_files_pattern(opteron_t, opteron_var_run_t, opteron_var_run_t)
 
-sysnet_dns_name_resolve(astral_t)
-corenet_all_recvfrom_unlabeled(astral_t)
+sysnet_dns_name_resolve(opteron_t)
+corenet_all_recvfrom_unlabeled(opteron_t)
 
-allow astral_t self:tcp_socket create_stream_socket_perms;
-corenet_tcp_sendrecv_generic_if(astral_t)
-corenet_tcp_sendrecv_generic_node(astral_t)
-corenet_tcp_sendrecv_all_ports(astral_t)
-corenet_tcp_bind_generic_node(astral_t)
-
-gen_require(`
-    type astral_port_t;
-')
-allow astral_t astral_port_t:tcp_socket name_bind;
+allow opteron_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(opteron_t)
+corenet_tcp_sendrecv_generic_node(opteron_t)
+corenet_tcp_sendrecv_all_ports(opteron_t)
+corenet_tcp_bind_generic_node(opteron_t)
 
 gen_require(`
-    type astral_port_t;
+    type opteron_port_t;
 ')
-allow astral_t astral_port_t:tcp_socket name_connect;
+allow opteron_t opteron_port_t:tcp_socket name_bind;
 
-domain_use_interactive_fds(astral_t)
+gen_require(`
+    type opteron_port_t;
+')
+allow opteron_t opteron_port_t:tcp_socket name_connect;
 
-files_read_etc_files(astral_t)
+domain_use_interactive_fds(opteron_t)
 
-miscfiles_read_localization(astral_t)
+files_read_etc_files(opteron_t)
 
-sysnet_dns_name_resolve(astral_t)
+miscfiles_read_localization(opteron_t)
 
-allow astral_t astral_exec_t:file execute_no_trans;
-allow astral_t self:process setsched;
-corecmd_exec_ls(astral_t)
-corenet_tcp_connect_http_port(astral_t)
-dev_read_urand(astral_t)
-fs_getattr_xattr_fs(astral_t)
-kernel_read_system_state(astral_t)
+sysnet_dns_name_resolve(opteron_t)
+
+allow opteron_t opteron_exec_t:file execute_no_trans;
+allow opteron_t self:process setsched;
+corecmd_exec_ls(opteron_t)
+corenet_tcp_connect_http_port(opteron_t)
+dev_read_urand(opteron_t)
+fs_getattr_xattr_fs(opteron_t)
+kernel_read_system_state(opteron_t)

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.astral;
+package org.opteron;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -24,14 +24,14 @@ import java.math.BigInteger;
 import com.google.common.base.Preconditions;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import static org.astral.NativeSecp256k1Util.*;
+import static org.opteron.NativeSecp256k1Util.*;
 
 /**
  * <p>This class holds native methods to handle ECDSA verification.</p>
  *
- * <p>You can find an example library that can be used for this at https://github.com/astral/secp256k1</p>
+ * <p>You can find an example library that can be used for this at https://github.com/opteron/secp256k1</p>
  *
- * <p>To build secp256k1 for use with astralj, run
+ * <p>To build secp256k1 for use with opteronj, run
  * `./configure --enable-jni --enable-experimental --enable-module-ecdh`
  * and `make` then copy `.libs/libsecp256k1.so` to your system library path
  * or point the JVM to the folder containing it with -Djava.library.path

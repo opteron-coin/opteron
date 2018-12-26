@@ -1,10 +1,10 @@
-// Copyright (c) 2017 The Astral Core developers
+// Copyright (c) 2017 The opteron Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <assets/assets.h>
 
-#include <test/test_astral.h>
+#include <test/test_opteron.h>
 
 #include <boost/test/unit_test.hpp>
 
@@ -39,7 +39,7 @@ BOOST_FIXTURE_TEST_SUITE(serialization_tests, BasicTestingSetup)
         BOOST_CHECK_MESSAGE(serializedAsset.nReissuable == 0, "Reissuable wasn't equal");
         BOOST_CHECK_MESSAGE(serializedAsset.nHasIPFS == 1, "HasIPFS wasn't equal");
         BOOST_CHECK_MESSAGE(EncodeIPFS(serializedAsset.strIPFSHash) == "QmacSRmrkVmvJfbCpmU6pK72furJ8E8fbKHindrLxmYMQo", "IPFSHash wasn't equal");
-        
+
         // Bare asset
         CNewAsset asset2("SERIALIZATION", 100000000);
         scriptPubKey = GetScriptForDestination(dest);

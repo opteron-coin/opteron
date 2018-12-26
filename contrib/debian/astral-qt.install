@@ -1,6 +1,6 @@
-usr/local/bin/astral-qt usr/bin
-share/pixmaps/astral32.xpm usr/share/pixmaps
-share/pixmaps/astral16.xpm usr/share/pixmaps
-share/pixmaps/astral128.png usr/share/pixmaps
-debian/astral-qt.desktop usr/share/applications
-debian/astral-qt.protocol usr/share/kde4/services/
+usr/local/bin/opteron-qt usr/bin
+share/pixmaps/opteron32.xpm usr/share/pixmaps
+share/pixmaps/opteron16.xpm usr/share/pixmaps
+share/pixmaps/opteron128.png usr/share/pixmaps
+debian/opteron-qt.desktop usr/share/applications
+debian/opteron-qt.protocol usr/share/kde4/services/
