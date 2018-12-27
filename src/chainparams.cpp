@@ -157,7 +157,7 @@ public:
         genesis = CreateGenesisBlock(1543437000, 7559226, 0x1e00ffff, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("000000834be38ee4682a807acda61d5b2d66bff7a0161d70bf03b0e710923a4a"));
+        assert(consensus.hashGenesisBlock == uint256S("56473757f3ee470731f3c651ee5ea7d9af27a0769bde16baa5f163f404ab8aa6"));
         assert(genesis.hashMerkleRoot == uint256S("56236e9a70509730bf061cb14bea104ad416e45c4f4bda9d38ce50860cd8400c"));
 
         vSeeds.emplace_back("vps614526.ovh.net", false);
@@ -365,9 +365,6 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1543337100, 24633664, 0x1e00ffff, 2, 50 * COIN);
-
-        // debug find genesis hash
-        printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
