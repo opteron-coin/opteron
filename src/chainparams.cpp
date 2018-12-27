@@ -365,10 +365,11 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1543337100, 24633664, 0x1e00ffff, 2, 50 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
 
         // debug find genesis hash
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+
+        consensus.hashGenesisBlock = genesis.GetHash();
 
         assert(consensus.hashGenesisBlock == uint256S("0000004a41e321c3c9f0315bd56d86176f65d8a2aeb11bdcf3d28899a66bb08b"));
         assert(genesis.hashMerkleRoot == uint256S("56236e9a70509730bf061cb14bea104ad416e45c4f4bda9d38ce50860cd8400c"));
