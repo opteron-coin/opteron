@@ -367,7 +367,7 @@ public:
         genesis = CreateGenesisBlock(1543337100, 24633664, 0x1e00ffff, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        # debug find genesis hash
+        // debug find genesis hash
         printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
 
         assert(consensus.hashGenesisBlock == uint256S("0000004a41e321c3c9f0315bd56d86176f65d8a2aeb11bdcf3d28899a66bb08b"));
