@@ -158,7 +158,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
 
         assert(consensus.hashGenesisBlock == uint256S("56473757f3ee470731f3c651ee5ea7d9af27a0769bde16baa5f163f404ab8aa6"));
-        assert(genesis.hashMerkleRoot == uint256S("56236e9a70509730bf061cb14bea104ad416e45c4f4bda9d38ce50860cd8400c"));
+
+        assert(genesis.hashMerkleRoot == uint256S("7e9c88d7d0765ec04e6e973c22f7dcbae6e5841fa8505e9a7e0bfa63da28aa70"));
 
         vSeeds.emplace_back("vps614526.ovh.net", false);
         vSeeds.emplace_back("vps587055.ovh.net", false);
