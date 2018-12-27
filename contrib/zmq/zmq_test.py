@@ -9,10 +9,10 @@
 
     opteron should be started with the command line arguments:
         opterond -testnet -daemon \
-                -zmqpubhashblock=tcp://127.0.0.1:28290 \
-                -zmqpubrawtx=tcp://127.0.0.1:28290 \
-                -zmqpubhashtx=tcp://127.0.0.1:28290 \
-                -zmqpubhashblock=tcp://127.0.0.1:28290
+                -zmqpubhashblock=tcp://127.0.0.1:248290 \
+                -zmqpubrawtx=tcp://127.0.0.1:248290 \
+                -zmqpubhashtx=tcp://127.0.0.1:248290 \
+                -zmqpubhashblock=tcp://127.0.0.1:248290
 """
 
 import sys
@@ -26,7 +26,7 @@ context = zmq.Context()
 socket = context.socket(zmq.SUB)
 
 print("Getting opteroncoin msgs")
-socket.connect("tcp://localhost:28290")
+socket.connect("tcp://localhost:248290")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashtx")
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashblock")

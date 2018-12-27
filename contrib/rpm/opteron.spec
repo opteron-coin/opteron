@@ -332,10 +332,10 @@ if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 for selinuxvariant in %{selinux_variants}; do
 	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/opteron.pp &> /dev/null || :
 done
-%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 8290
-%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 8291
-%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18290
-%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18291
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 48290
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 48291
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 148290
+%{_sbindir}/semanage port -a -t opteron_port_t -p tcp 148291
 %{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18443
 %{_sbindir}/semanage port -a -t opteron_port_t -p tcp 18444
 %{_sbindir}/fixfiles -R opteron-server restore &> /dev/null || :
@@ -353,10 +353,10 @@ fi
 # SELinux
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
-	%{_sbindir}/semanage port -d -p tcp 8290
-	%{_sbindir}/semanage port -d -p tcp 8291
-	%{_sbindir}/semanage port -d -p tcp 18290
-	%{_sbindir}/semanage port -d -p tcp 18291
+	%{_sbindir}/semanage port -d -p tcp 48290
+	%{_sbindir}/semanage port -d -p tcp 48291
+	%{_sbindir}/semanage port -d -p tcp 148290
+	%{_sbindir}/semanage port -d -p tcp 148291
 	%{_sbindir}/semanage port -d -p tcp 18443
 	%{_sbindir}/semanage port -d -p tcp 18444
 	for selinuxvariant in %{selinux_variants}; do

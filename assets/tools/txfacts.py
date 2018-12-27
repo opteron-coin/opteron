@@ -11,7 +11,7 @@ cli = "opteron-cli"
 
 mode = "-testnet"
 mode = ""
-rpc_port = 18290
+rpc_port = 148290
 #Set this information in your opteron.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'

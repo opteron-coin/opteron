@@ -34,7 +34,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tx_tests, BasicTestingSetup)
         txOut.scriptPubKey = scriptPubKey;
 
         // Create a random hash
-        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A2");
+        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A2");
 
         // Add the coin to the cache
         COutPoint outpoint(hash, 1);
@@ -78,7 +78,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tx_tests, BasicTestingSetup)
         txOut.scriptPubKey = scriptPubKey;
 
         // Create a random hash
-        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A2");
+        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A2");
 
         // Add the coin to the cache
         COutPoint outpoint(hash, 1);
@@ -132,7 +132,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tx_tests, BasicTestingSetup)
         txOut.scriptPubKey = scriptPubKey;
 
         // Create a random hash
-        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A2");
+        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A2");
 
         // Add the coin to the cache
         COutPoint outpoint(hash, 1);
@@ -189,7 +189,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tx_tests, BasicTestingSetup)
         txOut.scriptPubKey = scriptPubKey;
 
         // Create a random hash
-        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A2");
+        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A2");
 
         // Add the coin to the cache
         COutPoint outpoint(hash, 1);
@@ -262,9 +262,9 @@ BOOST_FIXTURE_TEST_SUITE(asset_tx_tests, BasicTestingSetup)
         txOut3.scriptPubKey = scriptPubKey3;
 
         // Create a random hash
-        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A2");
-        uint256 hash2 = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A3");
-        uint256 hash3 = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A4");
+        uint256 hash = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A2");
+        uint256 hash2 = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A3");
+        uint256 hash3 = uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A4");
 
         // Add the coins to the cache
         COutPoint outpoint(hash, 1);

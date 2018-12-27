@@ -33,7 +33,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_reissue_tests, BasicTestingSetup)
 
     // Create a reissuance of the asset
     CReissueAsset reissue1("opteronASSET", CAmount(1 * COIN), 8, 1, DecodeIPFS("QmacSRmrkVmvJfbCpmU6pK72furJ8E8fbKHindrLxmYMQo"));
-    COutPoint out(uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F494735278290079D22AB704A4"), 1);
+    COutPoint out(uint256S("BF50CB9A63BE0019171456252989A459A7D0A5F4947352748290079D22AB704A4"), 1);
 
     // Add an reissuance of the asset to the cache
     BOOST_CHECK_MESSAGE(cache.AddReissueAsset(reissue1, Params().GlobalBurnAddress(), out), "Failed to add reissue");

@@ -12,7 +12,7 @@ import json
 cli = "opteron-cli"
 
 mode =  "-testnet"
-rpc_port = 18290
+rpc_port = 148290
 #mode =  "-regtest"
 #rpc_port = 18443
 

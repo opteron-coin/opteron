@@ -88,15 +88,15 @@ BOOST_AUTO_TEST_CASE(netbase_splithost)
     BOOST_CHECK(TestSplitHost("www.opteron.org:80", "www.opteron.org", 80));
     BOOST_CHECK(TestSplitHost("[www.opteron.org]:80", "www.opteron.org", 80));
     BOOST_CHECK(TestSplitHost("127.0.0.1", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("127.0.0.1:8291", "127.0.0.1", 8291));
+    BOOST_CHECK(TestSplitHost("127.0.0.1:48291", "127.0.0.1", 48291));
     BOOST_CHECK(TestSplitHost("[127.0.0.1]", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[127.0.0.1]:8291", "127.0.0.1", 8291));
+    BOOST_CHECK(TestSplitHost("[127.0.0.1]:48291", "127.0.0.1", 48291));
     BOOST_CHECK(TestSplitHost("::ffff:127.0.0.1", "::ffff:127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:8291", "::ffff:127.0.0.1", 8291));
-    BOOST_CHECK(TestSplitHost("[::]:8291", "::", 8291));
-    BOOST_CHECK(TestSplitHost("::8291", "::8291", -1));
-    BOOST_CHECK(TestSplitHost(":8291", "", 8291));
-    BOOST_CHECK(TestSplitHost("[]:8291", "", 8291));
+    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:48291", "::ffff:127.0.0.1", 48291));
+    BOOST_CHECK(TestSplitHost("[::]:48291", "::", 48291));
+    BOOST_CHECK(TestSplitHost("::48291", "::48291", -1));
+    BOOST_CHECK(TestSplitHost(":48291", "", 48291));
+    BOOST_CHECK(TestSplitHost("[]:48291", "", 48291));
     BOOST_CHECK(TestSplitHost("", "", -1));
 }
 
@@ -109,10 +109,10 @@ bool static TestParse(std::string src, std::string canon)
 BOOST_AUTO_TEST_CASE(netbase_lookupnumeric)
 {
     BOOST_CHECK(TestParse("127.0.0.1", "127.0.0.1:65535"));
-    BOOST_CHECK(TestParse("127.0.0.1:8291", "127.0.0.1:8291"));
+    BOOST_CHECK(TestParse("127.0.0.1:48291", "127.0.0.1:48291"));
     BOOST_CHECK(TestParse("::ffff:127.0.0.1", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse("::", "[::]:65535"));
-    BOOST_CHECK(TestParse("[::]:8291", "[::]:8291"));
+    BOOST_CHECK(TestParse("[::]:48291", "[::]:48291"));
     BOOST_CHECK(TestParse("[127.0.0.1]", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse(":::", "[::]:0"));
 

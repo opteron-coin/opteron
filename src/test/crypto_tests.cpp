@@ -325,7 +325,7 @@ BOOST_AUTO_TEST_CASE(sha512_testvectors) {
                "d5db502e814bb63c063a7a5043b2df87c61133395f4ad1edca7fcf4b30c3236e");
     TestSHA512("SHA512 is considered to be safe",
                "099e6468d889e1c79092a89ae925a9499b5408e01b66cb5b0a3bd0dfa51a9964"
-               "6b4a3901caab1318189f74cd8cf2e941829012f2449df52067d3dd5b978456c2");
+               "6b4a3901caab1318189f74cd8cf2e9414829012f2449df52067d3dd5b978456c2");
     TestSHA512("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
                "204a8fc6dda82f0a0ced7beb8e08a41657c16ef468b228a8279be331a703c335"
                "96fd15c13b1b07f9aa1d3bea57789ca031ad85c7a71dd70354ec631238ca3445");
