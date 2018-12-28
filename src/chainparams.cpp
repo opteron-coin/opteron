@@ -55,7 +55,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "opteron X20R";
+    const char* pszTimestamp = "If taxation is property theft, then tax evasion is self-defense";
     const CScript genesisOutputScript = CScript() << ParseHex("04ed583f338b0eeb0df6bab2d0eefd1f9503f1cebfdf5a1e50e7526e693da1ff882fabba0ca1b6b08651781e0985aaf72835b8b68203ed3bc9e00a7fb4ff38df0b") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -154,12 +154,12 @@ public:
         nDefaultPort = 48291;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1543437000, 7559226, 0x1e00ffff, 2, 50 * COIN);
+        genesis = CreateGenesisBlock(1541690605, 2754835608, 0x1d00ffff, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("56473757f3ee470731f3c651ee5ea7d9af27a0769bde16baa5f163f404ab8aa6"));
+        assert(consensus.hashGenesisBlock == uint256S("00000000604ac504b69e473d88078bcdc9e26ce82306b5b34bb98ffea1305364"));
 
-        assert(genesis.hashMerkleRoot == uint256S("7e9c88d7d0765ec04e6e973c22f7dcbae6e5841fa8505e9a7e0bfa63da28aa70"));
+        assert(genesis.hashMerkleRoot == uint256S("e7659009ac8ecd675956a6e44fa3d49e50a364567f47bef1049ab9ef418d9b8c"));
 
         vSeeds.emplace_back("vps614526.ovh.net", false);
         vSeeds.emplace_back("vps587055.ovh.net", false);
@@ -262,11 +262,12 @@ public:
         nDefaultPort = 10928;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1543337100, 24633664, 0x1e00ffff, 2, 50 * COIN);
+        genesis = CreateGenesisBlock(1541690605, 2754835608, 0x1d00ffff, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("0000004a41e321c3c9f0315bd56d86176f65d8a2aeb11bdcf3d28899a66bb08b"));
-        assert(genesis.hashMerkleRoot == uint256S("56236e9a70509730bf061cb14bea104ad416e45c4f4bda9d38ce50860cd8400c"));
+        assert(consensus.hashGenesisBlock == uint256S("00000000604ac504b69e473d88078bcdc9e26ce82306b5b34bb98ffea1305364"));
+
+        assert(genesis.hashMerkleRoot == uint256S("e7659009ac8ecd675956a6e44fa3d49e50a364567f47bef1049ab9ef418d9b8c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -365,12 +366,12 @@ public:
         nDefaultPort = 18444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1543337100, 24633664, 0x1e00ffff, 2, 50 * COIN);
-
+        genesis = CreateGenesisBlock(1541690605, 2754835608, 0x1d00ffff, 2, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("0000004a41e321c3c9f0315bd56d86176f65d8a2aeb11bdcf3d28899a66bb08b"));
-        assert(genesis.hashMerkleRoot == uint256S("56236e9a70509730bf061cb14bea104ad416e45c4f4bda9d38ce50860cd8400c"));
+        assert(consensus.hashGenesisBlock == uint256S("00000000604ac504b69e473d88078bcdc9e26ce82306b5b34bb98ffea1305364"));
+
+        assert(genesis.hashMerkleRoot == uint256S("e7659009ac8ecd675956a6e44fa3d49e50a364567f47bef1049ab9ef418d9b8c"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
